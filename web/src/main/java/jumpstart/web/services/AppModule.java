@@ -81,7 +81,7 @@ public class AppModule {
 	public static void contributeBindingSource(MappedConfiguration<String, BindingFactory> configuration,
 			BindingSource bindingSource) {
 		// Not necessary if using chenillekit because it also contributes a "list" binding prefix.
-		// configuration.add("list", new ListBindingFactory(bindingSource));
+		configuration.add("list", new ListBindingFactory(bindingSource));
 	}
 
 	// Tell Tapestry how to block access to WEB-INF/, META-INF/, and assets that are not in our "whitelist".
