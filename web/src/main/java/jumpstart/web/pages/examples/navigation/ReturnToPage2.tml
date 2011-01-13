@@ -1,0 +1,22 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Return To Page (2)</h1>
+	
+	This page doesn't presume to know which page, or pages, can call it, so it requires the caller to give it a link back to the caller.<br/>
+	This is useful in situations where a page can be reached from more than one other page. <br/><br/>
+	
+	_messageFromCaller = <strong>"${messageFromCaller}"</strong>.<br/>
+	_linkBackToCaller = <strong>${linkBackToCaller}</strong> <br/><br/>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/Link.html">Link API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/ComponentResources.html">ComponentResources API</a>.<br/><br/>
+
+	<a t:type="actionlink" t:id="return" href="#">Return</a><br/><br/>
+	
+	<a t:type="actionlink" t:id="gohome" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ReturnToPage2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ReturnToPage2.java"/>
+</body>
+</html>

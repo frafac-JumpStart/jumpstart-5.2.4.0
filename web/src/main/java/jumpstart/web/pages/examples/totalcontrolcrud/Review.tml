@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; 
+	 We use a "strict" DTD to make IE follow the alignment rules. -->
+	 
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<!-- We'll immitate the default style of BeanDisplay, for no particular reason except to show we can! -->
+	<style type="text/css">
+		.box	{ background-color: rgb(204, 190, 153); border: black 2px outset; padding: 2px; font-family: 'Trebuchet MS'; }
+		th	{ width:250px; text-align:right; font-weight: normal; }
+	</style>
+</head>
+<body>
+	<h1>Review</h1>
+	
+	<t:if test="person">
+		<div class="box">
+			<table>
+				<tr>
+					<th>Id:</th>
+					<td>${person.id}</td>
+				</tr>
+				<tr>
+					<th>Version:</th>
+					<td>${person.version}</td>
+				</tr>
+				<tr>
+					<th>Name:</th>
+					<td>${person.lastName}, ${person.firstName}</td>
+				</tr>
+				<tr>
+					<th>Region:</th>
+					<td>${personRegion}</td>
+				</tr>
+				<tr>
+					<th>Start Date:</th>
+					<td><t:output t:value="person.startDate" format="startDateFormat"/></td>
+				</tr>
+			</table>
+		</div><br/>
+	</t:if>
+	<t:if negate="true" test="person">
+		Person ${personId} does not exist. Has the database been set up?<br/><br/>
+	</t:if>
+	
+	<a t:type="pageLink" t:page="examples/totalcontrolcrud/Index" href="#">Cancel</a><br/><br/>
+	
+	<a t:type="pageLink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/totalcontrolcrud/Review.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/totalcontrolcrud/Review.properties"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/totalcontrolcrud/Review.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+</body>
+</html>

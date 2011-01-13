@@ -1,0 +1,30 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Page Links (1)</h1>
+
+	This page is called <em>examples/navigation/PageLinks1</em>, and it is about the <strong>PageLink</strong> component.<br/><br/>
+	
+	All the examples so far have included a PageLink.  
+	What happens when you click on the link? It sends a render request.<br/>
+	A <strong>render request</strong> asks Tapestry to get an instance of a page, activate it, render the output and return it.<br/><br/>
+  	
+	Here's an example of some tml code using a PageLink:<br/>
+	<code>&lt;a t:type="pagelink" t:page="examples/navigation/PageLinks2" href="#"&gt;To PageLinks2&lt;/a&gt;</code><br/><br/>
+	
+	Here's the code in action:<br/> 
+	<a t:type="pagelink" t:page="examples/navigation/PageLinks2" href="#">To PageLinks2</a><br/><br/>
+	
+	It generates a link whose URL looks like this:<br/>
+	<code>http://myhost/jumpstart/examples/navigation/pagelinks2</code><br/><br/>
+
+	References:	
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/PageLink.html">PageLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/rendering.html">Component Rendering</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/PageLinks1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/PageLinks1.java"/>
+</body>
+</html>

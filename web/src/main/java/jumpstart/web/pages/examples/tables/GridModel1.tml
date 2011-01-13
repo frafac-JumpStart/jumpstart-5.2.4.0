@@ -1,0 +1,34 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/grid.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/grid.css"/>
+</head>
+<body>
+	<h1>Grid Model (1)</h1>
+	
+	We can take more control of the Grid when we provide the BeanModel ourselves.  It is a model that defines how 
+	data will be mapped into the grid.  It does not contain the data.<br/><br/>
+
+	<table t:type="grid" t:source="persons" t:row="person" t:model="mymodel" t:rowsPerPage="4" t:pagerPosition="top">[Grid here]
+		<p:actionCell>
+			<a t:type="pagelink" t:page="examples/tables/GridModel2" t:context="person.firstName" href="#">View</a>
+		</p:actionCell>
+ 	</table><br/>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Grid.html">Grid</a>, 
+	Providing the BeanModel in <a href="http://tapestry.apache.org/tapestry5/guide/beaneditform.html">BeanEditForm</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/services/BeanModelSource.html">BeanModelSource API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/beaneditor/BeanModel.html">BeanModel API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/beaneditor/PropertyModel.html">PropertyModel API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/annotations/Retain.html">@Retain API</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for Person, PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/GridModel1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/GridModel1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/grid.css"/>
+</body>
+</html>

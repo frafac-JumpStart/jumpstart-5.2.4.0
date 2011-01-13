@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; -->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		tr	{ background-color: rgb(204, 190, 153); border: black 2px outset; padding: 2px; font-family: 'Trebuchet MS'; }
+		th	{ width:300px; text-align:left; font-weight: normal; padding: 0.4em; }
+		td	{ width:300px; text-align:left; font-weight: normal; padding: 0.4em; vertical-align: top;}
+	</style>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>What is Called and When</h1>
+	
+	This page demonstrates what methods are called, and when, in various situations.<br/><br/>
+	
+	It provides, and logs, every page lifecycle method, several render phase methods, and every component event handler method.<br/> 
+	Here is what you will see in the logs if you configure log4j to record this page at debug level:<br/><br/>
+	
+ 	<table style="border:thin gray 2px;">
+ 		<tr>
+ 			<th>When this page is <strong>first instantiated</strong>.<br/></th>
+ 			<td>
+				pageLoaded()
+			</td>
+ 		</tr>
+ 		<tr>
+ 			<th>When Tapestry creates <strong>a URL to this page</strong>.<br/>
+ 			Eg. as it renders a PageLink to this page.</th>
+ 			<td>
+				pageAttached()<br/>
+				...onPassivate()<br/>
+				<em>...Tapestry creates a URL to the page</em><br/>
+				pageDetached()<br/>
+			</td>
+ 		</tr>
+ 		<tr>
+ 			<th>In response to a <strong>render request</strong>.<br/>
+ 				<ul>
+					<li>onPassivate() is triggered by each ActionLink, EventLink, and Form, as it renders.</li>
+					<li>onPrepareForRender() and onPrepare() are triggered by Form as it renders.</li>
+				</ul>
+			</th>
+ 			<td>
+				pageAttached()<br/>
+				...onActivate()<br/>
+				...setupRender()<br/>
+				...beginRender()<br/>
+				...getMessage()<br/>
+				...onPassivate()<br/>
+				...onPassivate()<br/>
+				...onPassivate()<br/>
+				...onPrepareForRender()<br/>
+				...onPrepare()<br/>
+				...afterRender()<br/>
+				...cleanupRender()<br/>
+				pageDetached()<br/>
+				<em>Tapestry returns page to browser</em>
+			</td>
+		</tr>
+ 		<tr>
+ 			<th>In response to request from <strong>ActionLink</strong>.<br/>
+ 			Eg. <a t:type="ActionLink" href="#">Home</a></th>
+			<td>
+				pageAttached()<br/>
+				...onActivate()<br/>
+				...onAction()<br/>
+				<em>...Tapestry creates a URL to next page</em><br/>
+				pageDetached()<br/>
+				<em>Tapestry returns URL of next page to browser</em>
+			</td>
+		</tr>
+		<tr>
+ 			<th>In response to request from <strong>EventLink</strong>.<br/>
+ 			Eg. <a t:type="EventLink" t:event="clicked" href="#">Home</a></th>
+			<td>
+				pageAttached()<br/>
+				...onActivate()<br/>
+				...onClicked()<br/>
+				<em>...Tapestry creates a URL to next page</em><br/>
+				pageDetached()<br/>
+				<em>Tapestry returns URL of next page to browser</em>
+			</td>
+ 		</tr>
+ 		<tr>
+ 			<th>
+ 				<form t:type="form">
+					In response to request from <strong>Form</strong>.<br/>
+					Eg. <input t:type="Submit" value="Home"/>
+				</form>
+ 			</th>
+			<td>
+				pageAttached()<br/>
+				...onActivate()<br/>
+				...onPrepareForSubmit()<br/>
+				...onPrepare()<br/>
+				...onSelected()<br/>
+				...onValidateForm()<br/>
+				...onSuccess()<br/>
+				...onSubmit()<br/>
+				<em>...Tapestry creates a URL to next page</em><br/>
+				pageDetached()<br/>
+				<em>Tapestry returns URL of next page to browser</em>
+			</td>
+		</tr>
+	</table><br/>
+	
+	Message: ${message}<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/lifecycle.html">Page Lifecycle</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/rendering.html">Component Rendering</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/ActionLink.html">ActionLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/EventLink.html">EventLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Submit.html">Submit</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/logging.html">Logging</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/WhatIsCalledAndWhen.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/WhatIsCalledAndWhen.java"/>
+</body>
+</html>

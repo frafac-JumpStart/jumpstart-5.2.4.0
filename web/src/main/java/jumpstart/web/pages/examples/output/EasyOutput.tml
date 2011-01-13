@@ -1,0 +1,35 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		dl.t-beandisplay dd.id	{ display:inline; margin-left: 0px; }	// IE 7.
+	</style>
+</head>
+<body>
+	<h1>Easy Output (Using BeanDisplay)</h1>
+	
+	This page shows how just one line of <strong>BeanDisplay</strong> component in the template results in a multi-line 
+	display of an object - in this example the object is Person 1 from the database.  Tapestry's BeanDisplay component 
+	magically displays the Person.<br/><br/>
+	
+	<t:beandisplay object="person"/><br/>
+	
+	The Person was retrieved from the database by PersonService, which is an EJB3 Session Bean, using the definition 
+	stored in Person, which is an EJB3 Entity Bean.<br/><br/>
+	
+	Obviously, BeanDisplay is ideal for rapid prototyping, but it can be used for more than that because its parameters 
+	let you exclude fields, include fields, reorder fields, etc. Its styling can be overridden with CSS.<br/><br/> 
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/BeanDisplay.html">BeanDisplay</a>,
+	<a href="http://tapestry.apache.org/tapestry5/guide/beaneditform.html">Using BeanEditForm (sic)</a>.<br/><br/>
+
+	<t:pagelink t:page="Index" href="#">Home</t:pagelink><br/><br/>
+	
+	The source for PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/output/EasyOutput.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/output/EasyOutput.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+</body>
+</html>

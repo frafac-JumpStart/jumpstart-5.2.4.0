@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; 
+	 We use a "strict" DTD to make IE follow the alignment rules. -->
+	 
+<html t:type="theapp/layout" t:tab="literal:Security" t:subtab="literal:User" t:title="literal:Search Users" 
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+<t:remove>
+	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css" />
+</t:remove>
+<div class="contentblock">
+	<h1>Search Users</h1>
+	<form t:type="form" t:id="form">
+		<table class="searchblock" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+					<t:errors />
+					<div class="search">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th><t:label for="loginId" /></th>
+								<td><input t:id="loginId" t:type="TextField" t:value="searchFields.loginId" size="15" t:validate="maxLength=15" /></td>
+							</tr>
+							<tr>
+								<th><t:label for="salutation"/></th>
+ 								<td><select t:id="salutation" t:type="Select" t:value="searchFields.salutation" t:model="salutations"/></td>
+							</tr>
+							<tr>
+								<th><t:label for="firstName" /></th>
+								<td><input t:id="firstName" t:type="TextField" value="searchFields.firstName" size="20" t:validate="maxLength=20" /></td>
+							</tr>
+							<tr>
+								<th><t:label for="lastName" /></th>
+								<td><input t:id="lastName" t:type="TextField" value="searchFields.lastName" size="20" t:validate="maxLength=20" /></td>
+							</tr>
+							<tr>
+								<th><t:label for="emailAddress">E-mail address</t:label></th>
+								<td><input t:id="emailAddress" t:type="TextField" value="searchFields.emailAddress" size="50" t:validate="maxLength=80" /></td>
+							</tr>
+							<tr>
+								<th><t:label for="expiryDate"/></th>
+								<!--  TODO Create new validators: minDateISO and maxDateISO for T5... -->
+								<!--  TODO Create a validator that checks a date is valid, based on the format... -->
+								<td><input t:id="expiryDate" t:type="DateField" value="searchFields.expiryDate" t:format="prop:dateInputFormat"/>
+									&nbsp;(${dateInputPattern})
+								</td>
+							</tr>
+							<tr>
+								<th><t:label for="active"/></th>
+ 								<td><select t:id="active" t:type="Select" t:model="activeOptions" t:value="activeAsString"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="buttons">
+						<table>
+							<tr>
+								<td><input type="submit" value="Search" class="positive" title="Search"/></td>
+								<td><button t:type="chenillekit/Button" type="button" t:event="Reset">Reset</button></td>
+								<!-- Replace this Button with the "page link button" when t5components releases it. -->
+								<td><button t:type="chenillekit/Button" type="button" t:event="New" title="New">New...</button></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<div t:type="if" t:test="showResult">
+		<!-- We need a form or we can't use checkbox. The form has no submit. -->
+		<form t:type="form">
+			<table class="matrixblock" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<div class="matrix">
+							<h1>Users</h1>
+							<table border="0" cellspacing="0" cellpadding="0" 
+								t:type="grid" t:source="users" t:row="user" t:lean="literal:true" 
+								t:include="loginId,salutation,firstName,lastName,emailAddress,expiryDate,active" t:add="actions" 
+								t:rowsPerPage="10" t:pagerPosition="top">[Grid here]
+				
+								<p:expiryDateCell>
+									<t:output value="user.expiryDate" format="dateListFormat"/>
+								</p:expiryDateCell>
+								<p:activeCell>
+									<input t:type="checkbox" value="user.active" t:disabled="true"/>
+								</p:activeCell>
+								<p:actionsCell>
+									<span class="action"><a t:type="pagelink" t:page="theapp/security/UserView" t:context="user.id" title="View">View</a></span>
+									<span class="action"><a t:type="pagelink" t:page="theapp/security/UserEdit" t:context="user.id" title="Edit">Edit</a></span>
+									<span class="action"><a t:type="actionlink" t:id="Delete" t:context="list:user.id,user.version" 
+										onclick="return confirm('Delete ${user.loginId}?')" title="Delete">Delete</a></span>
+								</p:actionsCell>
+								<p:empty>
+									<div class="nodata">(No Users to display)</div>
+								</p:empty>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+
+</html>

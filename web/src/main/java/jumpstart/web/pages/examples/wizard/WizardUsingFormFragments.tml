@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a DOCTYPE to allow us to use special characters like &nbsp; 
+	We use a "strict" DTD to make IE follow the alignment rules. -->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/wizard.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/wizard.css"/>
+</head>
+<body>
+	<h1>Wizard Using Form Fragments</h1>
+
+	This 4 step wizard is done with a single page holding a single form divided into <strong>form fragments</strong>.<br/>
+	The first 3 steps are data entry.  They share a "conversation" during which the browser's Back and Refresh/Reload buttons are allowed.<br/>
+	The 4th step displays success.  Any attempt to return to the "conversation" will be redirected to a 5th step - a "bad flow" step.<br/><br/>
+
+	<t:if test="inEntrySteps">
+		<form t:type="form" t:id="form" style="background: #EEEEEE; padding: 1em;">
+		
+			<t:formfragment visible="inStart">
+				<h2>Applying for Credit - Step 1: Start</h2>
+				<table>
+					<tr>
+						<td><t:label for="amount"/></td>
+						<td><input t:type="TextField" t:id="amount" value="creditRequest.amount" 
+							t:validate="required, min=10, max=9999" size="10"/></td>
+						<td>(required)</td>
+					</tr>
+				</table><br/>
+		
+				<input type="submit" value="Next &gt;"/>
+				<button t:type="chenillekit/Button" type="button" t:event="Quit" style="margin-left: 20px;"> Quit </button>
+		
+				<t:errors/>
+			</t:formfragment>
+	
+			<t:formfragment visible="inApplicant">
+				<h2>Applying for Credit - Step 2: The Applicant</h2>
+				<table>
+					<tr>
+						<td><t:label for="name"/></td>
+						<td><input t:type="TextField" t:id="name" value="creditRequest.applicantName" t:validate="required"/></td>
+						<td>(required)</td>
+					</tr>
+				</table><br/>
+				
+				<button t:type="chenillekit/Button" type="button" t:event="Prev">&lt; Prev</button>
+				<input type="submit" value="Next &gt;"/>
+				<button t:type="chenillekit/Button" type="button" t:event="Quit" style="margin-left: 20px;"> Quit </button>
+		
+				<t:errors/>
+			</t:formfragment>
+	
+			<t:formfragment visible="inSubmit">
+				<h2>Applying for Credit - Step 3: Submit</h2>
+	
+				Amount: $${creditRequest.amount}<br/>
+				Applicant Name: ${creditRequest.applicantName}<br/><br/>
+				
+				<button t:type="chenillekit/Button" type="button" t:event="Prev">&lt; Prev</button>
+				<input type="submit" value="Submit for Credit Check" onclick="displayProcessingMessage()"/>
+				<button t:type="chenillekit/Button" type="button" t:event="Quit" style="margin-left: 20px;"> Quit </button>
+		
+				<t:errors/>
+	
+				<div id="processingMessage" style="display:none; color:green; font-weight: bold; ">
+					<br/>Processing your application. Please wait...
+				</div>
+	
+				<!-- A script that displays the "processing" message -->
+				<script>
+						function displayProcessingMessage() {
+							obj = document.getElementById('processingMessage');
+							obj.style.display = ''
+							return true;
+						}
+				</script>
+			</t:formfragment>
+	
+		</form>
+	</t:if>
+	<t:if test="inBadFlow">
+		<div style="background: #EEAAAA; padding: 1em;">
+			Operation not allowed because the chosen Credit Request is over. Did you use the Back button after the Request was over?<br/><br/>
+
+			<a t:type="pagelink" t:page="examples/wizard/ConversationsList" href="#">List conversations</a><br/>
+			<a t:type="eventlink" t:event="Restart" href="#">Start again</a>
+		</div>
+	</t:if>
+	<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/FormFragment.html">FormFragment</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/appstate.html">Session State</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/EventContext.html">EventContext API</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingFormFragments.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingFormFragments.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/state/examples/wizard/CreditRequest.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/Conversations.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/Conversation.java"/>
+</body>
+</html>

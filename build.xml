@@ -1,0 +1,270 @@
+<!-- 
+	The target names used in this build file are based on the conventions found in Maven's build lifecycle.  
+	See http://books.sonatype.com/maven-book/reference/lifecycle.html .
+ -->
+
+<project name="jumpstart" default="get-clean-compile-test-package-preintegrationtest-integrationtest" basedir=".">
+
+	<property file="build.properties" />
+
+	<property name="project.dir" value="${basedir}"/>
+	<property name="exploded.ear.dir" value="${exploded.dir}/${app.name}.ear" />
+
+	<target name="clean" description="Delete the output of previous builds">
+		<echo message="**************************" />
+		<echo message="Cleaning all..." />
+		<echo message="**************************" />
+		<ant dir="${business.dir}" target="clean" />
+		<ant dir="${web.dir}" target="clean" />
+		<ant dir="${enterprise.dir}" target="clean" />
+	</target>
+
+	<target name="compile" description="Compile the source code of the project">
+		<echo message="**************************" />
+		<echo message="Compiling Business module..." />
+		<echo message="**************************" />
+		<ant dir="${business.dir}" target="compile" />
+
+		<echo message="**************************" />
+		<echo message="Packaging Business module to satisfy Web dependency..." />
+		<echo message="**************************" />
+		<ant dir="${business.dir}" target="package" />
+
+		<echo message="**************************" />
+		<echo message="Compiling Web module..." />
+		<echo message="**************************" />
+		<ant dir="${web.dir}" target="compile" />
+	</target>
+
+	<target name="test-compile" description="Compile the test source code into the test destination directory">
+		<echo message="**************************" />
+		<echo message="Compiling tests all..." />
+		<echo message="**************************" />
+		<ant dir="${business.dir}" target="test-compile" />
+		<ant dir="${web.dir}" target="test-compile" />
+	</target>
+
+	<target name="test" description="Run unit tests">
+		<echo message="**************************" />
+		<echo message="Testing all..." />
+		<echo message="**************************" />
+		<ant dir="${business.dir}" target="test" />
+		<ant dir="${web.dir}" target="test" />
+	</target>
+
+	<target name="package" description="Take the compiled code and package it in its distributable format, such as a JAR, WAR, or EAR">
+		<echo message="**************************" />
+		<echo message="Packaging all..." />
+		<echo message="**************************" />
+		<antcall target="print-package-info" />
+		<antcall target="package-as-ear-unless-for-tomcat" />
+		<antcall target="package-as-war-if-for-tomcat" />
+	</target>
+
+	<target name="print-package-info">
+		<echo message="   *************** PROPERTIES OF THE PACKAGE **********************************"/>
+		<echo message="   deployment.server.type            = ${deployment.server.type}"/>
+		<echo message="   deployment.persistence.descriptor = ${deployment.persistence.descriptor}"/>
+		<echo message="   deployment.web.descriptor         = ${deployment.web.descriptor}"/>
+		<echo message="   ****************************************************************************"/>
+	</target>
+
+	<target name="package-as-ear-unless-for-tomcat" unless="deployment.server.type.is.tomcat" depends="interpret-server-type">
+		<ant dir="${business.dir}" target="package" />
+		<ant dir="${web.dir}" target="package" />
+		<ant dir="${enterprise.dir}" target="package" />
+
+		<echo message="EAR has been placed in ${enterprise.dir}/target/package." />
+	</target>
+
+	<target name="package-as-war-if-for-tomcat" if="deployment.server.type.is.tomcat" depends="interpret-server-type">
+		<ant dir="${web.dir}" target="package" />
+
+		<echo message="WAR in 'Collapsed EAR' format has been placed in ${web.dir}/target/package." />
+	</target>
+
+	<target name="pre-integration-test" description="Perform actions required before integration tests are executed">
+		<echo message="**************************" />
+		<echo message="Pre-integration testing all..." />
+		<echo message="**************************" />
+		<antcall target="deploy-to-integration-test-server"/>
+	</target>
+
+	<target name="integration-test" description="Process and deploy the package if necessary into an environment where integration tests can be run">
+		<echo message="**************************" />
+		<echo message="Integration testing all..." />
+		<echo message="**************************" />
+		<ant dir="${business.dir}" target="integration-test" />
+		<ant dir="${web.dir}" target="integration-test" />
+		<ant dir="${enterprise.dir}" target="integration-test" />
+	</target>
+
+	<target name="install" description="Install the package into the local repository, for use as a dependency in other projects locally">
+		<echo message="**************************" />
+		<echo message="Install all..." />
+		<echo message="**************************" />
+		<ant dir="${business.dir}" target="install" />
+		<ant dir="${web.dir}" target="install" />
+		<ant dir="${enterprise.dir}" target="install" />
+	</target>
+
+	<target name="deploy" description="Copies the final package to the remote repository for sharing (usually only relevant during a formal release)">
+		<echo message="**************************" />
+		<echo message="Deploy EAR..." />
+		<echo message="**************************" />
+		<ant dir="${enterprise.dir}" target="deploy" />
+	</target>
+
+	<target name="touch-exploded-ear" description="Touch exploded EAR, causing JBoss to reload the EAR">
+		<echo message="**************************" />
+		<echo message="Touch exploded EAR's application.xml..." />
+		<echo message="**************************" />
+		<touch file="${exploded.ear.dir}/META-INF/application.xml" />
+		<echo message="Touched ${exploded.dir}/${app.name}.ear/META-INF/application.xml." />
+	</target>
+
+	<target name="delete-dependent-files" description="">
+		<setproxy />
+
+		<echo message="********************************************" />
+		<echo message="Deleting dependent files for business module..." />
+		<echo message="********************************************" />
+		<ant dir="${business.dir}" target="delete-dependent-files" />
+
+		<echo message="********************************************" />
+		<echo message="Deleting dependent files for web module..." />
+		<echo message="********************************************" />
+		<ant dir="${web.dir}" target="delete-dependent-files" />
+
+		<echo message="********************************************" />
+		<echo message="Deleting dependent files for enterprise module..." />
+		<echo message="********************************************" />
+		<ant dir="${enterprise.dir}" target="delete-dependent-files" />
+	</target>
+
+	<target name="get-dependent-files">
+		<setproxy />
+
+		<echo message="********************************************" />
+		<echo message="Getting dependent files for business module..." />
+		<echo message="********************************************" />
+		<ant dir="${business.dir}" target="get-dependent-files" />
+
+		<echo message="********************************************" />
+		<echo message="Getting dependent files for web module..." />
+		<echo message="********************************************" />
+		<ant dir="${web.dir}" target="get-dependent-files" />
+
+		<echo message="********************************************" />
+		<echo message="Getting dependent files for enterprise module..." />
+		<echo message="********************************************" />
+		<ant dir="${enterprise.dir}" target="get-dependent-files" />
+	</target>
+
+	<target name="deploy-to-integration-test-server">
+		<echo message="   *************** PROPERTIES OF THE INTEGRATION TEST *************************"/>
+		<echo message="   integration.test.server.dir = ${integration.test.server.dir}"/>
+		<echo message="   ****************************************************************************"/>
+
+		<!-- Deploy the EAR (and possibly a datasource descriptor) to the chosen deployment server -->
+
+		<!-- JBoss4 is no longer supported
+		<antcall target="deploy-ear-to-integration-test-server-if-jboss4" />
+		-->
+		<antcall target="deploy-ear-to-integration-test-server-if-jboss5"/>
+		<antcall target="deploy-ear-to-integration-test-server-if-glassfish" />
+		<antcall target="deploy-war-to-integration-test-server-if-tomcat" />
+
+		<!-- Wait for the previous deployment to unload. -->
+
+		<echo message="Waiting 10 seconds to allow previous deployment (if there is one) to stop..." />
+		<waitfor maxwait="10" maxwaitunit="second" checkevery="10000" timeoutproperty="ignore.me">
+			<http url="http://localhost:8080/absolutenonsense" />
+		</waitfor>
+
+		<!-- Wait for the server to autoload the deployment. -->
+
+		<echo message="Waiting up to 1 minute for app server to start jumpstart..." />
+		<waitfor maxwait="1" maxwaitunit="minute" checkevery="2000" timeoutproperty="app.not.started">
+			<http url="http://localhost:8080/jumpstart/examples/start/helloworld" />
+		</waitfor>
+		<fail if="app.not.started" message="*** The app was not ready after 1 minute.  Is the server running? Server is ${integration.test.server.dir}." />
+
+	</target>
+
+	<!-- JBoss4 is no longer supported
+	<target name="deploy-ear-to-integration-test-server-if-jboss4" if="deployment.server.type.is.jboss4" depends="interpret-server-type">
+		<ant dir="${enterprise.dir}" target="deploy-ear-to-integration-test-server-jboss4" />
+	</target>
+	-->
+
+	<target name="deploy-ear-to-integration-test-server-if-jboss5" if="deployment.server.type.is.jboss5" depends="interpret-server-type">
+		<ant dir="${enterprise.dir}" target="deploy-ear-to-integration-test-server-jboss5" />
+	</target>
+
+	<target name="deploy-ear-to-integration-test-server-if-glassfish" if="deployment.server.type.is.glassfish" depends="interpret-server-type">
+		<ant dir="${enterprise.dir}" target="deploy-ear-to-integration-test-server-glassfish" />
+	</target>
+
+	<target name="deploy-war-to-integration-test-server-if-tomcat" if="deployment.server.type.is.tomcat" depends="interpret-server-type">
+		<ant dir="${web.dir}" target="deploy-war-to-integration-test-server-tomcat" />
+	</target>
+
+	<target name="interpret-server-type">
+
+		<!-- Validate the deployment.server.type -->
+
+		<condition property="deployment.server.type.valid">
+			<or>
+				<!-- JBoss4 is no longer supported
+				<equals arg1="${deployment.server.type}" arg2="jboss4" />
+				-->
+				<equals arg1="${deployment.server.type}" arg2="jboss5" />
+				<equals arg1="${deployment.server.type}" arg2="glassfish" />
+				<equals arg1="${deployment.server.type}" arg2="tomcat" />
+			</or>
+		</condition>
+		<!-- JBoss4 is no longer supported
+		<fail unless="deployment.server.type.valid" message="*** Please specify a valid deployment.server.type. Expected glassfish, tomcat, jboss4, or jboss5.  Found ${deployment.server.type}." />
+		-->
+		<fail unless="deployment.server.type.valid" message="*** Please specify a valid deployment.server.type. Expected glassfish, tomcat, or jboss5.  Found ${deployment.server.type}." />
+
+		<!-- Set some boolean properties based on the deployment.server.type -->
+
+		<!-- JBoss4 is no longer supported
+		<condition property="deployment.server.type.is.jboss4">
+			<equals arg1="${deployment.server.type}" arg2="jboss4" />
+		</condition>
+		-->
+		<condition property="deployment.server.type.is.jboss5">
+			<equals arg1="${deployment.server.type}" arg2="jboss5" />
+		</condition>
+		<condition property="deployment.server.type.is.glassfish">
+			<equals arg1="${deployment.server.type}" arg2="glassfish" />
+		</condition>
+		<condition property="deployment.server.type.is.tomcat">
+			<equals arg1="${deployment.server.type}" arg2="tomcat" />
+		</condition>
+
+		<!-- Validate integration.test.server.dir. -->
+
+		<available type="dir" file="${project.dir}/${integration.test.server.dir}" property="integration.test.server.exists" />
+		<fail unless="integration.test.server.exists" message="*** Integration test server directory does not exist. Tried ${project.dir}/${integration.test.server.dir}." />
+
+	</target>
+
+	<target name="clean-compile-test" description="" depends="clean, compile, test-compile, test"/>
+
+	<target name="clean-compile-test-package" description="" depends="clean, compile, test-compile, test, package"/>
+
+	<target name="clean-compile-test-package-preintegrationtest" description="" depends="clean, compile, test-compile, test, package, pre-integration-test"/>
+
+	<target name="clean-compile-test-package-preintegrationtest-integrationtest" description="" depends="clean, compile, test-compile, test, package, pre-integration-test, integration-test"/>
+
+	<target name="get-clean-compile-test-package-preintegrationtest-integrationtest" description="" depends="get-dependent-files, clean, compile, test-compile, test, package, pre-integration-test, integration-test"/>
+
+	<target name="delete-get-clean-compile-test-package-preintegrationtest-integrationtest" description="" depends="delete-dependent-files, get-dependent-files, clean, compile, test-compile, test, package, pre-integration-test, integration-test"/>
+
+	<target name="all" description="" depends="delete-get-clean-compile-test-package-preintegrationtest-integrationtest"/>
+
+</project>

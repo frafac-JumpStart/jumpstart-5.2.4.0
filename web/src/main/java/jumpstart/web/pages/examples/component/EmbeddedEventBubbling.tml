@@ -1,0 +1,32 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Embedded Event Bubbling</h1>
+	
+	Imagine a component A is embedded in component B which is embedded in page P. If an event from A bubbles up through B to P, 
+	P will see the event as coming from B and NOT from A. This is deliberate, because P should not know what B contains.<br/><br/>
+	
+	In this demonstration, we're using a component called MyActionLink which can be told what to return from its event handler method. 
+	
+	<ul>
+		<li><a t:type="examples/component/myactionlink" t:id="bubbleup" t:returnvalue="false" href="#">This link will bubble up</a></li>
+		<li><a t:type="examples/component/myactionlink" t:id="nobubbleup" t:returnvalue="true" href="#">This link will not bubble up</a></li>
+	</ul>
+	
+	<t:if t:test="message">
+		<span style="color:red;">${message}<br/><br/></span>
+	</t:if>
+	
+	If an event from component A bubbles up to its enclosing component B and then to B's enclosing component C, C will 
+	see the event as coming from B and NOT from A. This is deliberate, because C should have no knowledge of B's internals.<br/><br/>
+	
+	References: see <em>Event Bubbling</em> in 
+	<a href="http://tapestry.apache.org/tapestry5/guide/event.html">Component Events</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/EmbeddedEventBubbling.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/EmbeddedEventBubbling.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/MyActionLink.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/MyActionLink.java"/>
+</body>
+</html>

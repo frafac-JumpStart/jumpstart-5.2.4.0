@@ -1,0 +1,22 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<!-- A stylesheet link that enables preview but cannot be guaranteed to work at runtime. -->
+<link rel="stylesheet" type="text/css" href="../../../css/examples/menubar.css"/>
+
+<t:content>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/menubar.css}"/>
+
+	<!-- Based on an example at http://www.dynamicdrive.com/dynamicindex1/ddtabmenu.htm -->
+	<div id="menubar">
+		<ul>
+			<li t:type="Loop" t:source="menu.menuoptions" t:value="menuoption">
+				<a t:type="pagelink" t:page="prop:menuoption.page" class="prop:cssClass">
+					<span>${menuoption.label}</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div id="menubarline"/>
+</t:content>
+
+</html>

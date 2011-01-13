@@ -1,0 +1,28 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		dl.t-beandisplay dd.id	{ display:inline; margin-left: 0px; }	// IE 7.
+	</style>
+</head>
+<body>
+	<h1>More Control Edit (Using BeanEditor) (2)</h1>
+	
+	Here's the Person you edited, displayed here with BeanDisplay.<br/>
+	
+	<t:beandisplay object="person">[BeanDisplay here]</t:beandisplay>
+
+	<a t:type="pagelink" t:page="examples/input/MoreControlEdit1" t:context="person.id" href="#">Return</a><br/><br/>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/BeanDisplay.html">BeanDisplay</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/MoreControlEdit2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/MoreControlEdit2.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+</body>
+</html>

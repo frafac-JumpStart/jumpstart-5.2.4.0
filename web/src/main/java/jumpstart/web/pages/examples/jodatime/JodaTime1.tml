@@ -1,0 +1,111 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Joda-Time (1)</h1>
+	Many developers prefer to use <a href="http://joda-time.sourceforge.net/">Joda-Time</a> instead of Java's date and time classes.<br/>
+	JumpStart provides 3 components to help out: JodaTimeOutput for output; DateMidnightField and LocalDateField for input.<br/><br/>
+	
+	This page demonstrates the <strong>JodaTimeOutput</strong> component. With JodaTimeOutput you can specify a style or a formatter.<br/> 
+	In this example we get a row from a database table called DateStuff into an object called dateStuff and display a field called 
+	aDateMidnight several ways...<br/><br/>
+	
+	<table style="font-family: Arial, Helvetica, sans-serif; font-size: small; background-color: #eee;">
+		<tr>
+			<td>expansion, ie. $ {dateStuff.aDateMidnight}</td>
+			<td>${dateStuff.aDateMidnight}</td>
+		</tr>
+		<tr>
+			<td>t:jodatimeoutput value="dateStuff.aDateMidnight" style="F-"</td>
+			<td><t:jodatimeoutput value="dateStuff.aDateMidnight" style="F-"/></td>
+		</tr>
+		<tr>
+			<td>t:jodatimeoutput value="dateStuff.aDateMidnight" style="L-"</td>
+			<td><t:jodatimeoutput value="dateStuff.aDateMidnight" style="L-"/></td>
+		</tr>
+		<tr>
+			<td>t:jodatimeoutput value="dateStuff.aDateMidnight" style="M-"</td>
+			<td><t:jodatimeoutput value="dateStuff.aDateMidnight" style="M-"/></td>
+		</tr>
+		<tr>
+			<td>t:jodatimeoutput value="dateStuff.aDateMidnight" style="S-"</td>
+			<td><t:jodatimeoutput value="dateStuff.aDateMidnight" style="S-"/></td>
+		</tr>
+		<tr>
+			<td>t:jodatimeoutput value="dateStuff.aDateMidnight" formatter="french"</td>
+			<td><t:jodatimeoutput value="dateStuff.aDateMidnight" formatter="french"/></td>
+		</tr>
+		<tr>
+			<td>t:jodatimeoutput value="dateStuff.aDateMidnight" formatter="ISODate"</td>
+			<td><t:jodatimeoutput value="dateStuff.aDateMidnight" formatter="ISODate"/></td>
+		</tr>
+	</table><br/>
+
+	Notes:
+	<ul>
+		<li>aDateMidnight is actually stored in the DateStuff table as an SQL DATE but the DateStuff object exposes it as a 
+		<strong>DateMidnight</strong> field.</li>
+		<li><strong>style</strong> is any joda-time
+		<a href="http://joda-time.sourceforge.net/api-release/org/joda/time/format/DateTimeFormat.html#forStyle(java.lang.String)">
+		Style</a> pattern.</li>
+		<li><strong>formatter</strong> is any joda-time
+		<a href="http://joda-time.sourceforge.net/api-release/org/joda/time/format/DateTimeFormatter.html">DateTimeFormatter</a>.</li>
+	</ul>
+
+	JodaTimeOutput can render any DateTime, DateMidnight, LocalDateTime, LocalDate, or LocalTime object. Here is a demonstration:<br/><br/>
+	
+	<table style="font-family: Arial, Helvetica, sans-serif; font-size: small; background-color: #eee;">
+		<tr>
+			<th>Class</th>
+			<th>Example field</th>
+			<th>Using expansion</th>
+			<th>Using JodaTimeOutput</th>
+			<th>Style used</th>
+		</tr>
+		<tr>
+			<td>DateTime</td>
+			<td>dateStuff.aDateTime</td>
+			<td>${dateStuff.aDateTime}</td>
+			<td><t:jodatimeoutput value="dateStuff.aDateTime" style="LL"/></td>
+			<td>style="LL"</td>
+		</tr>
+		<tr>
+			<td>DateMidnight</td>
+			<td>dateStuff.aDateMidnight</td>
+			<td>${dateStuff.aDateMidnight}</td>
+			<td><t:jodatimeoutput value="dateStuff.aDateMidnight" style="L-"/></td>
+			<td>style="L-"</td>
+		</tr>
+		<tr>
+			<td>LocalDateTime</td>
+			<td>dateStuff.aLocalDateTime</td>
+			<td>${dateStuff.aLocalDateTime}</td>
+			<td><t:jodatimeoutput value="dateStuff.aLocalDateTime" style="LL"/></td>
+			<td>style="LL"</td>
+		</tr>
+		<tr>
+			<td>LocalDate</td>
+			<td>dateStuff.aLocalDate</td>
+			<td>${dateStuff.aLocalDate}</td>
+			<td><t:jodatimeoutput value="dateStuff.aLocalDate" style="L-"/></td>
+			<td>style="L-"</td>
+		</tr>
+		<tr>
+			<td>LocalTime</td>
+			<td>dateStuff.aLocalTimeAsTime</td>
+			<td>${dateStuff.aLocalTimeAsTime}</td>
+			<td><t:jodatimeoutput value="dateStuff.aLocalTimeAsTime" style="-L"/></td>
+			<td>style="-L"</td>
+		</tr>
+	</table><br/>
+
+	<a t:type="pagelink" t:page="examples/jodatime/2" t:context="dateStuff.id" href="#">To Page 2</a><br/><br/>
+ 	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/jodatime/JodaTime1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/jodatime/JodaTime1.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/DateStuffService.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/DateStuff.java"/>
+</body>
+</html>

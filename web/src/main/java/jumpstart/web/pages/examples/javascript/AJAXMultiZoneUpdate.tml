@@ -1,0 +1,44 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>AJAX MultiZoneUpdate</h1>
+	
+	This page demonstrates how multiple zones can be updated simultaneously by returning a MultiZoneUpdate from the listener method.<br/><br/>
+	
+	<form t:type="form" style="background-color: eee; padding: 15px">
+
+		<t:zone t:id="nameZone1">
+			Welcome ${name}.
+		</t:zone><br/>
+
+		First Name: 
+		<input t:type="TextField" t:id="firstName" t:mixins="zoneUpdater" t:clientEvent="keyup" t:event="firstNameChanged" t:zone="nameZone1"/><br/>
+		Last Name: 
+		<input t:type="TextField" t:id="lastName" t:mixins="zoneUpdater" t:clientEvent="keyup" t:event="lastNameChanged" t:zone="nameZone1"/><br/><br/>
+
+		<t:zone t:id="nameZone2">
+			Welcome ${upperCaseName}.
+		</t:zone><br/>
+
+		Note that the following time field does not update because it's not in the zone:  ${time}<br/>
+		
+ 	</form>
+ 	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/ajax.html">Ajax</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Zone.html">Zone</a>,
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/ajax/MultiZoneUpdate.html">MultiZoneUpdate API</a>, 
+	<a href="http://tinybits.blogspot.com/2010/03/new-and-better-zoneupdater.html">Inge Solvoll's Zone Updater</a>.<br/><br/>
+
+	<a t:type="actionlink" t:id="gohome" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXMultiZoneUpdate.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXMultiZoneUpdate.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/ZoneUpdater.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/zone_updater.js"/>
+</body>
+</html>

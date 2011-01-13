@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; -->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Display Session Contents</h1>
+	
+	This page shows what's currently in your session.<br/>
+	To make it a handy monitoring tool just open it in a new window, because in most browsers the new window will share the 
+	original window's session.<br/><br/>
+	
+	References: <a href="http://tapestry.apache.org/tapestry5/guide/persist.html">Persistent Data</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/appstate.html">Persistent State</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/RenderObject.html">RenderObject</a>.<br/><br/>
+
+	<div class="t-env-data">
+
+	<!-- 
+		This next part is identical to a portion of Tapestry's default ExceptionReport page.
+	 -->
+		
+		<t:if test="hasSession">
+			<h2>Session Contents</h2>
+			<dl>
+				<t:loop source="session.attributeNames" value="attributeName">
+					<dt>${attributeName}</dt>
+					<dd>
+						<t:renderobject object="attributeValue"/>
+					</dd>
+				</t:loop>
+			</dl>
+		</t:if>
+		<t:if test="hasSession" negate="true">
+			<br/>
+			There is no Session.
+			<br/>
+		</t:if>
+
+	</div><br/>
+	
+	<a t:type="pagelink" page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/DisplaySessionContents.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/DisplaySessionContents.java"/>
+</body>
+</html>

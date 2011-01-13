@@ -1,0 +1,24 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Autocomplete Mixin</h1>
+	This page demonstrates the Autocomplete Mixin.  It has been mixed into an ordinary TextField component.<br/> 
+	As you type, Autocomplete issues <em>providecompletions</em> events which we handle by returning a list of partial matches.<br/><br/>
+
+	<form t:type="form">
+		Type in a country name:
+		<input t:id="countryName" t:type="TextField" t:mixins="autocomplete"/>
+	</form>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/mixins/Autocomplete.html">Autocomplete</a>,
+	<a href="http://tapestry.apache.org/tapestry5/guide/mixins.html">Mixins</a>,
+	<a href="http://tapestry.apache.org/tapestry5/guide/ajax.html">Ajax</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AutocompleteMixin.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AutocompleteMixin.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/CountryNames.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/AppModule.java"/>
+</body>
+</html>

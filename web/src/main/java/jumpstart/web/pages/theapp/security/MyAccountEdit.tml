@@ -1,0 +1,58 @@
+<html t:type="theapp/layout" t:tab="literal:NONE" t:title="literal:Edit User" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:remove>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css"/>
+</t:remove>
+<div class="contentblock">
+	<h1>Edit My Account</h1>
+	<form t:type="form" t:id="form">
+	
+		<!-- Include version in the form to prevent it being updated/refreshed in onActivate(), which would defeat optimistic locking. -->
+		<t:hidden value="user.version"/>
+	
+		<table class="recordblock" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+					<t:errors />
+					<div class="record">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th>Login Id</th>
+								<td>${user.loginId}</td>
+							</tr>
+							<tr>
+								<th><t:label for="salutation"/></th>
+									<td><select t:id="salutation" t:type="Select" t:value="user.salutation" t:model="salutations"/></td>
+							</tr>
+							<tr>
+								<th><t:label for="firstName"/></th>
+								<td><input t:id="firstName" t:type="TextField" value="user.firstName" size="20" t:validate="required,maxLength=20" /></td>
+							</tr>
+							<tr>
+								<th><t:label for="lastName"/></th>
+								<td><input t:id="lastName" t:type="TextField" value="user.lastName" size="20" t:validate="required,maxLength=20" /></td>
+							</tr>
+							<tr>
+								<th><t:label for="emailAddress"/></th>
+								<td><input t:id="emailAddress" t:type="TextField" value="user.emailAddress" size="50" t:validate="email,maxLength=80"/></td>
+							</tr>
+							<tr>
+								<th>Expiry Date</th>
+								<td><t:output value="user.expiryDate" format="dateViewFormat"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="buttons">
+						<table>
+							<tr>
+								<td><input type="submit" value="Save" class="positive"/></td>
+								<!-- Replace this Button with the "page link button" when t5components releases it. -->
+								<td><button t:type="chenillekit/Button" type="button" t:event="Cancel" title="Cancel">Cancel</button></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+</html>

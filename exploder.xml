@@ -1,0 +1,134 @@
+<project name="jumpstart-exploder" basedir="." default="copy-all-to-exploded-dir">
+
+	<property file="build.properties" />
+
+	<property name="project.dir" value="${basedir}"/>
+	<property name="ear.dir" value="${project.dir}/${exploded.dir}/jumpstart.ear" />
+	<property name="jar.dir" value="${ear.dir}/jumpstart.jar" />
+	<property name="war.dir" value="${ear.dir}/jumpstart.war" />
+	<property name="context.path" value="jumpstart/web" />
+	<property name="project.bin.dir" value="${project.dir}/bin"/>
+
+	<property name="enterprise.resources.main.dir" value="${project.dir}/${enterprise.dir}/src/main/resources"/>
+
+	<property name="web.java.main.dir" value="${project.dir}/${web.dir}/src/main/java"/>
+	<property name="web.resources.main.dir" value="${project.dir}/${web.dir}/src/main/resources"/>
+	<property name="web.lib.compile.dir" value="${project.dir}/${web.dir}/src/main/lib-compile"/>
+	<property name="web.lib.runtime.dir" value="${project.dir}/${web.dir}/src/main/lib-runtime"/>
+	<property name="web.deployment.descriptor.file" value="${project.dir}/${web.dir}/src/main/java/jumpstart/web/WEB-INF/web.xml" />
+
+	<property name="business.java.main.dir" value="${project.dir}/${business.dir}/src/main/java"/>
+	<property name="business.lib.compile.dir" value="${project.dir}/${business.dir}/src/main/lib-compile" />
+	<property name="business.lib.runtime.dir" value="${project.dir}/${business.dir}/src/main/lib-runtime" />
+	<property name="business.resources.main.dir" value="${project.dir}/${business.dir}/src/main/resources"/>
+	<property name="business.deployment.persistence.descriptor.file" value="${project.dir}/${business.dir}/src/main/resources/persistence-descriptor/${deployment.persistence.descriptor}" />
+
+	<!-- Make directory for exploded ear to sit in -->
+
+	<target name="mkdir">
+		<mkdir dir="${exploded.dir}" />
+	</target>
+
+	<!-- Copy enterprise elements to exploded EAR -->
+
+	<target name="copy-enterprise-to-exploded-ear" depends="mkdir">
+
+		<copy todir="${ear.dir}">
+			<fileset dir="${enterprise.resources.main.dir}" />
+		</copy>
+
+		<!-- JBoss prefers business libs to be at EAR level -->
+
+		<copy todir="${ear.dir}">
+			<fileset dir="${business.lib.compile.dir}" />
+			<fileset dir="${business.lib.runtime.dir}" />
+		</copy>
+
+	</target>
+
+	<!-- Copy business elements to exploded JAR -->
+
+	<target name="copy-business-to-exploded-jar" depends="mkdir">
+
+		<copy todir="${jar.dir}">
+			<fileset dir="${project.bin.dir}" includes="jumpstart/business/**,jumpstart/client/**,jumpstart/util/**" />
+			<fileset dir="${business.resources.main.dir}" includes="META-INF/**" />
+		</copy>
+
+		<copy tofile="${jar.dir}/META-INF/persistence.xml" file="${business.resources.main.dir}/persistence-descriptor/openejb-hibernate-hsqldb-persistence.xml" />
+		
+	</target>
+
+	<!-- Copy web elements to exploded WAR -->
+
+	<target name="copy-web-to-exploded-war" depends="mkdir">
+
+		<copy todir="${war.dir}">
+			<fileset dir="${web.java.main.dir}/${context.path}" includes="css/**,images/**,WEB-INF/*.properties" />
+		</copy>
+
+		<copy todir="${war.dir}/WEB-INF" >
+			<fileset file="${web.deployment.descriptor.file}" />
+		</copy>
+
+		<copy todir="${war.dir}/WEB-INF/classes">
+			<fileset dir="${project.bin.dir}" includes="${context.path}/**" excludes="**/*.java,${context.path}/css/**,${context.path}/images/**,${context.path}/WEB-INF/**,${context.path}/**/README.txt"/>
+			<fileset dir="${web.java.main.dir}" excludes="**/*.java,${context.path}/css/**,${context.path}/images/**,${context.path}/WEB-INF/**,${context.path}/**/README.txt"/>
+		</copy>
+
+		<copy todir="${war.dir}/WEB-INF/lib">
+			<fileset dir="${web.lib.compile.dir}" />
+			<fileset dir="${web.lib.runtime.dir}" />
+		</copy>
+
+		<copy todir="${war.dir}/META-INF">
+			<fileset file="${web.resources.main.dir}/META-INF/MANIFEST.MF" />
+		</copy>
+
+	</target>
+
+	<!-- Copy source to exploded WAR (so our SourceCodeDisplay component can get it) -->
+
+	<target name="copy-src-to-exploded-war" depends="mkdir" if="add.source.to.war">
+		<mkdir dir="${war.dir}/WEB-INF/sourcecode" />
+
+		<copy todir="${war.dir}/WEB-INF/sourcecode/business/src/main/java">
+			<fileset dir="${business.java.main.dir}" />
+			<fileset dir="${business.resources.main.dir}" />
+		</copy>
+
+		<copy todir="${war.dir}/WEB-INF/sourcecode/web/src/main/java">
+			<fileset dir="${web.java.main.dir}" />
+			<fileset dir="${web.resources.main.dir}" />
+		</copy>
+
+	</target>
+
+	<!-- Copy dev's datasource descriptor to exploded directory -->
+
+	<target name="copy-datasource-descriptor-to-exploded-dir" depends="mkdir">
+		<!-- Not needed since we moved from development from JBoss to OpenEJB.
+		<copy todir="${exploded.dir}" file="${basedir}/business/src/main/resources/datasource-descriptor/jumpstart-hsqldb-ds.xml"/>
+		-->
+	</target>
+
+	<!-- Clean exploded directory - delete everything in it -->
+
+	<target name="clean" depends="mkdir">
+		<delete includeemptydirs="true">
+			<fileset dir="${exploded.dir}" />
+		</delete>
+		<antcall target="mkdir" />
+	</target>
+
+	<!-- Copy all elements of the exploded directory -->
+
+	<target name="copy-all-to-exploded-dir">
+		<antcall target="copy-enterprise-to-exploded-ear" />
+		<antcall target="copy-business-to-exploded-jar" />
+		<antcall target="copy-web-to-exploded-war" />
+		<antcall target="copy-src-to-exploded-war" />
+		<antcall target="copy-datasource-descriptor-to-exploded-dir" />
+	</target>
+
+</project>

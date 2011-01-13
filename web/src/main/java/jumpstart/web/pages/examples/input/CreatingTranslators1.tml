@@ -1,0 +1,48 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>Creating Translators (1)</h1>
+
+	This example demonstrates how to write a translator and apply it to a TextField.<br/><br/>
+
+	The translator we have created is called YesNoTranslator.  
+	It converts between the client-side strings "y", "n", "yes", and "no", and a server-side Boolean.<br/>
+	Here we are using it to accept your answer to a question...<br/>
+	We made YesNoTranslator and a file of validation messages, ValidationMessages.properties, available to the whole 
+	application by contributing it to a service defined in AppModule.<br/><br/>
+
+	<form t:type="form" t:id="inputs">
+		<t:errors/>
+		<table>
+			<tr>
+				<td><t:label for="newToTapestry">Q: Are you new to Tapestry?</t:label></td>
+				<td><input t:type="TextField" t:id="newToTapestry" t:translate="yesNo" t:validate="required"/></td>
+			</tr>
+			<tr>
+				<td><t:label for="newToJava">Q: Are you new to Java?</t:label></td>
+				<td><input t:type="TextField" t:id="newToJava" t:translate="yesNo" t:validate="required"/></td>
+			</tr>
+			<tr> 
+				<td></td>
+				<td><input type="submit" value="Submit"/></td>
+			</tr>
+		</table>
+	</form><br/>
+	
+	References: <a href="http://tapestry.apache.org/tapestry5/guide/validation.html">Form Input and Validation</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-ioc/service.html">Tapestry IoC Services</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+		
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/CreatingTranslators1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/CreatingTranslators1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/translators/YesNoTranslator.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/translators/TranslationMessages.properties"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/AppModule.java"/>
+</body>
+</html>

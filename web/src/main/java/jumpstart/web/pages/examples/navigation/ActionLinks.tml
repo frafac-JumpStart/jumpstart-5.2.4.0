@@ -1,0 +1,43 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Action Links</h1>
+	
+	ActionLink triggers the ACTION event, which is handled in the same page.<br/><br/>
+	
+	Here's an example of some tml code using an ActionLink:<br/>
+	<code>&lt;a t:type="actionlink" t:id="SayHi" t:context="literal:Dude" href="#"&gt;Say Hi&lt;/a&gt;</code><br/><br/>
+
+	Here's the code in action: <br/>
+	<a t:type="actionlink" t:id="SayHi" t:context="literal:Dude" href="#">Say Hi</a> 
+	<span style="color:green">${hiMessage}</span><br/><br/>
+	
+	It generates a link whose URL looks like this: <br/>
+	<code>http://myhost/jumpstart/examples/navigation/actionlinks.sayhi/Dude</code><br/><br/>
+
+	When clicked, the ActionLink component called SayHi is notified and it sends the event ACTION to its container.<br/> 
+	The container can provide methods to handle the event, eg. onActionFromSayHi(String name).<br/><br/>
+
+	In this example, <em>onActionFromSayHi(String name)</em> returns nothing, which means stay on this page. 
+	Tapestry then <strong>redirects</strong> the browser to the page.<br/><br/>
+
+	<strong>Redirect-after-post</strong> <br/>
+	Once Tapestry knows which page is next, why doesn't Tapestry just render it and return it?  Because Tapestry uses the 
+	<a href="http://www.theserverside.com/tt/articles/article.tss?l=RedirectAfterPost">Redirect-After-Post</a> pattern: it constructs 
+	a <strong>render request</strong> URL to the next page, just like PageLink does, and returns that URL to the browser as a redirect. 
+	So when the next page shows, its URL will not be the URL that triggered an event.  Its URL will be safe to bookmark, reload or 
+	return to. The cost is 2 trips to the server, but it's worth it.<br/><br/>
+	
+	Actually, clicking on an ActionLink link causes a GET, not a POST, so in this case it's Redirect-After-Get!<br/><br/> 
+
+	References:	
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/ActionLink.html">ActionLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/event.html">Component Events</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/persist.html">Persistent Page Data</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ActionLinks.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ActionLinks.java"/>
+</body>
+</html>

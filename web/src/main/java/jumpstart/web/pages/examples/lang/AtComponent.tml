@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We've declared a doctype to allow us to use special characters like &gt; -->
+
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body>
+	<h1>@Component</h1>
+	
+	Template files can get cluttered when the components and all their parameter values are added.<br/>
+	Tapestry provides an alternative.  Instead of this:
+	<pre><code>	&lt;a t:type="pagelink" t:page="Index" href="#"&gt;Home&lt;/a&gt;</code></pre>
+
+	you can specify just an id:
+	<pre><code>	&lt;a t:id="index" href="#"&gt;Home&lt;/a&gt;</code></pre>
+
+	and provide the rest of the definition on an instance variable in the class by using the <code>@Component</code> 
+	annotation:
+	<pre><code>	@Component(id = "index", parameters = {"page=Index"})
+	private PageLink _index;</code></pre>
+
+	The <code>id</code> ties them together.  Here it is in action:
+				
+	<ul>
+		<li><a t:id="index" href="#">Home</a></li>
+	</ul>
+	
+	Note that parameter bindings specified in the annotation take precedence over the template.  In this example we
+	specified a binding for the <code>page</code> parameter, so we do not specify it in the template too. Bindings specified 
+	in the template are ignored if they conflict (case insensitive) with bindings from @Component.<br/><br/>
+
+	<strong>Which is best?</strong>  Once again, the choice is yours. The first style keeps the component and parameter 
+	information together in one place, which programmers may prefer. The second style removes clutter from the template,
+	which web designers may prefer.<br/><br/>
+
+	In JumpStart we use the first style.<br/><br/>
+	
+	References: <em>Embedded Components</em> in 
+	<a href="http://tapestry.apache.org/tapestry5/guide/component-classes.html">Component Classes</a>,
+	<a href="http://tapestry.apache.org/tapestry5.1/apidocs/org/apache/tapestry5/annotations/Component.html">@Component API</a>.
+	<br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/lang/AtComponent.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/lang/AtComponent.java"/>
+</body>
+</html>

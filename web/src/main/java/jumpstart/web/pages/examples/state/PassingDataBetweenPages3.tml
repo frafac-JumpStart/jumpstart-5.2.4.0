@@ -1,0 +1,34 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Passing Data Between Pages (3)</h1>
+
+	Welcome ${name}!<br/><br/>
+
+	This page used @Persist to save its data through the redirection.<br/> 
+	@Persist is usually the most appropriate way to pass <strong>whole objects, lengthy data, or data you don't 
+	want to be visible in a URL</strong>.<br/><br/>
+	
+	The default strategy of @Persist is "session", which means store the field in your session.<br/>
+	In this example we have used the FLASH strategy which stores the field in your session only temporarily - until it is displayed.<br/><br/>
+	
+	Other strategies include "client", COOKIE, and FLASHCOOKIE. See
+	<a href="http://tapestry.apache.org/tapestry5/guide/persist.html">Persistent Page Data</a> and 
+	<a href="http://wiki.apache.org/tapestry/Tapestry5HowToUsePersistentFieldStrategy">How To Use Persistent Field Strategy</a>.<br/><br/>
+
+	<strong>Caution</strong><br/>
+	<ul>
+		<li>The default strategy, "session", is risky because many browsers share the same session across windows and tabs.
+			The danger is that the field will be overwritten if the user opens a new window or tab and visits the same page.</li>
+		<li>Session persistence also has an impact on clustered servers.  Howard discusses this in 
+			<a href="http://thread.gmane.org/gmane.comp.java.tapestry.user/65410/focus=65426">Tapestry App Replication</a>.</li>
+	</ul>
+	To see what's in your session, go to the Display Session Contents example.<br/><br/>
+ 	
+	<a t:type="actionlink" t:id="return" href="#">Return</a><br/><br/>
+
+	<a t:type="actionlink" t:id="gohome" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/PassingDataBetweenPages3.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/PassingDataBetweenPages3.java"/>
+</body>
+</html>

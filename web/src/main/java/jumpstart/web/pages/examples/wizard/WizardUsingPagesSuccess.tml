@@ -1,0 +1,11 @@
+<html t:type="examples/wizard/WizardUsingPagesLayout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+	<div style="background: #EEEEEE; padding: 1em;">
+		<h2>Applying for Credit - Step 4: Success</h2>
+
+		Congratulations!  The credit application for $${approvedAmount} to ${approvedApplicantName} has been accepted.<br/><br/>
+			
+		<button t:type="chenillekit/Button" type="button" t:event="Restart">Start Again</button>
+	</div>
+
+</html>

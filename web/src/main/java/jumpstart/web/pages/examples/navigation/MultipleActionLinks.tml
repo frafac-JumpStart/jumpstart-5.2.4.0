@@ -1,0 +1,26 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Multiple Action Links</h1>
+	
+	If a page has multiple ActionLinks, it can handle them in different ways by providing multiple event handler methods.<br/><br/> 
+	
+	Here are two ActionLinks, one whose id is <em>sayhi</em> and the other whose id is <em>sayhello</em>:<br/> 
+	<a t:type="actionlink" t:id="sayhi" t:context="literal:Dude" href="#">Say Hi</a> 
+	<span style="color:green">${hiMessage}</span><br/>
+	<a t:type="actionlink" t:id="sayhello" t:context="literal:Dude" href="#">Say Hello</a> 
+	<span style="color:green">${helloMessage}</span><br/><br/>
+	
+	The page has two separate event handler methods, <em>onActionFromSayHi()</em> and <em>onActionFromSayHello</em>.<br/>
+	The method names say what event they handle (ACTION) and from which component (either "SayHi" or "SayHello").<br/><br/>
+
+	References:	
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/ActionLink.html">ActionLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/persist.html">Persistent Page Data</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/MultipleActionLinks.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/MultipleActionLinks.java"/>
+</body>
+</html>

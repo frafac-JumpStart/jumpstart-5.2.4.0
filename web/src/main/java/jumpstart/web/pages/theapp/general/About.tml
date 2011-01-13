@@ -1,0 +1,17 @@
+<html t:type="theapp/layout" title="literal:About" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+	<t:remove>
+	 	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css"/>
+	</t:remove>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<div class="bozo">About page goes here.</div>
+	<div style="text-align: center; margin-top: 100px; font-size:large; ">
+		Updates to Tapestry JumpStart can be found at <a href="http://jumpstart.doublenegative.com.au">http://jumpstart.doublenegative.com.au</a>.
+	</div>
+</html>

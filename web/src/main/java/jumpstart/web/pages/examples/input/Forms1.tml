@@ -1,0 +1,61 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>Forms (1)</h1>
+	
+	This page demonstrates input.<br/><br/>
+	
+	Here's an example of some tml code using a Form component around TextField and Errors components and a submit button.<br/>
+	<code><pre>
+	&lt;form t:type="form" t:id="names"&gt;
+		&lt;t:errors/&gt;&lt;br/&gt;
+		First Name: &lt;input t:type="TextField" t:id="firstName"/&gt;&lt;br/&gt;
+		Last Name: &lt;input t:type="TextField" t:id="lastName"/&gt;&lt;br/&gt;
+		&lt;input type="submit" value="Display"/&gt;
+ 	&lt;/form></pre></code>
+
+	Here's the code in action:	
+	<form t:type="form" t:id="names">
+		<t:errors/><br/>
+		First Name: <input t:type="TextField" t:id="firstName"/><br/>
+		Last Name: <input t:type="TextField" t:id="lastName"/><br/>
+		<input type="submit" value="Display"/>
+ 	</form>
+ 	
+ 	Clicking on Display causes an HTTP POST whose URL looks like this:<br/>
+ 	<code>http://myhost/jumpstart/examples/input/forms1.names</code><br/><br/>
+	
+	On receiving the URL, Tapestry notifies the corresponding form component. <br/>
+	The form sends events (PREPARE_FOR_SUBMIT, VALIDATE_FORM, SUCCESS (or FAILURE) and others) to its container.
+	In this example the form's container is this page.  <br/>
+	The container can provide methods to handle the events, eg. this page provides methods <em>onValidateForm()</em> and <em>onSuccess()</em>. <br/>
+	The methods do not have to follow the "on" naming convention - they can instead be annotated with <em>@OnEvent</em>.<br/><br/>
+	
+	In this example, <em>onSuccess()</em> sets up the next page and returns it. Tapestry then <strong>redirects</strong> the browser to that 
+	page.<br/><br/>
+
+	<strong>Redirect-after-post</strong> <br/>
+	Once Tapestry knows which page is next, why doesn't Tapestry just render it and return it?  Because Tapestry uses the 
+	<a href="http://www.theserverside.com/tt/articles/article.tss?l=RedirectAfterPost">Redirect-After-Post</a> pattern: it constructs 
+	a <strong>render request</strong> URL to the next page, just like PageLink does, and returns that URL to the browser as a redirect. 
+	So when the next page shows, its URL will not be the URL that submitted the form.  Its URL will be safe to bookmark, reload or 
+	return to. The cost is 2 trips to the server, but it's worth it.<br/><br/>
+
+	References: <a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/TextField.html">TextField</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Errors.html">Errors</a>, 
+	<a href="http://wiki.apache.org/tapestry/Tapestry5HowToUseForms">How To Use Forms</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/event.html">Component Events</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/annotations/OnEvent.html">@OnEvent API</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/Forms1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/Forms1.java"/>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<html t:type="theapp/layout" t:tab="literal:Security" t:subtab="literal:Role" t:title="literal:View Role" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:remove>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css"/>
+</t:remove>
+<div class="contentblock">
+	<h1>View Role</h1>
+	<t:if test="role">
+		<table class="recordblock" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+					<div class="record">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th>Name</th>
+								<td>${role.name}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="buttons">
+						<table>
+							<tr>
+								<td><button t:type="chenillekit/Button" type="button" t:event="Refresh" title="Refresh">Refresh</button></td>
+								<td><button t:type="chenillekit/Button" type="button" t:event="Cancel" title="Cancel">Cancel</button></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<table class="matrixblock" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+					<h1>Users with this Role</h1>
+					<div class="matrix">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th>User</th>
+								<th>Active</th>
+								<th>Actions</th>
+							</tr>
+							<tr t:type="loop" t:source="userRoles" t:value="userRole">
+								<td class="left">${userRole.user.loginid}</td>
+								<td>${userRole.active}</td>
+								<td>
+									<span class="action"><a t:type="actionlink" t:id="viewUserRole" t:context="userRole.id" title="View">View</a></span>
+								</td>
+							</tr>
+						</table>
+						<div t:type="if" t:test="userRoles" t:negate="true">
+							<div class="nodata">(No Users to display)</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</t:if>
+	<t:if negate="true" test="role">
+		<div class="badrequest">
+			Role does not exist.
+		</div>
+	</t:if>
+</div>
+</html>

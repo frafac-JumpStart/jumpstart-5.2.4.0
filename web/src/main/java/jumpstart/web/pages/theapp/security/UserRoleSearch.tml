@@ -1,0 +1,75 @@
+<html t:type="theapp/layout" t:tab="literal:Security" t:subtab="literal:UserRole" t:title="literal:Search User Roles" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:remove>
+	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css" />
+</t:remove>
+<div class="contentblock">
+	<h1>Search User Roles</h1>
+	<form t:type="form" t:id="form">
+		<table class="searchblock" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+					<t:errors />
+					<div class="search">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th><t:label for="user"/></th>
+								<td><select t:type="select" t:id="user" t:model="userIds" t:value="searchFields.userId"></select></td>
+							</tr>
+							<tr>
+								<th><t:label for="role"/></th>
+								<td><select t:type="select" t:id="role" t:model="roleIds" t:value="searchFields.roleId"></select></td>
+							</tr>
+						</table>
+					</div>
+					<div class="buttons">
+						<table>
+							<tr>
+								<td><input type="submit" value="Search" class="positive"/></td>
+								<td><button t:type="chenillekit/Button" type="button" t:event="Reset">Reset</button></td>
+								<td><button t:type="chenillekit/Button" type="button" t:event="Add" title="Add">Add...</button></td>
+ 							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>	
+		<div t:type="if" t:test="showResult">
+			<table class="matrixblock" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<div class="matrix">
+							<h1>User Roles</h1>
+							<table border="0" cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<th>User</th>
+									<th>Role</th>
+									<th>Active</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr t:type="loop" t:source="userRoles" t:value="userRole" t:formstate="NONE">
+									<td class="left">${userRole.user.loginId}</td>
+									<td class="left">${userRole.role.name}</td>
+	 								<td><input t:id="active" t:type="checkbox" value="userRole.active" disabled="true"/></td>
+									<td>
+										<span class="action"><a t:type="actionlink" t:id="view" t:context="userRole.id" title="View">View</a></span>
+										<span class="action"><a t:type="actionlink" t:id="edit" t:context="userRole.id" title="Edit">Edit</a></span>
+										<span class="action"><a t:type="actionlink" t:id="remove" t:context="list:userRole.id,userRole.version" 
+											onclick="return confirm('Remove ${userRole.user.loginId}/${userRole.role.name}?')" title="Remove">Remove</a></span>
+									</td>
+								</tr>
+							</tbody>
+							</table>
+							<div t:type="if" t:test="userRoles" t:negate="true">
+								<div class="nodata">(No User Roles to display)</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+ 	</form>
+</div>
+</html>

@@ -1,0 +1,20 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/links_and_submits.css}"/>
+	<!-- A 2nd stylesheet link that enables preview but cannot be guaranteed to work at runtime. -->
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/links_and_submits.css"/>
+</head>
+<body>
+	<h1>Styling Links and Submits (2)</h1>
+	
+	You chose ${yourChoice}!<br/><br/>
+	
+	<a t:type="pagelink" t:page="examples/styling/StylingLinksAndSubmits1" href="#">Return</a><br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/styling/StylingLinksAndSubmits2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/styling/StylingLinksAndSubmits2.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/links_and_submits.css"/>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openejb>
+
+	<!-- 
+		Whatever is specified in here overrides OpenEJB's corresponding defaults.  
+		See OpenEJB's conf/openejb.xml and conf/README.txt.
+
+		This config is for tests - we use an in-memory database (jdbc:hsqldb:mem:tempdb) 
+		but we could instead use files (say, jdbc:hsqldb:file:/devel/hsqldb/hsqldb, copied from openejb's data/hsqldb/).
+		To make openejb use this config, run tests with system property openejb.configuration set to the path of this file.
+		The resource ids correspond to the data sources specified in the persistence.xml.
+		For more options see http://openejb.apache.org/3.0/configuring-datasources.html .
+		
+		To use a persistent database instead, put the database files somewhere (eg. copy openejb's data/hsqldb/hsqldb.properties
+		and data/hsqldb/hsqldb.script to, say, /devel/mydb/) and set the values of JdbcUrl below accordingly 
+		(eg. jdbc:hsqldb:file:/devel/mydb/hsqldb).
+	 -->
+
+	<!-- For HSQLDB -->
+	<Resource id="JumpStartDS" type="DataSource">
+		JdbcDriver org.hsqldb.jdbcDriver 
+		JdbcUrl jdbc:hsqldb:mem:tempdb
+		UserName sa
+		Password
+		JtaManaged true
+	</Resource>
+
+	<Resource id="JumpStartDSUnmanaged" type="DataSource">
+		JdbcDriver org.hsqldb.jdbcDriver 
+		JdbcUrl jdbc:hsqldb:mem:tempdb
+		UserName sa
+		Password
+		JtaManaged false
+	</Resource>
+
+ 	<!-- For MySQL -->
+ 	<!-- For more settings see http://dev.mysql.com/doc/refman/5.0/en/connector-j-reference-configuration-properties.html -->
+	<!-- 
+	<Resource id="JumpStartDS" type="DataSource">
+		JdbcDriver com.mysql.jdbc.Driver 
+		JdbcUrl jdbc:mysql://localhost:3306/jumpstart_dev
+		UserName jumpstart
+		Password jumpstart
+		JtaManaged true
+	</Resource>
+
+	<Resource id="JumpStartDSUnmanaged" type="DataSource">
+		JdbcDriver com.mysql.jdbc.Driver 
+		JdbcUrl jdbc:mysql://localhost:3306/jumpstart_dev
+		UserName jumpstart
+		Password jumpstart
+		JtaManaged false
+	</Resource>
+	 -->
+	
+</openejb>

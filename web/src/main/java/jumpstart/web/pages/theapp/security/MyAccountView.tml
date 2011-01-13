@@ -1,0 +1,78 @@
+<html t:type="theapp/layout" t:tab="literal:NONE" t:title="literal:View User" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:remove>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css"/>
+</t:remove>
+<div class="contentblock">
+	<h1>View My Account</h1>
+	<table class="recordblock" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td>
+				<div class="record">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<th>Login Id</th>
+							<td>${user.loginId}</td>
+						</tr>
+						<tr>
+							<th>Salutation</th>
+							<td>${user.salutation}</td>
+						</tr>
+						<tr>
+							<th>First Name</th>
+							<td>${user.firstName}</td>
+						</tr>
+						<tr>
+							<th>Last Name</th>
+							<td>${user.lastName}</td>
+						</tr>
+						<tr>
+							<th>Email Address</th>
+							<td>${user.emailAddress}</td>
+						</tr>
+						<tr>
+							<th>Expiry Date</th>
+							<td><t:output value="user.expiryDate" format="dateViewFormat"/></td>
+						</tr>
+					</table>
+				</div>
+				<div class="buttons">
+					<table>
+						<tr>
+							<!-- Replace this Button with the "page link button" when t5components releases it. -->
+							<td><button t:type="chenillekit/Button" type="button" t:event="Edit" title="Edit">Edit</button></td>
+							<!-- Replace this Button with the "page link button" when t5components releases it. -->
+							<td><button t:type="chenillekit/Button" type="button" t:event="ChangePassword" title="Change Password">Password...</button></td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<table class="matrixblock" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td>
+				<h1>My Roles</h1>
+				<div class="matrix">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<th>Role</th>
+							<th>Active</th>
+							<th>Actions</th>
+						</tr>
+						<tr t:type="loop" t:source="userRoles" t:value="userRole">
+							<td class="left">${userRole.role.name}</td>
+							<td>${userRole.active}</td>
+							<td>
+								<span class="action"><a t:type="actionlink" t:id="viewUserRole" t:context="userRole.id" title="View">View</a></span>
+							</td>
+						</tr>
+					</table>
+					<div t:type="if" t:test="userRoles" t:negate="true">
+						<div class="nodata">(No Roles to display)</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+</html>

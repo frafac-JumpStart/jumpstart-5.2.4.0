@@ -1,0 +1,37 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/examples.css}"/>
+	<!-- A 2nd stylesheet link that enables preview but cannot be guaranteed to work at runtime. -->
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/examples.css"/>
+</head>
+<body>
+	<h1>Previewable With Stylesheets</h1>
+
+	This page is like the Stylesheets page, except that this one can be previewed directly in a web browser.  
+	The reason is an extra stylesheet link.<br/><br/>
+	
+	To see what a difference "previewability" makes, open Stylesheets.tml and PreviewableWithStylesheets.tml 
+	with a web browser and compare them.<br/><br/>
+	
+	References:
+	<a href="http://tapestry.apache.org/tapestry5/guide/css.html">Tapestry CSS Support</a>.<br/>
+	
+	<form t:type="form" t:id="inputs">
+		<table>
+			<tr>
+				<th>First Name:</th>
+				<td><input t:type="TextField" t:value="firstName"/></td>
+			</tr>
+			<tr>
+				<th>Last Name:</th>
+				<td><input t:type="TextField" t:value="lastName"/></td>
+			</tr>
+		</table>
+	</form>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/styling/PreviewableWithStylesheets.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/styling/PreviewableWithStylesheets.java"/>
+</body>
+</html>

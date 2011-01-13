@@ -1,0 +1,39 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${stylesheet}"/>
+	<!-- A 2nd stylesheet link that enables preview but cannot be guaranteed to work at runtime. -->
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/examples.css"/>
+</head>
+<body>
+	<h1>Switchable Stylesheets</h1>
+
+	Switches between 2 different <a href="http://www.w3.org/Style/CSS/">Cascading Style Sheets</a>:  
+	css/examples/examples.css and css/examples2.css.<br/><br/>
+	
+	References:
+	<a href="http://tapestry.apache.org/tapestry5/guide/css.html">Tapestry CSS Support</a>, 
+	<a href="http://tapestry.apache.org/tapestry5.1/guide/assets.html">Assets</a>.<br/>
+	
+	<form t:type="form" t:id="inputs">
+		<table class="table1">
+			<tr>
+				<th>First Name:</th>
+				<td><input t:type="TextField" t:value="firstName"/></td>
+			</tr>
+			<tr>
+				<th>Last Name:</th>
+				<td><input t:type="TextField" t:value="lastName"/></td>
+			</tr>
+		</table>
+		
+		<input type="submit" value="Switch Style"/>
+	</form>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/styling/SwitchableStylesheets.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/styling/SwitchableStylesheets.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/examples.css"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/switched.css"/>
+</body>
+</html>

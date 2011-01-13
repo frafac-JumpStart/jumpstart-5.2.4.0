@@ -1,0 +1,67 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/examples.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/examples.css"/>
+</head>
+<body>
+	<h1>Editable Loop Using Encoder (1)</h1>
+
+	A table built with a Form around a Loop, with editable firstName, and an encoder.<br/><br/>
+	
+	The technique used here gets a list of _persons from the database during render only.<br/>
+	Loop uses the encoder during rendering to get the primary key of each person. Loop stores the primary keys in a hidden field in the form.<br/>
+	Loop uses the encoder during form submission to get the person identified by each primary key before Loop overwrites the firstName.<br/><br/>
+
+	Our encoder does not hold the list of persons. It encodes by using person.getId() and it decodes by getting the person from the database.<br/>
+	The decoding technique is not particularly efficient, but that's OK in this example because we're just demonstrating possibilities.<br/><br/>
+	
+	This example <em>does not</em> handle when a Person has been <strong>deleted</strong> from the database in between rendering and form submission.<br/>
+	It could be achieved by modifying toValue(key) to return a special valued object which is treated differently by onValidateForm().<br/><br/>
+	
+	This example <em>does</em> handle when a Person has been <strong>added</strong> to the database in between rendering and form submission.<br/><br/>
+	
+	We chose not to annotate _persons with <strong>@Persist</strong> even though it would remove the need to get _persons during form submission.<br/>
+	Persisting a field in the session is risky because the field will be overwritten if the user opens a new window or tab 
+	with same session and visits the same page.<br/><br/>
+
+	<form t:type="form" t:id="personsedit">
+		<t:errors/>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Start Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr t:type="Loop" t:source="persons" t:value="person" t:encoder="encoder">
+ 					<td>${person.id}</td>
+					<td><input t:type="TextField" t:id="firstName" t:value="person.firstName" t:validate="required, maxlength=10" size="10"/></td>
+					<td>${person.lastName}</td>
+					<td><t:output value="person.startDate" format="dateFormat"/></td>
+					<!-- If optimistic locking is needed then uncomment this next line.
+						<t:hidden value="person.version"/>
+					 -->
+				</tr>
+			</tbody>
+	 	</table>
+	 	<input type="submit" value="Save"/>
+	 </form>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Loop.html">Loop</a>,
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/ValueEncoder.html">ValueEncoder API</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/EditableLoopUsingEncoder1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/EditableLoopUsingEncoder1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/examples.css"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+</body>
+</html>

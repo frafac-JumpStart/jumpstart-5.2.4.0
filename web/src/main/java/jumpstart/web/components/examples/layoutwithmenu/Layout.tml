@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a DOCTYPE to allow us to use special characters like &nbsp; 
+	We use a "strict" DTD to make IE follow the alignment rules. -->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<head>
+	<title>${title}</title>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/layout.css}"/>
+	<!-- A 2nd stylesheet link that enables preview but cannot be guaranteed to work at runtime. -->
+	<link rel="stylesheet" type="text/css" href="../../../css/examples/layout.css"/>
+</head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+	<div id="top">
+		<h1>Add a Layout with Menu</h1>
+
+		<div style="padding:10px 0;">
+		This example is another preview of the examples to follow. Again, very little is explained here - that is left to later examples.<br/>
+		</div>
+
+		<t:examples.layoutwithmenu.MenuBar menu="menu" chosenOption="chosenOption"/>
+	</div>
+
+	<div id="middle">
+		<table id="mid_table">
+			<tr id="mid_tr">
+				<td id="content">
+					<t:body/>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+
+</html>

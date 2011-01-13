@@ -1,0 +1,20 @@
+<html t:type="theapp/layout" title="literal:Help" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+	<t:remove>
+	 	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css"/>
+	</t:remove>
+	<div class="bozo">Help</div>
+	
+	<p>
+		This application manipulates the entities shown in the following diagram.
+	</p>
+	<div style="text-align: center; margin: 30px 0; ">
+		<img src="${context:images/theapp/security_classes.png}"/>
+	</div>
+	<p>
+		The diagram comes from the <em>security.zargo</em> file which can be edited with the free tool <a href="http://argouml.tigris.org/">ArgoUML</a>.
+	</p>
+	<p>
+		For an example that handles more complicated relationships, look at the <em>workout</em> domain: see business/src/main/java/jumpstart/business/domain/workout/README.html.<br/> 
+		JumpStart's business integration test suite uses the workout domain to verify all persistence situations are handled correctly.
+	</p>
+</html>

@@ -1,0 +1,29 @@
+<html t:type="examples/wizard/WizardUsingPagesLayout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+	<form t:type="form" t:id="form" style="background: #EEEEEE; padding: 1em;">
+		<h2>Applying for Credit - Step 3: Submit</h2>
+
+		Amount: $${creditRequest.amount}<br/>
+		Applicant Name: ${creditRequest.applicantName}<br/><br/>
+				
+		<button t:type="chenillekit/Button" type="button" t:event="Prev">&lt; Prev</button>
+		<input type="submit" value="Submit for Credit Check" onclick="displayProcessingMessage()"/>
+		<button t:type="chenillekit/Button" type="button" t:event="Quit" style="margin-left: 20px;"> Quit </button>
+
+		<t:errors/>
+
+		<div id="processingMessage" style="display:none; color:green; font-weight: bold; ">
+			<br/>Processing your application. Please wait...
+		</div>
+
+		<!-- A script that displays the "processing" message -->
+		<script>
+				function displayProcessingMessage() {
+					obj = document.getElementById('processingMessage');
+					obj.style.display = ''
+					return true;
+				}
+		</script>
+	</form>
+
+</html>

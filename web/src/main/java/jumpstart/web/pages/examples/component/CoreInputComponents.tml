@@ -1,0 +1,83 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		form		{ text-align: center; }
+		table		{ font-family: Arial, Helvetica, sans-serif;  font-size: 12px; font-weight: normal; margin: auto; }
+		th			{ background-color: #bee; text-align: center; padding: 10px 10px; }
+		td			{ background-color: #eeb; padding: 10px 10px; }
+		td.name		{ text-align: right; vertical-align: top; }
+		div.t-palette { width: 460px; }
+		.datePicker td .topLabel { color:black; }
+	</style>
+</head>
+<body>
+	<h1>Core Input Components</h1>
+	
+	This page demonstrates Tapestry's core input components.  Reference:
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/index.html">Components</a><br/><br/><br/>
+
+	<form t:type="form" t:id="inputs">
+		<table>
+			<tr>
+				<th>Component Name</th>
+				<th>Use them and press Submit</th>
+				<th>Submitted Value</th>
+			</tr>
+			<tr>
+				<td class="name">Checkbox:</td>
+				<td><input t:type="checkbox" value="checkboxValue"/></td>
+				<td>${checkboxValue}</td>
+			</tr>
+			<tr>
+				<td class="name">DateField:</td>
+				<td><input t:type="DateField" value="dateValue" format="${dateFieldFormat}"/> (${dateFieldFormat})</td>
+				<td>${dateValue}</td>
+			</tr>
+			<tr>
+				<td class="name">Palette:</td>
+				<td><input t:type="Palette" model="pets" selected="paletteSelectedValues" encoder="stringEncoder"/></td>
+				<td>${paletteSelectedValues}</td>
+			</tr>
+			<tr>
+				<td class="name">PasswordField:</td>
+				<td><input t:type="PasswordField" value="passwordValue"/></td>
+				<td>${passwordValue}</td>
+			</tr>
+			<tr>
+				<td class="name">RadioGroup,<br/> Radio,<br/> and Label:</td>
+				<td>
+					<t:RadioGroup value="radioSelectedValue" encoder="stringEncoder">
+						<t:Radio t:id="radioH" value="literal:H" label="High"/><t:label for="radioH"/><br/>
+						<t:Radio t:id="radioM" value="literal:M" label="Medium"/><t:label for="radioM"/><br/>
+						<t:Radio t:id="radioL" value="literal:L" label="Low"/><t:label for="radioL"/>
+					</t:RadioGroup>
+				</td>
+				<td>${radioSelectedValue}</td>
+			</tr>
+			<tr>
+				<td class="name">Select:</td>
+				<td><select t:type="Select" model="literal:Ms,Mrs,Mr,Dr,Prof" value="selectedValue"/></td>
+				<td>${selectedValue}</td>
+			</tr>
+			<tr>
+				<td class="name">TextArea:</td>
+				<td><input t:type="TextArea" value="textAreaValue"/></td>
+				<td><t:textoutput value="textAreaValue"/></td>
+			</tr>
+			<tr>
+				<td class="name">TextField:</td>
+				<td><input t:type="TextField" value="textValue"/></td>
+				<td>${textValue}</td>
+			</tr>
+		</table><br/>
+		
+		<input type="submit" value="Submit"/>
+		
+	</form>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/CoreInputComponents.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/CoreInputComponents.java"/>
+</body>
+</html>

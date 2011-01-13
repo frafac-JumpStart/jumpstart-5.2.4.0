@@ -1,0 +1,55 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter"
+	t:type="examples/layoutwithmenu/Layout" t:title="literal:Layout with Menu: Page 3" t:chosenOption="literal:Page 3">
+	
+	<t:remove>
+		<!-- At runtime the stylesheet will be provided by the Layout. The link here is only to enable preview. -->
+	 	<link rel="stylesheet" type="text/css" href="../../../css/examples/layout.css"/>
+	</t:remove>
+
+	<form t:type="form" t:id="preferencesForm">
+		Highlight zone updates? 
+		 <input t:type="checkbox" t:id="highlightZoneUpdates" value="highlightZoneUpdates" 
+			onclick="document.getElementById('preferencesForm').submit()"/>
+		This shows you which zones are updated by the Ajax response.
+	</form><br/>
+
+ 	<a t:type="eventLink" t:event="toCreate" t:zone="editorZone" href="#">Create...</a><br/>
+ 	
+	<table id="frame">
+		<tbody>
+			<tr>
+
+				<!-- This is the left side of the table: a list of Persons -->
+
+				<td id="listCell">
+					<t:zone t:id="listZone" t:update="prop:zoneUpdateFunction">
+						<t:examples.ajaxcomponentscrud.PersonList t:id="list" highlightPersonId="highlightPersonId" zone="listZone"/>
+					</t:zone>
+				</td>
+				
+				<!-- This is the right side of the table: where a Person will be created, reviewed, or updated. -->
+		
+				<td id="editorCell">
+					<t:zone t:id="editorZone" t:update="prop:zoneUpdateFunction">
+						<t:examples.ajaxcomponentscrud.PersonEditor t:id="editor" mode="mode" personId="personId" zone="editorZone"/>
+					</t:zone>
+				</td>
+				
+			</tr>
+		</tbody>
+ 	</table>
+
+	<a t:type="pageLink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for Person, PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/layoutwithmenu/Page3.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/layoutwithmenu/Layout.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/layoutwithmenu/Layout.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/layoutwithmenu/MenuBar.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/layoutwithmenu/MenuBar.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/Menu.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/MenuOption.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/layout.css"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/menubar.css"/>
+</html>

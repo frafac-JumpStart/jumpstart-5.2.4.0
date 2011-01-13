@@ -1,0 +1,50 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Varied Select</h1>
+	
+	<form t:type="form">
+		This example demonstrates labelling the blank option.<br/><br/>
+		
+		<t:label for="color0"/>:
+		<select t:type="select" t:id="color0" t:model="literal:Red,Yellow,Blue" t:blankLabel="Choose..."></select>
+		<input type="submit" value="Submit"/>
+		You chose: ${color0}
+	</form><br/>
+
+	<form t:type="form">
+		This example demonstrates labelling the blank option using the page's properties file.<br/><br/>
+		
+		<t:label for="color1"/>:
+		<select t:type="select" t:id="color1" t:model="literal:Red,Yellow,Blue"></select>
+		<input type="submit" value="Submit"/>
+		You chose: ${color1}
+	</form><br/>
+
+	<form t:type="form">
+		This example demonstrates making it mandatory to make a choice.<br/><br/>
+		
+		<t:label for="color2"/>:
+		<select t:type="select" t:id="color2" t:model="literal:Red,Yellow,Blue" t:validate="required"></select>
+		<input type="submit" value="Submit"/>
+		You chose: ${color2}
+	</form><br/>
+
+	<form t:type="form">
+		This example demonstrates making it mandatory to make a choice - but it also has a blank option.<br/><br/>
+		
+		<t:label for="color3"/>:
+		<select t:type="select" t:id="color3" t:model="literal:Red,Yellow,Blue" t:validate="required" t:blankOption="ALWAYS"></select>
+		<input type="submit" value="Submit"/>
+		You chose: ${color3}
+	</form><br/>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/VariedSelect.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/VariedSelect.properties"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/VariedSelect.java"/>
+</body>
+</html>

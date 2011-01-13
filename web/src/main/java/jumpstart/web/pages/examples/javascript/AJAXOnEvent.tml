@@ -1,0 +1,39 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>AJAX On Event: the ZoneUpdater Mixin</h1>
+	
+	This page demonstrates a custom mixin called ZoneUpdater that enables a server-side listener method 
+	to update a zone in response to a client-side event.<br/><br/>
+	
+	<form t:type="form" style="background-color: eee; padding: 15px">
+		First Name: 
+		<input t:type="TextField" t:id="firstName" t:mixins="zoneUpdater" t:clientEvent="keyup" t:event="firstNameChanged" t:zone="nameZone" /><br/>
+		Last Name: 
+		<input t:type="TextField" t:id="lastName" t:mixins="zoneUpdater" t:clientEvent="keyup" t:event="lastNameChanged" t:zone="nameZone"/><br/><br/>
+
+		<t:zone t:id="nameZone">
+			Welcome ${name}.
+		</t:zone><br/>
+
+		Note that the following time field does not update because it's not in the zone:  ${time}<br/>
+		
+ 	</form>
+ 	
+	References: 
+	<a href="http://tinybits.blogspot.com/2010/03/new-and-better-zoneupdater.html">Inge Solvoll's Zone Updater</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/ajax.html">Ajax</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Zone.html">Zone</a>,<br/><br/>
+
+	<a t:type="actionlink" t:id="gohome" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXOnEvent.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXOnEvent.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/ZoneUpdater.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/zone_updater.js"/>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/examples.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/examples.css"/>
+</head>
+<body>
+	<h1>Linking Grid (2)</h1>
+
+	You chose ${firstName}!<br/><br/>
+	
+	<a t:type="pagelink" t:page="examples/tables/LinkingGrid1" href="#">Return</a><br/>
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/LinkingGrid2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/LinkingGrid2.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/examples.css"/>
+</body>
+</html>

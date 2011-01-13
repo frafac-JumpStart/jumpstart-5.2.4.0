@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; -->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Protecting Pages</h1>
+	
+	Let's say you would like Tapestry to protect particular pages from being accessed by users who have not logged in...<br/><br/>
+	
+	In JumpStart we do this with 2 parts. First, we create an annotation, @ProtectedPage, which we add to pages we want to protect.<br/> 
+	You should consider doing the opposite: create an annotation to put on the pages you want to be public and protect all others.<br/><br/>
+	
+	Second, we create a ComponentRequestFilter, called PageProtectionFilter, which we contribute to the application in AppModule. 
+	This filter inspects every page render request and component event request as it comes in, determines which page is involved,
+	and whether the page has the annotation. If it does and the user is not logged in, then the filter redirects the browser to 
+	the Login page.<br/><br/>
+
+	Here's a link to a "protected" page:   
+	<a t:type="pagelink" t:page="theapp/general/welcome">Welcome</a>. Try it!<br/><br/>
+	
+	References: 
+	<a href="http://uli.spielviel.de/~uli/tapestry_request_processing.png">Request Processing diagram</a>, 
+	<a href="http://tapestryjava.blogspot.com/2009/12/securing-tapestry-pages-with.html">Securing Tapestry Pages with Annotations</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/infrastructure/ProtectingPages.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/infrastructure/ProtectingPages.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/theapp/general/Welcome.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/theapp/general/Welcome.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/annotation/ProtectedPage.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/PageProtectionFilter.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/AppModule.java"/>
+</body>
+</html>

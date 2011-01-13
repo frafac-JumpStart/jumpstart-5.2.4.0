@@ -1,0 +1,35 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body>
+	<h1>Methods</h1> 
+	
+	To do more you need to know about <strong>the methods that Tapestry looks for in each page</strong>.
+	Here are the most useful ones...<br/><br/>
+
+	<strong>onActivate()</strong> If your page has an <em>onActivate</em> method then Tapestry will call it whenever a request 
+	from a browser nominates the page. Tapestry will get an instance of the page and trigger ACTIVATE on it.<br/><br/>
+
+	<strong>setupRender()</strong> If your page has a <em>setupRender</em> method then Tapestry will call it right 
+	before it starts rendering.<br/><br/>
+
+	<strong>cleanupRender()</strong> If your page has a <em>cleanupRender</em> method then Tapestry will call it right 
+	after all the rendering has been done.<br/><br/>
+		
+	<strong>Getters</strong> Every property that we output onto the page will need a getter method.  In this example 
+	we have <em>getMessage()</em>.<br/><br/>
+
+	<strong>Setters</strong> Every property that we input from the page will need a setter method.  In this example 
+	we don't need any setters because there are no input fields.<br/><br/><br/>
+	
+	<strong>A demonstration.</strong> The value of _message is "<span style="color:red">${message}</span>". 
+	Note that the end of the message is "getMessage() called...".  The cleanupRender() method happens too late to  
+	be seen in the message but you will see it in the log.<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/rendering.html">Component Rendering</a>.<br/><br/>
+
+	<t:pagelink page="Index">Home</t:pagelink><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/lang/Methods.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/lang/Methods.java"/>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/grid.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/grid.css"/>
+</head>
+<body>
+	<h1>Previewable Grid</h1>
+	
+	A table built with the Grid component plus JumpStart's Remove component and a second stylesheet. 
+	This makes it previewable directly in a web browser or WYSIWYG editor. 
+	Try opening the template PreviewableGrid.tml file in a web browser to see the effect.<br/>
+
+	<table t:type="grid" t:source="persons" t:exclude="version" t:rowsPerPage="4" t:pagerPosition="top">
+		<t:remove>
+			<tr><th>Id</th><th>First Name</th><th>Last Name</th><th>Start Date</th></tr>
+			<tr><td>123</td><td>abc</td><td>abc</td><td>Jan 1, 2008</td></tr>
+		</t:remove>
+	</table><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Grid.html">Grid</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for Person, PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/PreviewableGrid.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/PreviewableGrid.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/grid.css"/>
+</body>
+</html>

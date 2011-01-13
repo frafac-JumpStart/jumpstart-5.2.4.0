@@ -1,0 +1,34 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/examples.css}"/>
+</head>
+<body>
+	<h1>Stylesheets</h1>
+
+	Styled with a <a href="http://www.w3.org/Style/CSS/">Cascading Style Sheet</a>, css/examples/examples.css.<br/><br/>
+	
+	Tapestry 5 includes its own stylesheet, assets/tapestry/default.css, at runtime.  Its aim is to format 
+	validation errors. Its entries are unlikely to clash with ours because its entries all start with "t-".<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/css.html">Tapestry CSS Support</a>.<br/>
+	
+	<form t:type="form" t:id="inputs">
+		<table>
+			<tr>
+				<th>First Name:</th>
+				<td><input t:type="TextField" t:value="firstName"/></td>
+			</tr>
+			<tr>
+				<th>Last Name:</th>
+				<td><input t:type="TextField" t:value="lastName"/></td>
+			</tr>
+		</table>
+	</form>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/styling/Stylesheets.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/styling/Stylesheets.java"/>
+</body>
+</html>

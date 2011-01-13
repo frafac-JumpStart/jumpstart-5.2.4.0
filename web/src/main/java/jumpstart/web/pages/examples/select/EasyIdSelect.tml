@@ -1,0 +1,30 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Easy Id Select</h1>
+
+	There are times when GenericSelectModel is too much, when you need only an id returned and not a whole object. IdSelectModel makes this easy.<br/>
+	In this example an IdSelectModel is built from a list of Persons. In each option, the label is Person's firstName and the value is 
+	Person's id.<br/><br/>
+
+	<form t:type="form">
+		Person: <select t:type="select" t:model="personIds" t:value="personId"></select>
+		<input type="submit" value="Submit"/>
+		You chose personId: ${personId}
+	</form>
+	
+	References: 
+	<a href="http://wiki.apache.org/tapestry/Tapestry5HowtoSelectWithObjects">How To Select With Objects</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>, 
+	<a href="http://tapestry.apache.org/tapestry5.1/apidocs/org/apache/tapestry5/ioc/services/PropertyAccess.html">PropertyAccess API</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/EasyIdSelect.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/EasyIdSelect.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/IdSelectModel.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/PersonService.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+</body>
+</html>

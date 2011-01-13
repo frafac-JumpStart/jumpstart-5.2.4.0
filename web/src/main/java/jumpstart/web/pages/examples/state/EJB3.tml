@@ -1,0 +1,41 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+		dl.t-beandisplay dd.id	{ display:inline; margin-left: 0px; }	// IE 7.
+	</style>
+</head>
+<body>
+
+	<h1>EJB3</h1>
+	
+	Reaching EJB3 session beans is simply a matter of creating a "business-tier service locator" and registering it  
+	as a Tapestry service. Detached entity beans can be used directly in Tapestry pages.<br/><br/>
+	
+	In this example we use JumpStart's BusinessServicesLocator to get a local session bean which finds this Person entity:<br/>
+	
+	<t:beandisplay object="person">[BeanDisplay here]</t:beandisplay><br/>
+
+	References: <a href="http://tapestry.apache.org/tapestry5/tapestry-ioc/service.html">Tapestry IoC Services</a>, 
+	<a href="http://jumpstart.doublenegative.com.au/faq.html">JumpStart FAQ</a>.<br/><br/>
+	
+	For those of you who do not want to use EJB3 and do not mind the open-session-in-view pattern there is 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-hibernate">tapestry-hibernate</a> 
+	and <a href="http://docs.codehaus.org/display/TYNAMO/tapestry-jpa+guide">tapestry-jpa</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/EJB3.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/EJB3.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/client/IBusinessServicesLocator.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/client/BusinessServicesLocator.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/iface/IPersonServiceRemote.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/iface/IPersonServiceLocal.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/PersonService.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/commons/jndi/JNDIObjectLocator.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/commons/exception/SystemUnavailableException.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/AppModule.java"/>
+</body>
+</html>

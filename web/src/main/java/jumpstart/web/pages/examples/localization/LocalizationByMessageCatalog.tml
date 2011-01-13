@@ -1,0 +1,58 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/examples.css}"/>
+	<link rel="stylesheet" type="text/css" href="../../../css/examples/examples.css"/>
+</head>
+<body>
+	<h1>Localization By Message Catalog</h1>
+	
+	This page demonstrates localization of strings by "component message catalog".  
+	The catalog consists of two files, with names based on the page name:
+
+	<ul>
+		<li><strong>LocalizationByMessageCatalog_fr.properties</strong> provides French strings.</li>
+		<li><strong>LocalizationByMessageCatalog.properties</strong> provides default strings.</li>
+	</ul>
+	
+	Using the current locale, we get:
+	<table>
+		<tr>
+			<th>${message:locale_code_label}:</th><td>${currentLocale.toString()}</td>
+		</tr>
+		<tr>
+			<th>${message:locale_name_label}:</th><td>${currentLocale.getDisplayName()}</td>
+		</tr>
+		<tr>
+			<th>${message:date_label}:</th><td><t:output value="date" format="prop:dateFormat"/></td>
+		</tr>
+		<tr>
+			<th>${message:number_label}:</th><td><t:output value="number" format="prop:numberFormat"/></td>
+		</tr>
+ 	</table>
+
+	The supported locales are defined in AppModule.  Our AppModule has ${supportedLocales.size()}.	Choose one: 
+	<t:loop source="supportedLocales" value="supportedLocale" index="var:index">
+		<t:if test="var:index">, </t:if>
+		<a href="#" t:type="actionlink" t:id="switchLocale" t:context="supportedLocale.toString()">${supportedLocale.getDisplayName()}</a>
+	</t:loop>.<br/><br/>
+	
+	For a seamless experience when working with non-ascii characters in properties files, it's probably best to set the file to 
+	UTF-8 encoded. In Eclipse, right-click on the file, choose Properties > Resource > Text file encoding > Other > UTF-8.<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/localization.html">Localization</a>, 
+	<a href="http://en.wikipedia.org/wiki/UTF-8">UTF-8</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-ioc/service.html">Tapestry IoC Services</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/If.html">If</a>, 
+	Render Variables in <a href="http://tapestry.apache.org/tapestry5/guide/parameters.html">Component Parameters</a>.<br/><br/>
+	
+	<a t:type="PageLink" page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/localization/LocalizationByMessageCatalog.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/localization/LocalizationByMessageCatalog.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/localization/LocalizationByMessageCatalog_fr.properties"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/localization/LocalizationByMessageCatalog.properties"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/AppModule.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/LocalesUtil.java"/>
+</body>
+</html> 

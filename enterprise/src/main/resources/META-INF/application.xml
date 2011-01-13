@@ -1,0 +1,23 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE application PUBLIC '-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN' 'http://java.sun.com/dtd/application_1_3.dtd'>
+
+<!-- This tells the Java EE container that we have a JAR and a WAR, and the WAR handles URLs that start with "jumpstart" -->
+
+<application>
+
+	<display-name>Tapestry JumpStart</display-name>
+	<description>Tapestry JumpStart</description>
+  
+  	<module>
+		<ejb>jumpstart.jar</ejb>
+	</module>
+
+
+	<module>
+		<web>
+			<web-uri>jumpstart.war</web-uri>
+			<context-root>jumpstart</context-root>
+		</web>
+	</module>
+
+</application>

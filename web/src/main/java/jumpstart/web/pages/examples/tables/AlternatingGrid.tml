@@ -1,0 +1,23 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/grid.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/grid.css"/>
+</head>
+<body>
+	<h1>Alternating Grid</h1>
+
+	This page is like the Easy Grid page, with the added feature of alternating coloured rows thanks to an EvenOdd class.<br/>
+
+	<table t:type="grid" t:source="persons" t:exclude="version"
+		t:rowsPerPage="4" t:pagerPosition="top" t:rowClass="prop:evenodd.next">[Grid here]</table>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for Person, PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/AlternatingGrid.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/AlternatingGrid.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/EvenOdd.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/grid.css"/>
+</body>
+</html>

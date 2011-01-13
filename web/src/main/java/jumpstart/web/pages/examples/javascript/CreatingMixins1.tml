@@ -1,0 +1,48 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Creating Mixins: ClickOnce (1)</h1>
+
+	This page demonstrates how to write a custom Mixin.  It's a Mixin that tackles a classic problem on the web: how to 
+	prevent <strong>duplicate submissions</strong> caused by additional clicks after a page has been submitted and before 
+	the response has come back.  The ClickOnce mixin can be mixed in to the Submit, ActionLink, and EventLink components.<br/><br/>
+	
+	<strong>Without the ClickOnce Mixin.</strong> Here's an example of the duplicate submissions  problem.<br/>
+	See how you can easily order more than 1 item by clicking impatiently on any or all of these elements...
+
+	<form t:type="form" t:id="plainForm">
+		<div style="padding: 20px 50px;">
+			<input t:type="submit" value="Order 1 Apple"/>
+			<a t:type="actionlink" t:id="plainOrderOneOrange" href="#">Order 1 Orange</a>
+			<a t:type="eventlink" t:event="orderOneBanana" href="#">Order 1 Banana</a>
+		</div>
+	</form>
+
+	<strong>With the ClickOnce Mixin.</strong>  The Mixin uses JavaScript to ignore clicks after the first one.<br/> 
+	See how the mixin prevents ordering more than 1 item...
+
+	<form t:type="form" t:id="mixinForm">
+		<div style="padding: 20px 50px;">
+			<input t:type="submit" value="Order 1 Apple" t:mixins="clickonce"/>
+			<a t:type="actionlink" t:id="mixinOrderOneOrange" t:mixins="clickonce" href="#">Order 1 Orange</a>
+			<a t:type="eventlink" t:event="orderOneBanana" t:mixins="clickonce" href="#">Order 1 Banana</a>
+		</div>
+	</form>
+	
+	Mixin location is important.  Mixins must be put in a package called <code>mixins</code>.  Tapestry gives this package 
+	special treatment.<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/mixins.html">Component Mixins</a>, 
+	<a href="http://wiki.apache.org/tapestry/Tapestry5AndJavaScriptExplained">Tapestry 5 and JavaScript Explained</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/annotations/IncludeJavaScriptLibrary.html">@IncludeJavaScriptLibrary API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/appstate.html">Session State</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/CreatingMixins1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/CreatingMixins1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/ClickOnce.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/click_once.js"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/state/examples/javascript/MyOrder.java"/>
+</body>
+</html>

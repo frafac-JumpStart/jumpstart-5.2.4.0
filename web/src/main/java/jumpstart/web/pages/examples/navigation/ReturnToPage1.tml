@@ -1,0 +1,25 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Return To Page (1)</h1>
+	
+	Sometimes a page can be called from many other pages.  If so, it can be tricky for the page to return to the previous page.<br/>
+	This example shows a way to do it.<br/><br/>
+	
+	This page creates a Link to itself, complete with the current context (ie. the value of arg1).  
+	It passes the Link to the next page.<br/><br/>
+	
+	<form t:type="form" t:id="inputs">
+		Curent context: <input t:type="TextField" t:id="arg1" t:validate="required"/>
+		<input type="submit" value="Submit"/>
+	</form> 
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/Link.html">Link API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/services/PageRenderLinkSource.html">PageRenderLinkSource API</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ReturnToPage1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ReturnToPage1.java"/>
+</body>
+</html>

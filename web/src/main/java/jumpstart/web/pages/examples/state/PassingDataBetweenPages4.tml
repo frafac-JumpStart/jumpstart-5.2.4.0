@@ -1,0 +1,27 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Passing Data Between Pages (4)</h1>
+
+	Welcome ${name}!<br/><br/>
+
+	This page used <strong>request parameters</strong> to pass its data through the redirection. 
+	The data was added to the URL as a query string (ie. as name-value pairs following a question mark), 
+	so the page can be bookmarked.<br/><br/>
+	
+	This technique may be the most appropriate way to pass <strong>filter criteria</strong> because, 
+	arguably, it produces the most RESTful URL in that situation.<br/><br/>
+
+	References: 
+	<a href="http://blpsilva.wordpress.com/2008/04/05/query-strings-in-restful-web-services/">
+		Query strings in RESTful Web Services</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/services/PageRenderLinkSource.html">PageRenderLinkSource API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/services/Request.html">Request API</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="examples/state/PassingDataBetweenPages1" href="#">Return</a><br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/PassingDataBetweenPages4.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/PassingDataBetweenPages4.java"/>
+</body>
+</html>

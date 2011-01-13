@@ -1,0 +1,81 @@
+
+/* 
+	This file demonstrates one way to override Tapestry's Grid CSS classes. Most of it has been copied from Tapestry's default.css file then modified. 
+	Another way is to assign a your own css class in Grid's class parameter. 
+*/ 
+
+body	{ font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; color:black; }a:link		{ color: blue }a:visited	{ color: blue }
+
+DIV.t-data-grid {
+    font-family: Arial, Helvetica, sans-serif; 
+    margin-top:20px; 
+    margin-bottom:20px; 
+}
+
+DIV.t-data-grid-pager {
+    margin: 8px 0px;
+}
+
+DIV.t-data-grid-pager A, DIV.t-data-grid-pager SPAN.current {
+    text-decoration: none;
+    color: black;
+    padding: 2px 5px;
+    font-size: 14px;
+    border: 1px solid silver;
+    margin-right: 5px;
+}
+
+DIV.t-data-grid-pager A:hover {
+    border: 1px solid black;
+}
+
+DIV.t-data-grid-pager SPAN.current {
+    color: white;
+    border: 1px solid #000066;
+    background-color: #3D69B6;
+}
+
+TABLE.t-data-grid {
+    border-collapse: collapse;
+    border-left: 1px solid #000066;
+    border-top: 1px solid #000066;
+    background-color: #000066;
+    font-size: 14px;
+}
+
+table.t-data-grid thead {
+	border-top: 1px solid #000066; /* For Firefox */
+}
+
+TABLE.t-data-grid THEAD TR {
+    color: white;
+    background-color: #ffffff;
+}
+
+TABLE.t-data-grid THEAD TR TH {
+    text-align: left;
+    padding: 1px 3px;
+    white-space: nowrap;
+    border-right: 1px solid #000066;
+    border-bottom: 1px solid #000066;
+    background-color:#3D69B6;
+    width: 150px;
+}
+
+TABLE.t-data-grid TBODY TR {
+    background-color: #ffffff;
+}
+
+TABLE.t-data-grid TBODY TR.odd {
+    background-color: #dddddd;
+}
+
+TABLE.t-data-grid TBODY TR TH A {
+    color: white;
+}
+
+TABLE.t-data-grid TBODY TR TD {
+    border-right: 1px solid #000066;
+    border-bottom: 1px solid #000066;
+    padding: 1px 3px;
+}

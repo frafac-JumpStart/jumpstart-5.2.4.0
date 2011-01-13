@@ -1,0 +1,41 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>Multiple Forms (1)</h1>
+	
+	This page demonstrates how to handle a page with more than one Form.<br/><br/><br/>
+	
+	<form t:type="form" t:id="searchcustomers" style="border: medium solid gray">
+		<t:errors/>
+		Customer Name: 
+		<input t:type="TextField" t:id="customerName" t:validate="required, maxlength=10" size="10"/> 
+		<input type="submit" value="Search Customers"/>
+ 	</form><br/>
+
+	<form t:type="form" t:id="searchsuppliers" style="border: medium solid gray">
+		<t:errors/>
+		Supplier Name: 
+		<input t:type="TextField" t:id="supplierName" t:validate="required, maxlength=10" size="10"/> 
+		<input type="submit" value="Search Suppliers"/>
+ 	</form><br/>
+	
+	To help us determine which Form has been submitted we give each Form a component id.<br/>
+	In this example the ids are "searchcustomers" and "searchsuppliers".<br/>
+	We include the id in their event handler method names: onSuccessFromSearchCustomers() and onSuccessFromSearchSuppliers().<br/><br/>
+
+	References: <a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/TextField.html">TextField</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Errors.html">Errors</a>,
+	<a href="http://wiki.apache.org/tapestry/Tapestry5HowToUseForms">How To Use Forms</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/annotations/OnEvent.html">@OnEvent API</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/MultipleForms1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/MultipleForms1.java"/>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>Translators (1)</h1>
+	Tapestry translators convert between values on the server-side and their string representations on the client side.<br/><br/>
+
+	A translator can be specified on any TextField, PasswordField, TextArea.<br/>
+	Tapestry comes with several built-in translators.  We use 4 of them here.<br/><br/>
+	
+	Tapestry uses the built-in translators automatically as needed unless you specify a different translator.<br/>
+	You can see them being invoked automatically in the following example:<br/><br/>
+
+	<form t:type="form" t:id="inputs">
+		<t:errors/>
+		<table>
+			<tr>
+				<td>The IntegerTranslator will handle this line.</td>
+				<td><t:label for="integerField"/></td>
+				<td><input t:type="TextField" t:id="integerField" t:value="integerField"/></td>
+			</tr>
+			<tr>
+				<td>The LongTranslator will handle this line.</td>
+				<td><t:label for="longField"/></td>
+				<td><input t:type="TextField" t:id="longField" t:value="longField"/></td>
+			</tr>
+			<tr>
+				<td>The DoubleTranslator will handle this line.</td>
+				<td><t:label for="doubleField"/></td>
+				<td><input t:type="TextField" t:id="doubleField"/></td>
+			</tr>
+			<tr>
+				<td>The StringTranslator will handle this line.</td>
+				<td><t:label for="stringField"/></td>
+				<td><input t:type="TextField" t:id="stringField" t:value="stringField"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td><input type="submit" value="Submit"/></td>
+			</tr>
+		</table>
+	</form>
+	
+	The same translators are also invoked automatically for int, long, and double fields.<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/Translator.html">Translator API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/internal/translator/package-summary.html">translator API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/validation.html">Form Input and Validation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/TextField.html">TextField</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/PasswordField.html">PasswordField</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/TextArea.html">TextArea</a>.
+	<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+		
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/Translators1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/Translators1.java"/>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; 
+	 We use a "strict" DTD to make IE follow the alignment rules. -->
+	 
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/componentscrud.css}"/>
+	<!-- A 2nd stylesheet link that enables preview but cannot be guaranteed to work at runtime. -->
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/componentscrud.css"/>
+</head>
+<body>
+	<h1>Components CRUD</h1>
+	
+	This example is another preview of the examples to follow. <br/>
+	Here we have converted the left side and right side of the Filter CRUD example into 2 reusable components, PersonList and PersonEditor, and the page coordinates them.<br/>
+	Again, very little is explained here - that is left to later examples.<br/><br/>
+
+ 	<a t:type="eventLink" t:event="toCreate" href="#">Create...</a><br/>
+ 	
+	<table id="frame">
+		<tbody>
+			<tr>
+
+				<!-- This is the left side of the table: a list of Persons -->
+
+				<td id="listCell">
+					<t:examples.componentscrud.PersonList t:id="list" partialName="partialName" highlightPersonId="highlightPersonId"/>
+				</td>
+				
+				<!-- This is the right side of the table: where a Person will be created, reviewed, or updated. -->
+		
+				<td id="editorCell">
+					<t:examples.componentscrud.PersonEditor t:id="editor" mode="mode" personId="personId"/>
+				</td>
+				
+			</tr>
+		</tbody>
+ 	</table>
+
+	<a t:type="pageLink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/componentscrud/Index.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/componentscrud/Index.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/componentscrud/PersonList.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/componentscrud/PersonList.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/componentscrud/PersonEditor.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/componentscrud/PersonEditor.properties"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/componentscrud/PersonEditor.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/componentscrud.css"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/Confirm.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/confirm.js"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+</body>
+</html>

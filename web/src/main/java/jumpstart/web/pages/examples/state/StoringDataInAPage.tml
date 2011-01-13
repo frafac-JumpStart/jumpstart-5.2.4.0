@@ -1,0 +1,42 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Storing Data in a Page</h1>
+	
+	Sometimes there are fields in a page that you want the page to store for use next time you access the page.<br/>
+	To do this, annotate those fields with <em>@Persist</em>.<br/><br/>
+	
+	In this example we have a field called _count which we increment every time the page is rendered.  We annotate it with @Persist.<br/>
+	Reload the page or revisit it and you will see that _count has been remembered and incremented.<br/>
+	<ul>
+		<li>A count of how many times you have visited this page during this session: <strong>${count}</strong></li>
+	</ul>
+	
+	The default strategy for @Persist is "session", which means store the field in your session. 
+	Session-persisted objects can be removed from the session by setting them to null or using the 
+	<code>discardPersistentFieldChanges()</code> method of ComponentResources, as demonstrated by this link:
+	<a t:type="actionlink" t:id="clear" href="#">Remove _count from the Session and go Home</a>. 
+	To see what's in your session, go to the Display Session Contents example.<br/><br/>
+	
+	Other strategies for @Persist include "client" and COOKIE. See 
+	<a href="http://tapestry.apache.org/tapestry5/guide/persist.html">Persistent Page Data</a> and
+	<a href="http://wiki.apache.org/tapestry/Tapestry5HowToUsePersistentFieldStrategy">How To Use Persistent Field Strategy</a>.<br/><br/> 
+	
+	<strong>Caution</strong><br/>
+	<ul>
+		<li>The default strategy, "session", is risky because many browsers share the same session across windows and tabs.
+			The danger is that the field will be overwritten if the user opens a new window or tab and visits the same page.</li>
+		<li>Session persistence also has an impact on clustered servers.  Howard discusses this in 
+			<a href="http://thread.gmane.org/gmane.comp.java.tapestry.user/65410/focus=65426">Tapestry App Replication</a>. 
+			Note that <em>@ApplicationState</em> is the old name for <em>@SessionState</em>.</li>
+	</ul>
+	
+	References: <a href="http://tapestry.apache.org/tapestry5/guide/persist.html">Persistent Page Data</a>, 
+	<a href="http://tapestry.apache.org/tapestry5.1/apidocs/org/apache/tapestry5/ComponentResources.html">ComponentResources API</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/StoringDataInAPage.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/StoringDataInAPage.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/state/examples/state/Count.java"/>
+</body>
+</html>

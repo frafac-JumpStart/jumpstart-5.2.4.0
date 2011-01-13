@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; 
+	 We use a "strict" DTD to make IE follow the alignment rules. -->
+	 
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+ 		body					{ font-family: Arial, Helvetica, sans-serif; font-size: smaller; }
+		.error-label			{ color: red; }
+ 		.required-field			{ border-right-color: orange; }
+		.error-field			{ border-color: red; }
+		.error-msg				{ color: red; }
+	</style>
+</head>
+<body>
+	<h1>AJAX Validators (1)</h1>
+	
+	Let's say you need a validator that behaves like any other client-side validator except that it asks the server to do the validation, 
+	for example to validate that a username or email address is unique.<br/><br/> 
+
+	Well, here we present a reusable <strong>mixin</strong> built for the job. It's called <strong>AjaxValidator</strong> and
+	we use it here to validate that the first and last names are unique.<br/><br/>
+
+	<form t:type="CustomForm" t:id="inputs" >
+		<t:errors/>
+		<table>
+			<tr>
+				<td><t:label for="firstName"/>:</td>
+				<td><input t:type="TextField" t:id="firstName" t:validate="required, maxlength=10" size="10"
+					t:mixins="ajaxValidator"/></td>
+				<td>(required, maxLength=10, new name only)</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td colspan="2"><t:customerror for="firstName"/></td>
+			</tr>
+			<tr>
+				<td><t:label for="lastName"/>:</td>
+				<td><input t:type="TextField" t:id="lastName" t:validate="required, maxLength=10" size="10"
+					t:mixins="ajaxValidator"/></td>
+				<td>(required, maxLength=10, new name only)</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td colspan="2"><t:customerror for="lastName"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Display"/></td>
+				<td></td>
+			</tr>
+		</table>
+	</form><br/>
+	
+	Here are the names already in use:<br/><br/>
+	
+	<table t:type="grid" t:source="persons" t:row="var:person" include="firstName,lastName">[Grid here]</table><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/mixins.html">Mixins</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/ajax.html">Ajax</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for Person, PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/AJAXValidators1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/AJAXValidators1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/AjaxValidator.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/ajax_validator.js"/>
+</body>
+</html>

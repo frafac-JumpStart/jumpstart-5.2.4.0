@@ -1,0 +1,6 @@
+body	{ font-family: Courier, serif; font-size: 12px; font-weight: normal; color: maroon; }a:link		{ color: blue }a:visited	{ color: blue }
+
+.table1			{ border: none; background-color: #000066; margin: 20px auto; border-collapse: collapse; }
+.table1	tr		{ background-color: #dddddd; }
+.table1	th		{ border: none; padding: 1px 3px; text-align: right; height: 1.3em; color: green; background-color: inherit; }
+.table1	td		{ border: none; padding:1px 3px 1px 3px; text-align:left; }

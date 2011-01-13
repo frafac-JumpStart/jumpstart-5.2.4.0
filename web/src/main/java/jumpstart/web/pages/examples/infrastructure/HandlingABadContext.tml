@@ -1,0 +1,68 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		dl.t-beandisplay dd.id	{ display:inline; margin-left: 0px; }	// IE 7.
+	</style>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+
+	<h1>Handling A Bad Context</h1>
+	
+	With each page you design it's important to decide how to handle a bad activation context, because 
+	a bad context can occur	in various ways.<br/><br/>
+
+	For example, look at the URL of this page.  The activation context is clearly visible as <em>1</em> and
+	it is easy to change.  Try replacing it with <em>2</em> and you will see person 2.  Users may become 
+	accustomed to this facility.<br/><br/>
+	
+	<t:if test="person">
+		Here is the requested person:<br/>
+		<t:beandisplay object="person"/>
+	</t:if>
+	<t:if negate="true" test="person">
+		<strong>Person ${personId} does not exist.</strong><br/>
+	</t:if>
+	<br/>
+	
+	In this example a bad context could occur several ways:
+	<ul>
+		<li>You've chosen a person that does not exist, eg. <em>100</em>.</li>
+		<li>You are not authorised to the person (in JumpStart there is no check on this).</li>
+		<li>The format of the context is incorrect, eg. <em>abc</em>.</li>
+		<li>You bookmark the page but when you return to it later the context is no longer valid 
+			because data, authorization, or the application have changed.</li>
+	</ul>
+	
+	Here are the alternatives:
+	<ol>
+		<li><strong>Handle it on the same page</strong> - either display the person or display the error.<br/>
+			This approach has the big advantage that it keeps the same URL - the user can see what they requested.<br/>
+			The <em>"exception"</em> event can help simplify this.  See References below.</li>
+		<li><strong>Return a new page</strong>, possibly passing it the exception or a message to display.<br/>
+			The page could even return <a href="http://en.wikipedia.org/wiki/404_error">HTTP 404</a> as described 
+			<a href="http://news.gmane.org/find-root.php?message_id=%3c48A4290A.7010407%40fsadev.com%3e">here</a>.</li>
+		<li>Throw an exception and let <strong>Tapestry's exception reporting page</strong> catch it. <br/>
+			This is the simplest approach but probably not suitable for production.  See the Exception Reporting Page example.</li>
+		<li>Throw an exception and catch it with <strong>your own exception reporting page</strong> as described in the Exception Reporting Page example.<br/>
+			The exception reporting page could give certain exceptions special treatment eg. DoesNotExistException and NotAuthorisedException might 
+			get different treatment to unexpected exceptions.</li>
+	</ol>
+	
+	This page has been built to handle only one situation: person does not exist. 
+	All other problems will be caught by the exception reporting page.<br/><br/>
+	
+	References: 
+	<em>Intercepting Event Exceptions</em> in <a href="http://tapestry.apache.org/tapestry5/guide/event.html">Component Events</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/cookbook/exceptions.html">Exception Reporting</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/If.html">If</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/BeanDisplay.html">BeanDisplay</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for Person, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/infrastructure/HandlingABadContext.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/infrastructure/HandlingABadContext.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/PersonService.java"/>
+</body>
+</html>

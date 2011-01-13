@@ -1,0 +1,27 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Combining Components</h1>
+
+	This page demonstrates how components can be combined to create new components.<br/><br/>
+
+	In this example we combine SlidingPanel with SourceCodeDisplay to produce a new component, <strong>SlidingSourceCodeDisplay</strong>.<br/>
+	It renders a SlidingPanel wrapped around a SourceCodeDisplay.<br/> 
+	SlidingPanel was explained in the Third Party Components example. SourceCodeDisplay is a JumpStart component.<br/> 
+	Our new component requires a <em>src</em> parameter, whose value it passes directly into SourceCodeDisplay.<br/><br/>
+
+	For more components see <em>Third Party Libraries</em> on <a href="http://tapestry.apache.org/tapestry5/">Tapestry 5 Home</a>
+	and <em>Components</em> on <a href="http://wiki.apache.org/tapestry/Tapestry5HowTos">Tapestry 5 How Tos</a>.<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/component-classes.html">Component Classes</a>,
+	<a href="http://tapestry.apache.org/tapestry5/guide/templates.html">Component Templates</a>,
+	<a href="http://tapestry.apache.org/tapestry5/guide/parameters.html">Component Parameters</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:examples.component.slidingsourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/CombiningComponents.tml"/>
+	<t:examples.component.slidingsourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/CombiningComponents.java"/>
+	<t:examples.component.slidingsourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/SlidingSourceCodeDisplay.tml"/>
+	<t:examples.component.slidingsourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/SlidingSourceCodeDisplay.java"/>
+</body>
+</html>

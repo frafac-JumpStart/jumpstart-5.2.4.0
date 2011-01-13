@@ -1,0 +1,92 @@
+<project name="enterprise" basedir=".">
+
+	<property file="../build.properties" />
+
+	<property name="project.dir" value="${basedir}/.." />
+
+	<property name="business.lib.compile.dir" value="${project.dir}/${business.dir}/src/main/lib-compile" />
+	<property name="business.lib.runtime.dir" value="${project.dir}/${business.dir}/src/main/lib-runtime" />
+	<property name="business.target.package.dir" value="${project.dir}/${business.dir}/target/package" />
+	<property name="business.jar.file" value="${business.target.package.dir}/${app.name}.jar" />
+	<property name="web.target.package.dir" value="${project.dir}/${web.dir}/target/package" />
+	<property name="web.war.file" value="${web.target.package.dir}/${app.name}.war" />
+
+	<property name="resources.main.dir" value="src/main/resources" />
+
+	<property name="target.dir" value="target" />
+	<property name="target.classes.dir" value="${target.dir}/classes" />
+	<property name="target.package.dir" value="${target.dir}/package" />
+
+	<property name="ear.file" value="${target.package.dir}/${app.name}.ear" />
+
+	<target name="clean" description="Deletes the target directory">
+		<delete dir="${target.dir}" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="${target.package.dir}" />
+	</target>
+
+	<target name="package" depends="init" description="">
+		<delete file="${ear.file}" />
+
+		<ear destfile="${ear.file}" manifest="${resources.main.dir}/META-INF/MANIFEST.MF" appxml="${resources.main.dir}/META-INF/application.xml">
+			<zipfileset file="${business.jar.file}" />
+			<zipfileset file="${web.war.file}" />
+			<zipfileset dir="${business.lib.compile.dir}" includes="*.jar" prefix="lib" />
+			<zipfileset dir="${business.lib.runtime.dir}" includes="*.jar" prefix="lib" />
+		</ear>
+	</target>
+
+	<!-- JBoss4 is no longer supported
+	<target name="deploy-ear-to-integration-test-server-jboss4">
+		<available type="dir" file="${project.dir}/${integration.test.server.dir}/deploy" property="integration.test.deploy.dir.exists" />
+		<fail unless="integration.test.deploy.dir.exists" message="*** Integration test deployment directory does not exist. Tried ${project.dir}/${integration.test.server.dir}/deploy." />
+
+		<copy todir="${project.dir}/${integration.test.server.dir}/deploy" file="${ear.file}" />
+		<copy tofile="${project.dir}/${integration.test.server.dir}/deploy/jumpstart-ds.xml" file="${project.dir}/business/src/main/resources/datasource-descriptor/jumpstart-hsqldb-ds.xml" />
+	</target>
+	-->
+
+	<target name="deploy-ear-to-integration-test-server-jboss5">
+		<available type="dir" file="${project.dir}/${integration.test.server.dir}/deploy" property="integration.test.deploy.dir.exists"/>
+		<fail unless="integration.test.deploy.dir.exists" message="*** Integration test deployment directory does not exist. Tried ${project.dir}/${integration.test.server.dir}/deploy."/>
+
+		<copy todir="${project.dir}/${integration.test.server.dir}/deploy" file="${project.dir}/business/src/main/resources/datasource-descriptor/jumpstart-hsqldb-ds.xml"/>
+
+		<echo message="Waiting 5 seconds to allow datasource time to be registered..." />
+		<waitfor maxwait="5" maxwaitunit="second" checkevery="5000" timeoutproperty="ignore.me">
+			<http url="http://localhost:8080/absolutenonsense" />
+		</waitfor>
+		
+		<copy todir="${project.dir}/${integration.test.server.dir}/deploy" file="${ear.file}"/>
+	</target>
+
+	<target name="deploy-ear-to-integration-test-server-glassfish">
+		<available type="dir" file="${project.dir}/${integration.test.server.dir}/autodeploy" property="integration.test.deploy.dir.exists" />
+		<fail unless="integration.test.deploy.dir.exists" message="*** Integration test deployment directory does not exist. Tried ${project.dir}/${integration.test.server.dir}/autodeploy." />
+
+		<copy todir="${project.dir}/${integration.test.server.dir}/autodeploy" file="${ear.file}" />
+		<!-- There is no datasource descriptor to copy to glassfish - datasources are added via the admin console web page. -->
+	</target>
+
+	<target name="integration-test" description="">
+		<echo message="There are no integration tests in jumpstart enterprise tier." />
+	</target>
+
+	<target name="install" description="">
+		<echo message="There is no local repository to install the EAR in." />
+	</target>
+
+	<target name="deploy" description="">
+	</target>
+
+	<target name="delete-dependent-files" description="">
+		<echo message="There are no dependent files in jumpstart enterprise tier." />
+	</target>
+
+	<target name="get-dependent-files">
+		<echo message="There are no dependent files in jumpstart enterprise tier." />
+	</target>
+
+</project>

@@ -1,0 +1,28 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body>
+	<h1>Hello World Explained</h1> 
+	
+	The typical Tapestry page is defined by a 
+	<a href="http://tapestry.apache.org/tapestry5/guide/templates.html">Template</a> and a  
+	<a href="http://tapestry.apache.org/tapestry5/guide/component-classes.html">Class</a>.<br/>
+	The template for this page is <em>HelloWorldExplained.tml</em>, and the class is <em>HelloWorldExplained.class</em>.<br/>
+	In this example the class has no methods.  That's principally because there are no input or output fields in the page.<br/>
+	So in this example Tapestry renders the page (ie. generates HTML) solely by interpreting the template.<br/><br/>
+	
+	Pages can have embedded components.
+	In this page we see 2 embedded component types being used:<br/>
+	* <a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/PageLink.html">PageLink</a>,
+	which is part of the Tapestry core.  It generates the "Home" link below.<br/>
+	* SourceCodeDisplay, which is part of JumpStart's components.  It generates the green areas you see below.<br/><br/>
+	
+	Page location is important.  Pages must be put in a package called <code>pages</code>. Tapestry gives this package 
+	special treatment.<br/>
+	JumpStart's root package is <code>jumpstart.web</code>, so we know it must have a <code>jumpstart.web.pages</code> package.<br/>
+	This page is <code>jumpstart.web.pages.examples.start.HelloWorldExplained</code>.<br/><br/>
+	
+	<t:pagelink page="Index">Home</t:pagelink><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/start/HelloWorldExplained.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/start/HelloWorldExplained.java"/>
+</body>
+</html>

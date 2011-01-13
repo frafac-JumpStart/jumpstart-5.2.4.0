@@ -1,0 +1,124 @@
+<project name="data_util" basedir=".">
+
+	<property file="build.properties" />
+	<property file="data_util.properties" />
+
+	<property name="hsqldb.init.properties" value="${business.dir}/src/test/data/hsqldb.properties" />
+	<property name="hsqldb.init.script" value="${business.dir}/src/test/data/hsqldb.script" />
+
+	<path id="classpath.sql">
+		<fileset dir="${hsqldb.jar.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="reset-database-hsqldb-prompted" description="">
+		<fail unless="hsqldb.jar.dir" message="*** Please specify hsqldb.jar.dir in data_util.properties." />
+		<fail unless="hsqldb.data.dir" message="*** Please specify hsqldb.data.dir in data_util.properties." />
+
+		<input message="Are you sure you want to reset the data in ${hsqldb.data.dir} (y/n)?" validargs="y,n" addproperty="do.reset.hsqldb.data" />
+		<condition property="do.abort">
+			<equals arg1="n" arg2="${do.reset.hsqldb.data}" />
+		</condition>
+		<fail if="do.abort">Reset has been aborted by user.</fail>
+		<antcall target="reset-database-hsqldb"/>
+	</target>
+
+	<target name="reset-database-hsqldb">
+		<fail unless="hsqldb.jar.dir" message="*** Please specify hsqldb.jar.dir in data_util.properties." />
+		<fail unless="hsqldb.data.dir" message="*** Please specify hsqldb.data.dir in data_util.properties." />
+		
+		<available type="file" file="${hsqldb.data.dir}/hsqldb.lck" property="hsqldb.lck.exists"/>
+		<fail if="hsqldb.lck.exists" message="*** Cannot reset hsqldb because it is in use. Database is in ${hsqldb.data.dir}/."/>
+
+		<condition property="for.jboss">
+			<contains string="${hsqldb.data.dir}" substring="jboss" casesensitive="false" />
+		</condition>
+
+		<antcall target="replace-hsqldb-files-unless-for-jboss"/>
+		<antcall target="replace-jumpstartdb-files-if-for-jboss"/>
+	</target>
+
+	<target name="replace-hsqldb-files-unless-for-jboss" unless="for.jboss">
+		<copy file="${hsqldb.init.properties}" tofile="${hsqldb.data.dir}/hsqldb.properties" overwrite="false" />
+		<copy file="${hsqldb.init.script}" tofile="${hsqldb.data.dir}/hsqldb.script" overwrite="true" />
+		<delete file="${hsqldb.data.dir}/hsqldb.log"/>
+
+		<echo message="hsqldb has been reset in ${hsqldb.data.dir}/."/>
+	</target>
+
+	<target name="replace-jumpstartdb-files-if-for-jboss" if="for.jboss">
+		<copy file="${hsqldb.init.properties}" tofile="${hsqldb.data.dir}/jumpstartDB.properties" overwrite="false" />
+		<copy file="${hsqldb.init.script}" tofile="${hsqldb.data.dir}/jumpstartDB.script" overwrite="true" />
+		<delete file="${hsqldb.data.dir}/jumpstartDB.log"/>
+
+		<echo message="jumpstartDB has been reset in ${hsqldb.data.dir}/."/>
+	</target>
+
+	<target name="start-hsqldb-manager" description="Starts HSQLDB GUI">
+		<condition property="handle.empty.password.for.windows">
+			<and>
+				<equals arg1="" arg2="${database.password}" />
+				<os family="windows" />
+			</and>
+		</condition>
+
+		<antcall target="start-hsqldb-manager-if-password"/>
+		<antcall target="start-hsqldb-manager-if-windows-and-no-password"/>
+	</target>
+
+	<target name="start-hsqldb-manager-if-password" unless="handle.empty.password.for.windows">
+		<java classname="org.hsqldb.util.DatabaseManagerSwing" fork="true">
+			<classpath refid="classpath.sql" />
+			<arg value="-driver" />
+			<arg value="${database.driver}" />
+			<arg value="-url" />
+			<arg value="${database.url}" />
+			<arg value="-user" />
+			<arg value="${database.userid}" />
+			<arg value="-password" />
+			<arg value="${database.password}" />
+		</java>
+	</target>
+
+	<target name="start-hsqldb-manager-if-windows-and-no-password" if="handle.empty.password.for.windows">
+		<java classname="org.hsqldb.util.DatabaseManagerSwing" fork="true">
+			<classpath refid="classpath.sql" />
+			<arg value="-driver" />
+			<arg value="${database.driver}" />
+			<arg value="-url" />
+			<arg value="${database.url}" />
+			<arg value="-user" />
+			<arg value="${database.userid}" />
+		</java>
+	</target>
+	
+	<target name="populate-derby">
+		<sql driver="org.apache.derby." url="jdbc:derby:sun-appserv-samples;create=true" userid="APP" password="APP" 
+			src="${business.dir}/src/main/test/data/initial_data.sql">
+		</sql>
+	</target>
+	
+	<target name="add-hibernate-to-a-server" description="">
+		<fail unless="add.hibernate.to.dir" message="*** Please specify add.hibernate.to.dir in data_util.properties." />
+		<available type="dir" file="${add.hibernate.to.dir}" property="add.hibernate.to.dir.exists"/>
+		<fail unless="add.hibernate.to.dir.exists" message="*** Cannot copy hibernate jars because target directory does not exist at: ${add.hibernate.to.dir} ." />
+
+		<get dest="${add.hibernate.to.dir}/antlr-3.1.1.jar" usetimestamp="true" src="${maven.repo.root}/org/antlr/antlr/3.1.1/antlr-3.1.1.jar"/>
+		<get dest="${add.hibernate.to.dir}/asm-1.5.3.jar" usetimestamp="true" src="${maven.repo.root}/asm/asm/1.5.3/asm-1.5.3.jar"/>
+		<get dest="${add.hibernate.to.dir}/asm-attrs-1.5.3.jar" usetimestamp="true" src="${maven.repo.root}/asm/asm-attrs/1.5.3/asm-attrs-1.5.3.jar"/>
+		<get dest="${add.hibernate.to.dir}/commons-collections-3.2.jar" usetimestamp="true" src="${maven.repo.root}/commons-collections/commons-collections/3.2/commons-collections-3.2.jar"/>
+		<get dest="${add.hibernate.to.dir}/commons-logging-1.1.jar" usetimestamp="true" src="${maven.repo.root}/commons-logging/commons-logging/1.1/commons-logging-1.1.jar"/>
+		<get dest="${add.hibernate.to.dir}/dom4j-1.6.1.jar" usetimestamp="true" src="${maven.repo.root}/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
+		<get dest="${add.hibernate.to.dir}/hibernate-annotations-3.4.0.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-annotations/3.4.0.GA/hibernate-annotations-3.4.0.GA.jar"/>
+		<get dest="${add.hibernate.to.dir}/hibernate-commons-annotations-3.1.0.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-commons-annotations/3.1.0.GA/hibernate-commons-annotations-3.1.0.GA.jar"/>
+	 	<get dest="${add.hibernate.to.dir}/hibernate-ehcache-3.3.1.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-ehcache/3.3.1.GA/hibernate-ehcache-3.3.1.GA.jar"/>
+		<get dest="${add.hibernate.to.dir}/hibernate-entitymanager-3.4.0.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-entitymanager/3.4.0.GA/hibernate-entitymanager-3.4.0.GA.jar"/>
+	 	<get dest="${add.hibernate.to.dir}/hibernate-core-3.3.1.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-core/3.3.1.GA/hibernate-core-3.3.1.GA.jar"/>
+		<get dest="${add.hibernate.to.dir}/javassist-3.9.0.GA.jar" usetimestamp="true" src="http://repository.jboss.org/maven2/javassist/javassist/3.9.0.GA/javassist-3.9.0.GA.jar" />
+		<get dest="${add.hibernate.to.dir}/log4j-1.2.14.jar" usetimestamp="true" src="${maven.repo.root}/log4j/log4j/1.2.14/log4j-1.2.14.jar"/>
+		<get dest="${add.hibernate.to.dir}/slf4j-api-1.5.2.jar" usetimestamp="true" src="${maven.repo.root}/org/slf4j/slf4j-api/1.5.2/slf4j-api-1.5.2.jar" />
+  		<get dest="${add.hibernate.to.dir}/slf4j-log4j12-1.5.2.jar" usetimestamp="true" src="${maven.repo.root}/org/slf4j/slf4j-log4j12/1.5.2/slf4j-log4j12-1.5.2.jar" />
+	</target>
+
+</project>

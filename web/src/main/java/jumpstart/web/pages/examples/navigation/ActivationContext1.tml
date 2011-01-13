@@ -1,0 +1,33 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Activation Context (1)</h1>
+
+  	PageLink can pass parameters to the page it is requesting. You specify them in PageLink's <em>context</em> parameter.<br/>
+  	Tapestry tacks the parameters onto the end of the render request URL. They're known as the <strong>activation context</strong>.<br/> 
+  	The page can receive them as it is activated by providing an <strong>onActivate()</strong> method with the right number and type of 
+  	parameters.<br/><br/>
+  	
+	Here's an example of some tml code using a context. It passes <em>1</em> to the next page:<br/>
+	<code>&lt;a t:type="pagelink" t:page="examples/navigation/ActivationContext2" t:context="literal:1" href="#"&gt;Show Person 1&lt;/a&gt;</code><br/><br/>
+
+	Here's the code in action:<br/> 
+	<a t:type="pagelink" t:page="examples/navigation/ActivationContext2" t:context="literal:1" href="#">Show Person 1</a><br/><br/>
+	
+	It generates a link whose URL looks like this:<br/> 
+	<code>http://myhost/jumpstart/examples/navigation/activationcontext2/1</code><br/><br/>
+	
+	The URL is a <strong>render request</strong> which tells Tapestry to get an instance of <em>ActivationContext2</em>, 
+	activate it with the parameter <em>1</em>, render the output and return it.<br/>
+	To receive the parameters, <em>ActivationContext2</em> has a method <em>onActivate(Long personId)</em>.<br/><br/>
+
+	References:	
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/PageLink.html">PageLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/rendering.html">Component Rendering</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ActivationContext1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ActivationContext1.java"/>
+</body>
+</html>

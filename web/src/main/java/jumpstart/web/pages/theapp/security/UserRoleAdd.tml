@@ -1,0 +1,58 @@
+<html t:type="theapp/layout" t:tab="literal:Security" t:subtab="literal:UserRole" t:title="literal:Create User Role" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:remove>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css"/>
+</t:remove>
+<div class="contentblock">
+	<h1>Add User Role</h1>
+	<form t:type="form" t:id="form">
+		<table class="recordblock" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+					<t:errors />
+					<div class="record">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<div>
+									<t:if test="user">
+										<th>User:</th>
+										<td>${user.loginId}</td>
+									</t:if>
+									<t:if negate="true" test="user">
+										<th><t:label for="user"/></th>
+										<td><select t:type="select" t:id="user" t:model="userIds" t:value="selectedUserId" t:validate="required" t:blankOption="ALWAYS"></select></td>
+									</t:if>
+								</div>
+							</tr>
+							<tr>
+								<div>
+									<t:if test="role">
+										<th>Role:</th>
+										<td>${role.name}</td>
+									</t:if>
+									<t:if negate="true" test="role">
+										<th><t:label for="role"/></th>
+										<td><select t:type="select" t:id="role" t:model="roleIds" t:value="selectedRoleId" t:validate="required" t:blankOption="ALWAYS"></select></td>
+									</t:if>
+								</div>
+							</tr>
+							<tr>
+								<th><t:label for="active"/></th>
+ 								<td><input t:id="active" t:type="checkbox" value="userRole.active"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="buttons">
+						<table>
+							<tr>
+								<td><input type="submit" value="Save" class="positive"/></td>
+								<td><button t:type="chenillekit/Button" type="button" t:event="Reset" title="Reset">Reset</button></td>
+								<td><button t:type="chenillekit/Button" type="button" t:event="Cancel" title="Cancel">Cancel</button></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+</html>

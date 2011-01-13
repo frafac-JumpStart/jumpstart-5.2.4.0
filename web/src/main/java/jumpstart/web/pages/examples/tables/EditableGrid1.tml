@@ -1,0 +1,47 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/grid.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/grid.css"/>
+</head>
+<body>
+	<h1>Editable Grid (1)</h1>
+	
+	A table built with a Form around a Grid, with editable firstName.<br/><br/>
+	
+	The technique used here gets a list of _persons from the database during render and again during form submission.<br/>
+	It relies on that list of _persons being the same both times and <strong>in the same sequence</strong>.<br/>
+	During submit, each entry in _persons will have its firstName overwritten with the firstName from the corresponding entry in the Grid.<br/><br/>
+	
+	We chose not to annotate _persons with <strong>@Persist</strong> even though it would remove the need to get _persons during form submission.<br/>
+	Persisting a field in the session is risky because the field will be overwritten if the user opens a new window or tab 
+	with same session and visits the same page.<br/><br/>
+	
+	For more flexibility, see the Editable Loop examples.<br/>
+	
+	<form t:type="form" t:id="personsedit">
+		<t:errors/>
+		<table t:type="grid" t:source="persons" t:row="person" t:include="id,firstname,lastname,startdate">[Persons Grid here]
+			<p:firstNameCell>
+				<input t:type="textfield" t:value="person.firstName" t:validate="required, maxlength=10" size="10"/>
+				<!-- If optimistic locking is needed then uncomment this next line.
+					<t:hidden value="person.version"/>
+				 -->
+			</p:firstNameCell>
+	 	</table>
+	 	<input type="submit" value="Save"/>
+	 </form><br/>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Grid.html">Grid</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/EditableGrid1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/EditableGrid1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/grid.css"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+</body>
+</html>

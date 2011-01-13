@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; 
+	 We use a "strict" DTD to make IE follow the alignment rules. -->
+	 
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+<head>
+	<title>Log In</title>
+	<link rel="stylesheet" type="text/css" href="${asset:context:css/login.css}"/>
+	<t:remove>
+		<!-- This link allows previewability -->
+		<link rel="stylesheet" type="text/css" href="../css/login.css"/>
+	</t:remove>
+</head>
+
+<body>
+	<div id="titles">
+		<h1>Your Application</h1>
+
+		<br/><br/>
+		<a t:type="pagelink" t:page="Index" href="#">Home</a> 
+	</div>
+
+	<form t:type="form" t:id="login">
+		<table id="main">
+			<tr>
+				<td>
+					<table id="headers">
+						<tr>
+							<th>Log In</th>
+						</tr>
+					</table>
+					<br/>
+					<table id="input">
+						<tr>
+							<th><t:label for="loginId"/>:</th>
+							<td><input t:type="TextField" t:id="loginId" size="15" maxLength="12" t:validate="required, maxLength=15"/></td>
+						</tr>
+						<tr>
+							<th><t:label for="password"/>:</th>
+							<td><input t:type="PasswordField" t:id="password" size="15" maxLength="12" t:validate="required, maxLength=15"/></td>
+						</tr>
+					</table>
+					<div class="buttons">
+						<input type="submit" value="Login"/>
+					</div>
+				</td>
+			</tr>
+		</table>
+		
+		<div id="errors">
+			<t:errors/>
+		</div>
+	</form>
+
+</body>
+</html>

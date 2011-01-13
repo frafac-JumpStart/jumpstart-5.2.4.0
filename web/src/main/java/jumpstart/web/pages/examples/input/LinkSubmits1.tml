@@ -1,0 +1,48 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Link Submits (1)</h1>
+	
+	LinkSubmit generates a link that submits its enclosing Form.  It triggers the same event as the Submit component.<br/><br/>
+	
+	<form t:type="form" t:id="names" style="border: medium solid gray">
+		<t:errors/>
+		<table>
+			<tr>
+				<td>First Name:</td>
+				<td><input t:type="TextField" t:id="firstName" t:validate="required"/></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td><input t:type="TextField" t:id="lastName" t:validate="required"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><t:linksubmit t:id="newlinksubmit">Display</t:linksubmit></td>
+			</tr>
+		</table>
+ 	</form>
+ 	
+ 	CAUTION: LinkSubmit does not submit if there are no validators specified in the form. 
+ 	See <a href="https://issues.apache.org/jira/browse/TAP5-719">TAP5-719</a>.<br/><br/> 
+
+	References:	
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/LinkSubmit.html">LinkSubmit</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/TextField.html">TextField</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Errors.html">Errors</a>, 
+	<a href="http://wiki.apache.org/tapestry/Tapestry5HowToUseForms">How To Use Forms</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/event.html">Component Events</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/persist.html">Persistent Page Data</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/LinkSubmits1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/LinkSubmits1.java"/>
+</body>
+</html>

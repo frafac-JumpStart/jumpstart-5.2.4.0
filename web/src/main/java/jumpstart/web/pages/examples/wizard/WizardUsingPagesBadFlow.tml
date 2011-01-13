@@ -1,0 +1,10 @@
+<html t:type="examples/wizard/WizardUsingPagesLayout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+	<div style="background: #EEAAAA; padding: 1em;">
+		Operation not allowed because the chosen Credit Request is over. Did you use the Back button after the Request was over?<br/><br/>
+
+		<a t:type="pagelink" t:page="examples/wizard/ConversationsList" href="#">List conversations</a><br/>
+		<a t:type="pagelink" t:page="examples/wizard/WizardUsingPages1" href="#">Start again</a>
+	</div>
+
+</html>

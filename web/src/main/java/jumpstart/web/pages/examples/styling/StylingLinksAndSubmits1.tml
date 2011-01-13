@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; 
+	 We use a "strict" DTD to make IE follow the alignment rules. -->
+	 
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/links_and_submits.css}"/>
+	<!-- A 2nd stylesheet link that enables preview but cannot be guaranteed to work at runtime. -->
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/links_and_submits.css"/>
+</head>
+<body>
+	<h1>Styling Links and Submits (1)</h1>
+	
+	This page shows some techniques for styling PageLink, ActonLink, EventLink, Submit, or using chenillekit/Button instead.<br/><br/>
+		
+	<strong>Links to pages: </strong>
+	<a t:type="pagelink" t:page="examples/styling/LinksAndSubmits2" t:context="literal:PageLink" href="#">Next</a>&nbsp;
+	<a t:type="pagelink" t:page="examples/styling/LinksAndSubmits2" t:context="literal:PageLink with img" class="imagelink">
+		<img src="${nextImage}" alt="Next"/>
+	</a>
+	<button t:type="chenillekit/Button" type="page" t:pageName="examples/styling/LinksAndSubmits2" 
+		t:context="literal:chenillekit/Button with pageName">Next</button>
+	<br/><br/>
+	
+	<strong>Links to actions: </strong>
+	<a t:type="actionlink" t:id="AL1" t:context="literal:ActionLink" href="#">Next</a>&nbsp; 
+	<a t:type="actionlink" t:id="AL2" t:context="literal:ActionLink with img" class="imagelink">
+		<img src="${nextImage}" alt="Next"/>
+	</a>
+	<br/><br/>
+	
+	<strong>Links to events: </strong>
+	<a t:type="eventlink" t:event="NextPage" t:context="literal:EventLink" href="#">Next</a>&nbsp; 
+	<a t:type="eventlink" t:event="NextPage" t:context="literal:EventLink with img" class="imagelink">
+		<img src="${nextImage}" alt="Next"/>
+	</a>
+	<button t:type="chenillekit/Button" type="button" t:event="NextPage" t:context="literal:chenillekit/Button with event">Next</button>
+	<br/><br/>
+
+	A Form...
+	<form t:type="form" t:id="inputs" style="border: thin solid black;">
+		<table>
+			<tr>
+				<td><t:label for="firstName"/>:</td>
+				<td><input t:type="TextField" t:id="firstName" t:validate="required"/></td>
+			</tr>
+		</table>
+		
+		<strong>Submit: </strong>
+		<input type="submit" value="Display"/>&nbsp;
+		<input type="submit" value=" " class="nextimage"/>&nbsp;
+		<button t:type="chenillekit/Button" type="submit">Display</button><br/><br/>
+		
+	</form><br/>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/PageLink.html">PageLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/ActionLink.html">ActionLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/EventLink.html">EventLink</a>, 
+	<a href="http://www.chenillekit.org/demo/tapcomp/buttondemo">chenillekit/Button</a>, 
+	<a href="http://www.chenillekit.org/">chenillekit</a>,  
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Submit.html">Submit</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/styling/StylingLinksAndSubmits1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/styling/StylingLinksAndSubmits1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/links_and_submits.css"/>
+</body>
+</html>

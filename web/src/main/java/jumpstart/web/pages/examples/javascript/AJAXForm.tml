@@ -1,0 +1,36 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>AJAX Form</h1>
+	
+	This page demonstrates how Tapestry AJAX-enables a Form if you specifying the zone parameter of the Form.<br/><br/>
+	
+	<form t:type="form" t:zone="nameZone" style="background-color: eee; padding: 15px">
+		First Name: <input t:type="TextField" t:id="firstName"/><br/>
+		Last Name: <input t:type="TextField" t:id="lastName"/><br/><br/>
+ 
+		<t:zone t:id="nameZone">
+			Welcome ${name}.
+		</t:zone><br/>
+
+		Note that the following time field does not update because it's not in the zone:  ${time}
+		<br/><br/>
+		
+		<input type="submit" value="Accept"/>
+ 	</form>
+ 	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/ajax.html">Ajax</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Zone.html">Zone</a>,<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXForm.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXForm.java"/>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Creating Mixins: ClickOnce (2)</h1>
+
+	This page shows how many you've ordered.
+	
+	<div style="padding: 20px 50px;">
+		You have ordered ${myOrder.applesQuantity} apples, ${myOrder.orangesQuantity} oranges, ${myOrder.bananasQuantity} bananas.
+	</div>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/mixins.html">Component Mixins</a>,
+	<a href="http://wiki.apache.org/tapestry/Tapestry5AndJavaScriptExplained">Tapestry 5 and JavaScript Explained</a>,
+	<a href="http://tapestry.apache.org/tapestry5/guide/appstate.html">Session State</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="examples/javascript/CreatingMixins1" href="#">Return</a><br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/CreatingMixins2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/CreatingMixins2.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/state/examples/javascript/MyOrder.java"/>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<title>Application Exception</title>
+</head>
+<body>
+	<h1>This is an example custom exception report page</h1>
+
+	<t:if test="productionMode">
+		System property <em>tapestry.production-mode</em> is currently <em>true</em>, so I will display a simple non-technical 
+		message that doesn't reveal any of the inner workings of the application. For more info about this page, click 
+		<a t:type="pagelink" t:page="examples/infrastructure/CustomExceptionPage" href="#">Custom Exception Page</a>.<br/><br/><br/>
+
+		<div style="background-color: rgb(204, 190, 153); border: black 2px outset; padding: 20px; font-family: 'Trebuchet MS';">
+			<strong>The system is temporarily unavailable.</strong> <br/>
+			Please try again later, or <t:pagelink page="Index">click here to return to Start</t:pagelink>.
+		</div><br/><br/><br/>
+	</t:if>
+	<t:if negate="true" test="productionMode">
+		System property <em>tapestry.production-mode</em> is currently <em>false</em>, so I will display full technical details 
+		of the exception - the same exception and session data as Tapestry's default ExceptionReport. 
+		The source for this page is at the bottom. For more info about this page, click 
+		<a t:type="pagelink" t:page="examples/infrastructure/CustomExceptionPage" href="#">Custom Exception Page</a>.<br/><br/><br/>
+		
+		<t:exceptionandsessiondisplay exception="exception"/>
+	</t:if>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/ExceptionReport.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/ExceptionReport.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/ExceptionAndSessionDisplay.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/ExceptionAndSessionDisplay.java"/>
+</body>
+</html>

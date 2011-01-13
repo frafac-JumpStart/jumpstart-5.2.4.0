@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+      
+<!-- This tells the servlet container how to handle jumpstart requests: feed them through TapestryFilter. -->
+      
+    <display-name>Tapestry JumpStart</display-name> 
+    
+    <context-param> 
+        <param-name>tapestry.app-package</param-name> 
+        <param-value>jumpstart.web</param-value> 
+    </context-param> 
+    
+    <filter> 
+        <filter-name>app</filter-name> 
+        <filter-class>org.apache.tapestry5.TapestryFilter</filter-class> 
+    </filter> 
+    
+    <filter-mapping> 
+        <filter-name>app</filter-name> 
+        <url-pattern>/*</url-pattern> 
+    </filter-mapping> 
+    
+    <!-- Only Glassfish needs these ejb-local-refs. See https://glassfish.dev.java.net/javaee5/ejb/EJB_FAQ.html -->
+    
+    <ejb-local-ref>
+    	<ejb-ref-name>PersonService</ejb-ref-name>
+    	<local>jumpstart.business.domain.examples.iface.IPersonServiceLocal</local>
+    	<ejb-link>PersonService</ejb-link>
+    </ejb-local-ref>
+    
+    <ejb-local-ref>
+    	<ejb-ref-name>DateStuffService</ejb-ref-name>
+    	<local>jumpstart.business.domain.examples.iface.IDateStuffServiceLocal</local>
+    	<ejb-link>DateStuffService</ejb-link>
+    </ejb-local-ref>
+    
+    <ejb-local-ref>
+    	<ejb-ref-name>SecurityFinderService</ejb-ref-name>
+    	<local>jumpstart.business.domain.security.iface.ISecurityFinderServiceLocal</local>
+    	<ejb-link>SecurityFinderService</ejb-link>
+    </ejb-local-ref>
+    
+    <ejb-local-ref>
+    	<ejb-ref-name>SecurityManagerService</ejb-ref-name>
+    	<local>jumpstart.business.domain.security.iface.ISecurityManagerServiceLocal</local>
+    	<ejb-link>SecurityManagerService</ejb-link>
+    </ejb-local-ref>
+    
+</web-app> 

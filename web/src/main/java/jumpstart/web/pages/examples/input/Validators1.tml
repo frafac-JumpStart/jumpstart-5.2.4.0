@@ -1,0 +1,49 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>Validators (1)</h1>
+	This page uses Tapestry validators - you can see on the input fields in the template.<br/><br/>
+
+	<form t:type="form" t:id="inputs">
+		<t:errors/>
+		<table>
+			<tr>
+				<td><t:label for="firstName"/>:</td>
+				<td><input t:type="TextField" t:id="firstName" t:validate="required, maxlength=10" size="10"/></td>
+				<td>(required, maxLength=10)</td>
+			</tr>
+			<tr>
+				<td><t:label for="lastName"/>:</td>
+				<td><input t:type="TextField" t:id="lastName" t:validate="required, maxLength=10" size="10"/></td>
+				<td>(required, maxLength=10)</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Display"/></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+	
+	Validators always have a server-side implementation (in Java) and optionally a client-side implementation 
+	(usually JavaScript). By default, Tapestry uses the client-side implementation if there is one.  You can 
+	override this with the <code>clientValidation</code> parameter of Form.<br/><br/>
+
+	Tapestry ships with these validators: Email, Max, MaxLength, Min, MinLength, Regexp, Required.  They all implement 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/Validator.html">Validator API</a>.
+	<br/><br/>
+	
+	References: <a href="http://tapestry.apache.org/tapestry5/guide/validation.html">Form Input and Validation</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>.
+	<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+		
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/Validators1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/Validators1.java"/>
+</body>
+</html>

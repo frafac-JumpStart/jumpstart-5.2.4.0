@@ -1,0 +1,45 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>Multiple Submits (1)</h1>
+	
+	This page demonstrates how to handle a Form with more than one submit.<br/><br/><br/>
+
+	<form t:type="form" t:id="search" style="border: medium solid gray">
+		<t:errors/>
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><input t:type="TextField" t:id="name" t:validate="required, maxlength=10" size="10"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="submit" value="Search Customers"/>
+					<input t:type="Submit" t:id="suppliers" value="Search Suppliers"/>
+				</td>
+			</tr>
+		</table>
+ 	</form><br/>
+
+	To help us determine which submit button was pressed, we use a Tapestry Submit component for the second button.<br/>
+	The Submit component will trigger the SELECTED event and provide a component id of "suppliers".<br/>
+	In the program we assume a default searchType of CUSTOMERS, but if <code>onSelectedFromSuppliers()</code> is called 
+	then we know searchType is SUPPLIERS.<br/><br/>
+
+	References: <a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/TextField.html">TextField</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Submit.html">Submit</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Errors.html">Errors</a>,
+	<a href="http://wiki.apache.org/tapestry/Tapestry5HowToUseForms">How To Use Forms</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/MultipleSubmits1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/MultipleSubmits1.java"/>
+</body>
+</html>

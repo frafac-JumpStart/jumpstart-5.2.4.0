@@ -1,0 +1,22 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Passing Data Between Pages (2)</h1>
+
+	Welcome ${name}!<br/><br/>
+	
+	This page used the <strong>activation context</strong> to save its data through the redirection. 
+	The data became part of the URL so the page can be bookmarked.<br/><br/>
+
+	This technique is usually employed to pass an <strong>identifier</strong>, eg. productId.<br/><br/>
+
+	References: See <em>Page Render Requests</em> in  
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="examples/state/PassingDataBetweenPages1" href="#">Return</a><br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/PassingDataBetweenPages2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/PassingDataBetweenPages2.java"/>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:content>
+	<a t:type="actionlink" t:id="componenta" href="#">${linkText}</a> 
+	<span style="color: red">${message}</span>
+</t:content>
+</html>

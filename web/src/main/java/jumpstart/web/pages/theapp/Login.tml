@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; 
+	 We use a "strict" DTD to make IE follow the alignment rules. -->
+	 
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<head>
+	<title>Log In</title>
+	<link rel="stylesheet" type="text/css" href="${context:css/theapp/login.css}"/>
+	<t:remove>
+		<!-- This link allows previewability -->
+		<link rel="stylesheet" type="text/css" href="../css/theapp/login.css"/>
+	</t:remove>
+</head>
+
+<body>
+	<div id="titles">
+		<h1>JumpStart 4.12.2</h1>
+		<h2>For Tapestry 5.1.0.5</h2>
+
+		Log in or click 
+		<a t:type="pagelink" t:page="Index" href="#">Home</a> 
+		to go to the "getting started" examples.<br/><br/><br/><br/>
+		
+		This page can be made secure (ie. accessible only by HTTPS) by annotating the class with <code>@Secure</code>.<br/>
+		Your web server will have to have HTTPS enabled, too, which may require some configuration.<br/>
+		References:
+		<a href="http://tapestry.apache.org/tapestry5/guide/secure.html">Securing your application with HTTPS</a>, 
+		<a href="http://roneiv.wordpress.com/2008/01/03/jboss-tutorial-how-to-enable-ssl-https-on-jboss-as-well-as-other-nice-to-know-configurations/">How to enable SSL on JBoss</a>.
+		<br/><br/><br/><br/>
+		
+		Initially, the available login IDs are secofr, admin, and john, and the passwords are the same as the login ID.
+	</div>
+
+	<form t:type="form" t:id="login">
+		<table id="main">
+			<tr>
+				<td>
+					<table id="headers">
+						<tr>
+							<th>Log In</th>
+						</tr>
+					</table>
+					<br/>
+					<table id="input">
+						<tr>
+							<th><t:label for="loginId"/>:</th>
+							<td><input t:type="TextField" t:id="loginId" size="15" maxLength="12" t:validate="required, maxLength=15"/></td>
+						</tr>
+						<tr>
+							<th><t:label for="password"/>:</th>
+							<td><input t:type="PasswordField" t:id="password" size="15" maxLength="12" t:validate="required, maxLength=15"/></td>
+						</tr>
+					</table>
+					<div class="buttons">
+						<input type="submit" value="Login"/>
+					</div>
+				</td>
+			</tr>
+		</table>
+		
+		<div id="errors">
+			<t:errors/>
+		</div>
+	</form>
+
+</body>
+</html>

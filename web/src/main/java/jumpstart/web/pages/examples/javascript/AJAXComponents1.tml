@@ -1,0 +1,43 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>AJAX Components (1)</h1>
+	
+	This page demonstrates creating a custom component which contains a Zone. 
+	It also demonstrates using that component more than once in the same page.<br/><br/>
+	
+	The component is called TextEchoer. It contains a TextField and a Zone that "echoes" the value of the TextField.<br/><br/>
+	
+	<form t:type="form" style="background-color: eee; padding: 15px">
+		First Name: <input t:type="examples/javascript/TextEchoer" t:id="firstName"/><br/>
+		Last Name: <input t:type="examples/javascript/TextEchoer" t:id="lastName"/><br/><br/>
+		<input type="submit" value="Display"/>
+ 	</form>
+	
+	The tricky part about using an AJAX component more than once in a page is that each occurrence of a Zone must have a unique client-side id. 
+	Otherwise the first occurrence of the Zone will receive all the updates intended for all the other occurrences.<br/><br/>
+
+	TextEchoer achieves this with <code>id="prop:componentResources.id"</code>, which is simply getting the id given to it by its container 
+	(in this case, <code>firstName</code> and <code>lastName</code>).<br/><br/>
+
+	An alternative technique would be to generate a random id in the component, TextEchoer.<br/><br/>
+ 	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/ajax.html">Ajax</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Zone.html">Zone</a>,
+	<a href="http://tinybits.blogspot.com/2010/03/new-and-better-zoneupdater.html">Inge Solvoll's Zone Updater</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXComponents1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXComponents1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/javascript/TextEchoer.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/javascript/TextEchoer.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/ZoneUpdater.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/zone_updater.js"/>
+</body>
+</html>

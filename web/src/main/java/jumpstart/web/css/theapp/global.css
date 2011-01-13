@@ -1,0 +1,144 @@
+
+/***************
+ * Basic elements
+ ***************/
+
+body		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; }
+tr			{ background-color:#ffffff }
+td			{ font-family: arial; font-size: 12px; color:black; font-weight:normal }
+th			{ font-family: arial; font-size: 12px; color:black; text-align:center; font-weight:normal }
+input		{ font-family: arial; font-size: 12px; color: navy; font-weight:normal }
+select		{ font-family: arial; font-size: 12px; color: navy; font-weight:normal }
+img			{ border: none; }	/* Necessary for browsers other than Safari */
+form		{ margin: 0px; }	/* Necessary for IE */
+
+a:link		{ color: blue }
+a:visited	{ color: blue }
+a:active	{ color: orange }
+
+.error		{ color: red; text-align: center; }
+.warning	{ color: orange; text-align: center; }
+.info		{ color: green; text-align: center; clear: both; }
+
+/* Override Tapestry's 
+div.t-error ul	{ text-align: left; }
+*/
+.datePicker td .topLabel { color:black; }
+	
+/***************
+ * Border elements
+ ***************/
+
+#top						{ background: #eee; }
+
+#banner						{ padding: 1.0em; }
+#banner h1					{ display: inline; font-family: Arial, Helvetica, sans-serif; font-size:x-large; font-weight: bold; color:#999999 }
+#banner h2					{ display: inline; font-family: Arial, Helvetica, sans-serif; font-size:medium; font-weight: bold; color:#999999 }
+#banner .links				{ position: absolute; right: 2.0em; top: 1.0em; }
+
+#navbar						{ margin: 0; border-bottom: 1px solid #778; font: bold 12px Verdana, sans-serif; text-align: center; }
+#navbar ul					{ margin: 0; padding: 0 0 3px 0; }
+#navbar li					{ list-style: none; margin: 1px; display: inline; }
+#navbar a 					{ text-decoration: none; }
+#navbar a span				{ padding: 3px 10px; border-bottom: none; border: 1px solid #778; color: #666; background: #e4e4e4; }
+#navbar a:hover	span		{ color: #333; }
+#navbar .activeTab span		{ color: #333; background: #ffffff; border-bottom: 1px solid #f8f8f8; }
+
+#subnavbar					{ margin-bottom: 20px; border-bottom: 1px solid #778; font: bold 12px Verdana, sans-serif; text-align: center;
+	padding-top: 8px; background: #f8f8f8; }
+#subnavbar ul				{ margin: 0; padding: 0 0 3px 0; }
+#subnavbar li				{ list-style: none; margin: 1px; display: inline; }
+#subnavbar a 				{ text-decoration: none; }
+#subnavbar a span			{ padding: 3px 10px; border-bottom: none; border: 1px solid #778; color: #666; background: #f0f0f0; }
+#subnavbar a:hover span		{ color: #333;}
+#subnavbar .activeSubTab span	{ color: #333; background: #ffffff; border-bottom: 1px solid #ffffff; }
+
+/*
+ * Beware - using "#middle table", "#middle tr", etc at this level will override
+ * descendant tables down in the actual content. 
+ * Could use child selectors like "#middle > table" and "#middle > table > tr" 
+ * but Windows IE5, 5.5, & 6 don't support them.
+ * Instead I've used specific ids like "mid_table", "mid_tr", "leftnav" and "content".
+ */
+#middle			{ clear: both; margin: 0; border: none; padding: 0; }
+#mid_table		{ width: 100%; margin: 0; border: none; padding: 0; }
+#mid_tr			{ width: 100%; margin: -2px; border: none; padding: 0; }
+
+#content		{ width: 80%; margin: 0; border: none; padding: 0; vertical-align: top; }
+
+#cleardiv		{	/* to fix IE5 and IE5.5 */ clear: both; height: 1em; }
+#footer			{ clear: both; margin: 0; padding: .5em 1em; color: #333; background-color: #fff; }
+
+/***************
+ * Content
+ ***************/
+
+.contentblock		{ border: #CCCCCC 0px solid; margin: 3px; }
+.contentblock	h1	{ font-size: 1.3em; font-weight: bold; color: black; margin-top: 16px; text-align: center; }
+
+
+.badrequest			{ font-size: medium; color: black; margin-top: 16px; text-align: center; }
+
+
+.bozo				{ border: none; font-size:xx-large; font-weight: bold; color: #3D69B6; text-align: center; }
+
+
+.buttons			{ float: right; }
+.buttons td			{ text-align: center; }
+.buttons input		{ margin-top: 1px; }
+.buttons input.positive, .buttons button.positive	{ color: navy; }
+
+
+.searchblock		{ margin: auto; text-align: center; }
+.search	table		{ background-color:#000066; border: black solid 1px; margin-top:20px; margin-bottom:20px; }
+.search	th			{ background-color:#3D69B6;  color:white; height: 28px; padding-top:1px; padding-bottom:1px; padding-left:3px; padding-right:3px;
+	border: black solid 1px; text-align:left; width: 150px; height: 25px }
+.search	td 			{ padding-top:1px; padding-bottom:1px; padding-left: 3px; padding-right:3px;
+	border: black solid 1px; text-align:left; }
+
+
+.recordblock		{ margin: auto; text-align: center; }
+.record	table		{ background-color:#000066; border: black solid 1px; margin-top:20px; margin-bottom:20px; }
+.record	th			{ background-color:#3D69B6; color:white;
+	padding-top:1px; padding-bottom:1px; padding-left:3px; padding-right:3px; border: black solid 1px; 
+	text-align:left; width: 150px; height: 25px }
+.record	td 			{ padding:1px 3px 1px 3px; border: black solid 1px; text-align:left; }
+
+.matrixblock 		{ margin: auto; text-align: center; }
+.matrixblock .nodata	{ margin-top:20px; margin-bottom:20px; }
+.matrixblock .buttons	{ float: right; margin-top:20px; margin-bottom:20px; margin-left: 5px; text-align: right; }
+
+.matrix				{ float: left; margin-top:10px; margin-bottom:20px; margin-left: auto; margin-right: auto; }
+.matrix	table		{ border: black solid 1px; background-color:#000066; }
+.matrix tr			{ background: #ffffff; }
+.matrix tr.even		{ background: #ffffff; }
+.matrix tr.odd		{ background: #ffffff; }
+.matrix	th			{ border: black solid 1px; background-color:#3D69B6; padding: 3px; color:white; }
+.matrix	td 			{ border: black solid 1px; padding: 3px; }
+.matrix	td .left	{ text-align: left; }
+
+/* Overriding the Grid component's style */
+
+.matrix DIV.t-data-grid					{ font-family: inherit; }
+.matrix DIV.t-data-grid-pager			{ margin: 8px 0px; }
+.matrix DIV.t-data-grid-pager A, DIV.t-data-grid-pager SPAN.current 
+										{ text-decoration: none; color: black; padding: 2px 5px; font-size: medium;
+											border: 1px solid silver; margin-right: 5px; }
+.matrix DIV.t-data-grid-pager A:hover	{ border: 1px solid black; }
+.matrix DIV.t-data-grid-pager SPAN.current	{ color: white; background-color: #3D69B6; }
+
+.matrix TABLE.t-data-grid				{ border-collapse: inherit; border: black solid 1px; border-left: black solid 1px;
+											background-color: #000066; }
+.matrix TABLE.t-data-grid TR TH A		{ color: inherit; }
+.matrix TABLE.t-data-grid THEAD TR		{ color: inherit; background-color: inherit; }
+.matrix TABLE.t-data-grid THEAD TR TH	{ text-align: center; padding: 1px 3px; white-space: no-wrap;
+											border: black solid 1px; 
+											background-color:#3D69B6; padding: 2px; color: white; vertical-align: bottom; }
+.matrix TABLE.t-data-grid TBODY TR TD	{ border: black solid 1px; padding: 3px; }
+
+
+.action				{ background-image: url(../../images/action-button.png); display: block; float: left;
+	height: 24px; width: 50px; line-height: 24px; color: #666;
+	text-align: center; margin-left: 2px; margin-right: 2px; }
+.action a 			{ text-decoration: none; color: #000; }
+.action a:hover 	{ font-weight: bold; }

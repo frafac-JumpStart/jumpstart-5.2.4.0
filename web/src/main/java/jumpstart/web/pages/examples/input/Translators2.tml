@@ -1,0 +1,32 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>Translators (2)</h1>
+	
+	<table>
+		<tr>
+			<td>integerField:</td><td>${integerField}</td>
+		</tr>
+		<tr>
+			<td>longField:</td><td>${longField}</td>
+		</tr>
+		<tr>
+			<td>doubleField:</td><td>${doubleField}</td>
+		</tr>
+		<tr>
+			<td>stringField:</td><td>${stringField}</td>
+		</tr>
+	</table><br/>
+	
+	<a t:type="pagelink" t:page="examples/input/Translators1" href="#">Return</a><br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+		
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/Translators2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/Translators2.java"/>
+</body>
+</html>

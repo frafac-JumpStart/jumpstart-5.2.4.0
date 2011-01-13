@@ -1,0 +1,38 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Return Types (1)</h1>
+	
+	Event handler methods control what is displayed next by what they return. <br/>
+	The following ActionLinks demonstrate all the return types that Tapestry allows:
+	<ul>
+		<li><a t:type="actionlink" t:id="returnvoid" href="#">void</a> - redisplay the same page.</li>
+		<li><a t:type="actionlink" t:id="returnnull" href="#">null</a> - redisplay the same page.</li>
+		<li><a t:type="actionlink" t:id="returnclass" href="#">Class (must be a page class)</a> - go to new page.</li>
+		<li><a t:type="actionlink" t:id="returnstring" href="#">String (must be a logical page name)</a> - go to new page.</li>
+		<li><a t:type="actionlink" t:id="returnpageobject" href="#">page object</a> - go to new page, with the option of setting up its parameters first.</li>
+		<li><a t:type="actionlink" t:id="returnlink" href="#">Link</a> - go to new page, with the option of setting up a context first.</li>
+		<li><a t:type="actionlink" t:id="returnstreamresponse" href="#">StreamResponse</a> - used by pages or components to return images, PDFs, etc.</li>
+		<li><a t:type="actionlink" t:id="returnurl" href="#">URL</a> - go to a java.net.URL of an external page.</li>
+		<li><a t:type="actionlink" t:id="returntrue" href="#">true</a> - redisplay same page, aborting event bubbling (see Event Bubbling example).</li>
+		<li><a t:type="actionlink" t:id="returnfalse" href="#">false</a> - same as returning null.</li>
+	</ul>
+	
+	<t:if t:test="message">
+		<span style="color:red;">${message}<br/><br/></span>
+	</t:if>
+
+	References: see Component Event Requests in 
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/Link.html">Link API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/ComponentResources.html">ComponentResources API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/StreamResponse.html">StreamResponse API</a>, 
+	the Streaming Data section of <a href="http://wiki.apache.org/tapestry/Tapestry5HowTos">Tapestry 5 How Tos</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/If.html">If</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ReturnTypes1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ReturnTypes1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/text/examples/ReturnTypeText.txt"/>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter"
+	t:type="examples/layoutwithmenu/Layout" t:title="literal:Layout with Menu: Page 1" t:chosenOption="literal:Page 1">
+	
+	<!-- The following stylesheet link is here only to enable preview. At runtime it's removed and we let Layout's stylesheet take over. -->
+	<t:remove>
+	 	<link rel="stylesheet" type="text/css" href="../../../css/examples/layout.css"/>
+	</t:remove>
+	
+	This page shares the same layout as Page 2 and Page 3. How? They all use the same outermost element: a component we have called Layout.<br/>
+	Layout contains the text you see above and a component we have called MenuBar.<br/><br/>
+	
+	Page 2 is identical to the Components CRUD example with Layout added.<br/>
+	Page 3 is identical to the AJAX Components CRUD example with Layout added.<br/><br/>
+	 	
+	<a t:type="pageLink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/layoutwithmenu/Page1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/layoutwithmenu/Layout.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/layoutwithmenu/Layout.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/layoutwithmenu/MenuBar.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/layoutwithmenu/MenuBar.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/Menu.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/MenuOption.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/layout.css"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/menubar.css"/>
+</html>

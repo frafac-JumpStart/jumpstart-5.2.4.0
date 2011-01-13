@@ -1,0 +1,21 @@
+body		{ font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; }
+h1			{ font-size: 20px; margin-top: 0px; margin-bottom: 10px; }
+h2			{ font-size: 16px; margin-top: 0px; margin-bottom: 10px; }
+tr			{ background-color:#ffffff }
+td			{ font-family: arial; font-size: 12px; color:black; text-align:center; font-weight:normal }
+th			{ font-family: arial; font-size: 12px; color:black; text-align:center; font-weight:normal }
+input		{ font-family: arial; font-size: 12px; color: navy; font-weight:normal }
+
+#titles		{ text-align: center; margin: 20px; }
+
+#login					{ display: table; margin: auto; text-align: center; border: none; color: #533; line-height: 130%;
+							margin-top: 30px; }	/* text-align is needed for IE */
+#login	#main			{ width: 300px; margin:	auto; border: thin solid #333; color: #000; background: #eee; }
+#login	#headers		{ width: 100%; background: #3D69B6; color: white; text-align: center; font-family: sans-serif; font-size: small; font-weight: bold; }
+#login	#headers th		{ background-color:#3D69B6; color:white; font-weight: bold; }
+#login	#input			{ width: 100%; }
+#login	#input th		{ width: 40%; }
+#login	#input td		{ width: 50%; padding: 4px; font-family: sans-serif; font-size: small; font-weight: bold; text-align: left; }
+#login  .buttons		{ padding: 4px 0px; margin: auto; text-align: center; }	/* text-align is needed for IE */
+
+#errors		{ margin-top: 20px; }

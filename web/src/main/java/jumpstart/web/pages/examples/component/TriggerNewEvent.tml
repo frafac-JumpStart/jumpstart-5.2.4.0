@@ -1,0 +1,31 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Trigger New Event</h1>
+	
+	A component can trigger new events on itself.<br/><br/>
+	
+	In this example we use this feature to create FooLink, a component type like ActionLink except instead of 
+	triggering event "action" it triggers event "foo".<br/><br/>
+	
+	The technique for doing this is so simple: FooLink wraps an ActionLink and handles event "action" by aborting it 
+	and triggering "foo" instead. "foo" then bubbles up just as "action" would have.<br/>
+	
+	<ul>
+		<li><a t:type="examples/component/foolink" t:id="componentb" href="#"/></li>
+	</ul>
+	
+	<t:if t:test="message">
+		<span style="color:red;">${message}<br/><br/></span>
+	</t:if>
+	
+	References: see <em>Event Bubbling</em> in 
+	<a href="http://tapestry.apache.org/tapestry5/guide/event.html">Component Events</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/TriggerNewEvent.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/TriggerNewEvent.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/FooLink.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/FooLink.java"/>
+</body>
+</html>

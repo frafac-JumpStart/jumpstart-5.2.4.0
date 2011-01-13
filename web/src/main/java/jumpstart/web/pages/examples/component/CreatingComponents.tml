@@ -1,0 +1,49 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Creating Components</h1>
+
+	This page shows how simple it can be to create a component.<br/><br/>
+	
+	Components have lots in common with pages:<br/>
+	<ul>
+		<li>A component <em>must</em> have a 
+		<a href="http://tapestry.apache.org/tapestry5/guide/component-classes.html">Class</a>.</li>
+		<li>A component <em>may</em> have a 
+		<a href="http://tapestry.apache.org/tapestry5/guide/templates.html">Template</a>.</li>
+		<li>A component has the same 
+		<a href="http://tapestry.apache.org/tapestry5/guide/rendering.html">Rendering phases</a>
+		as a page.</li>
+		<li>A component can have embedded components.</li>
+	</ul>
+	
+	Instead of rendering from a template, a component can generate raw HTML or other markup in 
+	the Java code with the help of org.apache.tapestry5.MarkupWriter. 
+	JumpStart's SourceCodeDisplay does it that way, as do many of Tapestry's core components.<br/><br/>
+		
+	Components have some differences to pages:<br/>
+	<ul>
+		<li>They reside under the <code>components</code> package, not the <code>pages</code> package.</li>
+		<li>They can receive 
+		<a href="http://tapestry.apache.org/tapestry5/guide/parameters.html">Parameters</a>. 
+		Actually, parameters are bi-directional, so later they will return their value to the containing component.</li>
+	</ul>
+
+	<h3>An example</h3>
+		  
+	We have created a simple component called <strong>BoldItalicDisplay</strong> whose job is to receive 
+	a String and render it in bold and italics, just as it has done here:<br/><br/>
+
+	<t:examples.component.bolditalicdisplay value="${message}"/><br/><br/>
+	
+	You can see from the source code below that BoldItalicDisplay consists of a class and a template.<br/>
+	The BoldItalicDisplay class declares a parameter and a getter.  
+	The BoldItalicDisplay template describes how to render it.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/CreatingComponents.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/CreatingComponents.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/BoldItalicDisplay.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/BoldItalicDisplay.java"/>
+</body>
+</html>

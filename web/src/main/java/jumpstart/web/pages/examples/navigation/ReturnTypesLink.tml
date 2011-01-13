@@ -1,0 +1,14 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Return Types (Link)</h1>
+	
+	You chose an action that returned a Link to this page object with context "${parameter}". <br/><br/>
+	
+	<a t:type="pagelink" t:page="examples/navigation/ReturnTypes1" href="#">Return</a><br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ReturnTypesLink.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ReturnTypesLink.java"/>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Event Bubbling</h1>
+	
+	If a component's event handler method returns <em>void</em>, <em>null</em>, or <em>false</em>, the event will "bubble up".<br/> <br/>
+	 
+	"Bubbling up" means that if there are no more matching event handlers in the component (see the Multiple Method Matches example) 
+	then the component will trigger the same event in its enclosing component (which may be the page).<br/><br/>
+	
+	In this demonstration, componentA is an ActionLink inside MyActionLink. MyActionLink can be told whether to bubble up.<br/><br/>
+	
+	component1, of type MyActionLink: 
+	<blockquote  style="background-color: #eee">
+		<a t:type="examples/component/myactionlink" t:id="component1" t:bubbleup="true" href="#">I will bubble up</a>
+	</blockquote>
+	component2, also of type MyActionLink:
+	<blockquote  style="background-color: #eee">
+		<a t:type="examples/component/myactionlink" t:id="component2" t:bubbleup="false" href="#">I will not bubble up</a>
+	</blockquote>
+	
+	<t:if t:test="message">
+		<span style="color:red;">${message}<br/><br/></span>
+	</t:if>
+	
+	References: see <em>Event Bubbling</em> in 
+	<a href="http://tapestry.apache.org/tapestry5/guide/event.html">Component Events</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/EventBubbling.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/EventBubbling.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/MyActionLink.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/MyActionLink.java"/>
+</body>
+</html>

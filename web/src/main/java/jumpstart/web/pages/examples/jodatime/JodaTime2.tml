@@ -1,0 +1,45 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>JodaTime (2)</h1>
+	This page demonstrates that Tapestry's DateField component can handle Joda Time's <strong>DateMidnight</strong> and <strong>LocalDate</strong> 
+	fields,<br/> once type coercions between them and java.util.Date have been declared. We've declared them in AppModule.<br/><br/>
+
+	<form t:type="form" t:id="dates">
+		<!-- Hide the version field.  We don't want version field to be editable, but it must be in 
+			the form to prevent it being updated/refreshed in onActivate(), which would defeat optimistic locking. -->
+ 		<t:hidden value="dateStuff.version"/>
+
+		A java.util.Date field: 
+<!-- In future I'd like to add t:validate="date,minDate=${minDate},maxDate=${maxDate}" to this input... -->
+		<input t:type="datefield" value="dateStuff.aDate" t:format="${dateFieldFormat}"/><br/><br/>
+
+		An org.joda.time.DateMidnight field:
+<!-- In future I'd like to add t:validate="date,minDate=${minDate},maxDate=${maxDate}" to this input... -->
+		<input t:type="datefield" value="dateStuff.aDateMidnight" t:format="${dateFieldFormat}"/><br/><br/>
+
+		An org.joda.time.LocalDate field:
+<!-- In future I'd like to add t:validate="date,minDate=${minDate},maxDate=${maxDate}" to this input... -->
+		<input t:type="datefield" value="dateStuff.aLocalDate" t:format="${dateFieldFormat}"/><br/><br/>
+
+ 		<t:errors/>
+		<input type="submit" value="Save"/><br/>
+	</form>
+
+	References: 
+	<a href="http://joda-time.sourceforge.net/">Joda-Time</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/DateField.html">DateField</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="examples/jodatime/1" href="#">Return</a><br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/jodatime/JodaTime2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/jodatime/JodaTime2.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/AppModule.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/DateStuffService.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/DateStuff.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/util/JodaTimeUtil.java"/>
+</body>
+</html>

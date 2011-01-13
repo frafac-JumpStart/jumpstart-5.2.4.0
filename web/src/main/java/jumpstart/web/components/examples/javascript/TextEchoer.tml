@@ -1,0 +1,11 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:content>
+
+	<input t:type="TextField" t:id="value" t:mixins="zoneUpdater" t:clientEvent="keyup" t:event="valueChanged" t:zone="prop:componentResources.id"/>
+
+	<span t:type="zone" t:id="echoZone" id="prop:componentResources.id">
+		${echo}
+	</span>
+
+</t:content>
+</html>

@@ -1,0 +1,42 @@
+<html>
+
+<body>
+	<h1>business/src/main/workout/README.html</h1>
+	<p>
+	The <strong>workout</strong> package contains entities that model many relationship types:
+	</p>
+	<ul>
+		<li>Department is an aggregation of Teachers.</li>
+		<li>Building is a composition of Rooms.</li>
+		<li>Student has a mandatory association with a Teacher.</li>
+		<li>Teacher has an optional association with a Room (the teacher's "favourite" room).</li>
+		<li>Building has an optional association with a Room (the building's "main" room).</li>
+	</ul>
+	<img src="workout_classes.png">
+	<p>
+	These classes are not really part of the application.  They've been put here solely to give the 
+	business layer's persistence and exception handling a "workout" (ie. testing) without 
+	disrupting the data in the app's real entities.
+	</p>
+	<p>
+	To give them a workout, run the tests:
+	<ul>
+		<li>First make sure JumpStart is running in JBoss, then either:</li>
+		<li>Run them interactively by locating <em>business/src/test/java/jumpstart/business/BusinessTestSuite</em>,
+			then right-click on BusinessTestSuite and choose Run As > JUnit Test; or</li>
+		<li>Run the Ant task <em>test-business</em> in the <em>build.xml</em> file.</li>
+	</ul>
+	<p>Problems?  Eclipse might not be ready for junit - see 
+		<a href="troubleshooting.html#JUNIT_TASK">Could not create task or type of type: junit</a>.
+	</p>
+	<ul>
+		<li>business/src/test/java/jumpstart/business/domain/workout</li>
+		<li>business/src/test/java/jumpstart/business/commons/exception</li>
+	</ul>
+	The diagram above comes from the <em>workout.zargo</em> file which can be edited with the free tool ArgoUML.<br/>
+	You can launch ArgoUML by Java Web Start by clicking <a href="http://argouml-downloads.tigris.org/jws/argouml-latest-stable.jnlp">here</a>. 
+	If it downloads without launching, just open the downloaded file.  
+	For details visit <a href="http://argouml.tigris.org/">http://argouml.tigris.org</a>.
+</body>
+
+</html>

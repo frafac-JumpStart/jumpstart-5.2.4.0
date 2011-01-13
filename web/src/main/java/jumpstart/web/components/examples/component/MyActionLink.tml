@@ -1,0 +1,7 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:content>
+	I have been given bubbleup=${bubbleup}.<br/>
+	componentA: <a t:type="actionlink" t:id="componenta" href="#"><t:body/></a><br/>
+	message: <span style="color:red">${message}</span>
+</t:content>
+</html>

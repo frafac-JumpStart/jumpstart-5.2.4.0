@@ -1,0 +1,37 @@
+<html t:type="theapp/layout" t:tab="literal:Security" t:subtab="literal:UserRole" t:title="literal:View User Role" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:remove>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css"/>
+</t:remove>
+<div class="contentblock">
+	<h1>View User Role</h1>
+	<table class="recordblock" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td>
+				<div class="record">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<th>User</th>
+							<td>${userRole.user.loginId}</td>
+						</tr>
+						<tr>
+							<th>Role</th>
+							<td>${userRole.role.name}</td>
+						</tr>
+						<tr>
+							<th>Active</th>
+							<td>${userRole.active}</td>
+						</tr>							
+					</table>
+				</div>
+				<div class="buttons">
+					<table>
+						<tr>
+							<td><button t:type="chenillekit/Button" type="button" t:event="Cancel" title="Cancel">Cancel</button></td>
+						</tr>
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+</html>

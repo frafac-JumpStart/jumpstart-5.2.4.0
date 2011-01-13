@@ -1,0 +1,214 @@
+<project name="tools" basedir=".">
+
+	<property file="tools.properties"/>
+	<property file="../build.properties"/>
+
+	<property name="rootdir" value=".."/>
+	<property name="datasource.descriptor.dir" value="${fresh.project.dir}/business/src/main/resources/datasource-descriptor"/>
+
+	<!-- Create a completely fresh project using your directory-, path-, and package-names from build.properties -->
+	
+	<target name="create-fresh-project" description="">
+		<fail unless="fresh.project.dir" message="*** Please set up the fresh.project.dir property in the build.properties file."/>
+		<fail unless="fresh.project.title" message="*** Please set up the fresh.project.title property in the build.properties file."/>
+		<fail unless="fresh.project.name" message="*** Please set up the fresh.project.name property in the build.properties file."/>
+		<fail unless="fresh.project.app.name" message="*** Please set up the fresh.project.app.name property in the build.properties file."/>
+		<fail unless="fresh.project.package" message="*** Please set up the fresh.project.package property in the build.properties file."/>
+		<fail unless="fresh.project.path" message="*** Please set up the fresh.project.path property in the build.properties file."/>
+		<fail unless="fresh.project.datasource.name" message="*** Please set up the fresh.project.datasource.name property in the build.properties file."/>
+		
+		<available type="dir" file="${fresh.project.dir}" property="fresh.project.dir.exists"/>
+		<fail if="fresh.project.dir.exists" message="*** Fresh project cannot be created because directory already exists: ${fresh.project.dir}."/>
+		
+		<!-- Copy project level files and hidden directories. -->
+		
+		<mkdir dir="${fresh.project.dir}"/>
+		<copy todir="${fresh.project.dir}">
+			<fileset dir=".." includes=".*/**,build.properties,build.xml,data_util.properties,data_util.xml,collapser.xml,exploder.xml"/>
+		</copy>
+		<mkdir dir="${fresh.project.dir}/bin"/>
+		
+		<replace file="${fresh.project.dir}/build.xml" token="jumpstart/examples/start/helloworld" value="${fresh.project.app.name}/index"/>
+		
+		<!-- Copy Business module, selectively.  Exclude java. -->
+		
+		<copy todir="${fresh.project.dir}/business">
+			<fileset dir="${rootdir}/business">
+				<include name="src/main/**"/>
+				<include name="src/test/**"/>
+				<include name="build.xml"/>
+
+				<exclude name="src/main/java/**"/>
+				<exclude name="src/test/java/**"/>
+			</fileset>
+		</copy>
+		<copy todir="${fresh.project.dir}/business/src/test/data" file="./substitutes/drop_tables.sql" overwrite="true"/>
+		<copy todir="${fresh.project.dir}/business/src/test/data" file="./substitutes/initial_data.sql" overwrite="true"/>
+
+		<!-- Copy Business java, but use new package names -->
+		
+		<copy todir="${fresh.project.dir}/business/src/main/java/${fresh.project.path}">
+			<fileset dir="${rootdir}/business/src/main/java/jumpstart">
+				<include name="**"/>
+				<exclude name="**/domain/examples/**"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${fresh.project.dir}/business/src/main/java/">
+			<fileset dir="${rootdir}/business/src/main/java">
+				<include name="*.properties"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${fresh.project.dir}/business/src/test/java/${fresh.project.path}">
+			<fileset dir="${rootdir}/business/src/test/java/jumpstart">
+				<include name="**"/>
+				<exclude name="**/domain/examples/**"/>
+			</fileset>
+		</copy>
+		<copy todir="${fresh.project.dir}/business/src/test/java/${fresh.project.path}/business" file="./substitutes/BusinessUnitTestSuite.java" overwrite="true"/>
+		<copy todir="${fresh.project.dir}/business/src/test/java/${fresh.project.path}/business" file="./substitutes/BusinessIntegrationTestSuite.java" overwrite="true"/>
+		
+		<!-- Copy Web java, but use new package names -->
+		
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web">
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web">
+				<include name="annotation/**"/>
+				<include name="commons/IdSelectModel.java"/>
+				<include name="commons/URLParameterHelper.java"/>
+				<include name="mixins"/>
+				<include name="model"/>
+				<include name="WEB-INF/**"/>
+				<include name="*.txt"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/base">
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/base/theapp">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/components">
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/components">
+				<include name="Hidden.java"/>
+				<include name="Remove.java"/>
+			</fileset>
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/components/theapp">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/css">
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/css/theapp">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/images">
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/images">
+				<include name="*.png"/>
+				<include name="*.gif"/>
+			</fileset>
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/images/theapp">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/pages">
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/pages">
+				<include name="*.java"/>
+				<include name="*.tml"/>
+				<include name="*.properties"/>
+				<include name="*.txt"/>
+			</fileset>
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/pages/theapp">
+				<include name="**"/>
+			</fileset>
+		</copy>
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/pages" file="./substitutes/Index.tml" overwrite="true"/>
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/pages" file="./substitutes/Login.tml" overwrite="true"/>
+		
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/services">
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/services">
+				<exclude name="CountryNames.java"/>
+			</fileset>
+		</copy>
+		<delete file="${fresh.project.dir}/business/src/main/java/${fresh.project.path}/client/IBusinessServicesLocator.java"/>
+		<delete file="${fresh.project.dir}/business/src/main/java/${fresh.project.path}/client/BusinessServicesLocator.java"/>
+		<copy todir="${fresh.project.dir}/business/src/main/java/${fresh.project.path}/client" file="./substitutes/IBusinessServicesLocator2.java" overwrite="true"/>
+		<copy todir="${fresh.project.dir}/business/src/main/java/${fresh.project.path}/client" file="./substitutes/BusinessServicesLocator2.java" overwrite="true"/>
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/services" file="./substitutes/AppModule.java" overwrite="true"/>
+		
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/state">
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/state/theapp">
+				<include name="**"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web/state">
+			<fileset dir="${rootdir}/web/src/main/java/jumpstart/web/state/theapp">
+				<include name="**"/>
+			</fileset>
+		</copy>
+
+		<replace dir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web" token="base.theapp" value="base"/>
+		<replace dir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web" token="components/theapp" value="components"/>
+		<replace dir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web" token="components.theapp" value="components"/>
+		<replace dir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web" token="pages/theapp" value="pages"/>
+		<replace dir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web" token="pages.theapp" value="pages"/>
+		<replace dir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web" token="state.theapp" value="state"/>
+		<replace dir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web" token="theapp/" value=""/>
+		<replace dir="${fresh.project.dir}/web/src/main/java/${fresh.project.path}/web" token="theapp." value=""/>
+		<replace dir="${fresh.project.dir}/web/src/main/java" token="../../images" value="../images"/>
+				
+		<copy todir="${fresh.project.dir}/web/src/test/java/${fresh.project.path}/web">
+			<fileset dir="${rootdir}/web/src/test/java/jumpstart/web"/>
+		</copy>
+
+		<!-- Copy Web libs and resources -->
+
+		<copy todir="${fresh.project.dir}/web">
+			<fileset dir="${rootdir}/web">
+				<include name="src/main/lib*/**"/>
+				<include name="src/main/resources/**"/>
+				<include name="src/test/**"/>
+				<exclude name="src/test/java/**"/>
+				<include name="build.xml"/>
+			</fileset>
+		</copy>
+
+		<!-- Copy Enterprise module -->
+
+		<copy todir="${fresh.project.dir}/enterprise">
+			<fileset dir="${rootdir}/enterprise">
+				<include name="src/**"/>
+				<include name="build.xml"/>
+			</fileset>
+		</copy>
+
+		<!-- Replace the various occurences of "jumpstart" with the new names -->
+
+		<move file="${datasource.descriptor.dir}/jumpstart-hsqldb-ds.xml" tofile="${datasource.descriptor.dir}/${fresh.project.app.name}-hsqldb-ds.xml"/>
+
+		<echo message="Replacing all references to jumpstart with the names you've chosen in tools.properties..."/>
+		
+		<replace dir="${fresh.project.dir}" token="Tapestry JumpStart" value="${fresh.project.title}"/>
+		<replace dir="${fresh.project.dir}" token="Your Application" value="${fresh.project.title}"/>
+		<replace dir="${fresh.project.dir}" token="JumpStartDS" value="${fresh.project.datasource.name}"/>
+		<replace dir="${fresh.project.dir}" token="jumpstart.ear" value="${fresh.project.app.name}.ear"/>
+		<replace dir="${fresh.project.dir}" token="jumpstart.jar" value="${fresh.project.app.name}.jar"/>
+		<replace dir="${fresh.project.dir}" token="jumpstart.war" value="${fresh.project.app.name}.war"/>
+		<replace dir="${fresh.project.dir}" token="jumpstart." value="${fresh.project.package}."/>
+		<replace dir="${fresh.project.dir}" token="jumpstart/Security" value="${fresh.project.app.name}/Security"/>
+		<replace dir="${fresh.project.dir}" token="jumpstart/Workout" value="${fresh.project.app.name}/Workout"/>
+		<replace dir="${fresh.project.dir}" token="jumpstart/" value="${fresh.project.path}/"/>
+		<replace dir="${fresh.project.dir}" token="JUMPSTART" value="${fresh.project.name}"/>
+		<replace dir="${fresh.project.dir}" token="JumpStart" value="${fresh.project.name}"/>
+		<replace dir="${fresh.project.dir}" token="jumpstart" value="${fresh.project.app.name}"/>
+		<replace dir="${fresh.project.dir}" token="3.14.0" value="0.1"/>
+
+		<replace file="${fresh.project.dir}/build.properties" token="add.source.to.war" value="##add.source.to.war"/>
+	</target>
+
+</project>

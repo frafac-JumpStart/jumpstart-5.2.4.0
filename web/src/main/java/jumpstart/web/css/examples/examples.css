@@ -1,0 +1,8 @@
+body	{ font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; color:black; }a:link		{ color: blue }a:visited	{ color: blue }table	{ border-collapse: collapse; border-left: 2px solid #000066; border-top: 2px solid #000066; margin-top:20px; margin-bottom:20px; }
+thead	{ border-top: 2px solid #000066; } /* For Firefox */
+tr		{ background-color: #ffffff; }
+tr.odd	{ background-color: #dddddd; }
+th		{ border-right: 2px solid #000066; border-bottom: 2px solid #000066;
+			padding:1px 3px 1px 3px; text-align:left; width: 150px; color:white; background-color:#3D69B6; }
+td		{ border-right: 2px solid #000066; border-bottom: 2px solid #000066; padding:1px 3px 1px 3px; text-align:left; }
+.nodata	{ margin-left:20px; }

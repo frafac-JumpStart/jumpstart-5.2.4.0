@@ -1,0 +1,33 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/grid.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/grid.css"/>
+</head>
+<body>
+	<h1>Grid With Delete Column (1)</h1>
+	
+	A table built with the Grid component, including only the Person columns we want, and adding a Delete column.<br/>
+
+	<form t:type="form" t:id="deletables">
+		<table t:type="grid" t:source="persons" t:row="person" t:include="id,firstname,lastname,startdate" t:add="delete">
+			[Persons Grid here]
+			<p:deleteCell>
+				<input t:type="checkbox" t:id="delete" value="delete"/>
+			</p:deleteCell>
+	 	</table>
+	 	<input type="submit" value="Save"/>
+	 </form><br/>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Grid.html">Grid</a>.<br/><br/>
+	
+	<a t:type="actionlink" t:id="gohome" href="#">Home</a><br/><br/>
+	
+	The source for PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/GridWithDeleteColumn1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/GridWithDeleteColumn1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/grid.css"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+</body>
+</html>

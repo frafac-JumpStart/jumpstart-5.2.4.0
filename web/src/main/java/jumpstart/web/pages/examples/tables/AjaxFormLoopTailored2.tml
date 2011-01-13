@@ -1,0 +1,40 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/examples.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/examples.css"/>
+</head>
+<body>
+	<h1>AjaxFormLoop Tailored (2)</h1>
+
+	Here is the result of your changes.  They have not been persisted to the database.<br/>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Region</th>
+				<th>Start Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr t:type="Loop" t:source="persons" t:value="person">
+				<td>${person.id}</td>
+				<td>${person.firstName}</td>
+				<td>${person.lastName}</td>
+				<td>${personRegion}</td>
+				<td><t:output value="person.startDate" format="dateFormat"/></td>
+			</tr>
+		</tbody>
+ 	</table>
+	
+	<a t:type="pagelink" t:page="examples/tables/AjaxFormLoopTailored1" href="#">Return</a><br/>
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/AjaxFormLoopTailored2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/AjaxFormLoopTailored2.properties"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/AjaxFormLoopTailored2.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/examples.css"/>
+</body>
+</html>

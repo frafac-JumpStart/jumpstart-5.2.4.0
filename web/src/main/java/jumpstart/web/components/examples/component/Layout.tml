@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a DOCTYPE to allow us to use special characters like &nbsp; 
+	 We use a "strict" DTD to make IE follow the alignment rules. -->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<style type="text/css">
+	body		{ margin: 0; font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	.header		{ background-color: #ffcc99; text-align: center; padding: 1em 0; }
+	.middle		{ width:100%; border-collapse: collapse;}
+	.left		{ width:4em; background-color: #ffcc99; text-align: center; }
+	.content	{ }
+	.right		{ width:4em; background-color: #ffcc99; text-align: center; }
+	.footer		{ background-color: #ffcc99; text-align: center; padding: 1em 0; }
+	.nav a		{ margin: 0 0.5em; }
+</style>
+
+<body>
+
+	<div class="header">
+		Header
+		<div class="nav">
+			<a t:type="pagelink" t:page="examples/component/Layout1">Page 1</a>
+			<a t:type="pagelink" t:page="examples/component/Layout2">Page 2</a>
+			<a t:type="pagelink" t:page="Index">Home</a>
+		</div>
+	</div>
+	
+	<table class="middle">
+		<tr>
+			<td class="left">
+				Left
+			</td>
+			<td class="content">
+				<t:body/>
+			</td>
+			<td class="right">
+				Right
+			</td>
+		</tr>
+	</table>
+	
+	<div class="footer">
+		Footer
+	</div>
+
+</body>
+</html>

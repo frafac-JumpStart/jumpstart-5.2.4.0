@@ -1,0 +1,50 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>AJAX Select (1)</h1>
+	
+	This page demonstrates a technique for AJAX-enabling a Select component.<br/><br/>
+
+	<div t:type="zone" t:id="searchZone" style="background-color: eee; padding: 15px">
+		<form t:type="form" t:id="searchCriteria" style="margin: 0">
+			<t:errors/>
+
+			<t:label for="carMake"/>:
+			<select t:type="select" t:id="carMake" t:model="carMakes" t:blankLabel="Choose..." 
+				t:mixins="zoneUpdater" t:clientEvent="change" t:event="changeOfCarMake" t:zone="searchZone"></select>
+	
+			<t:label for="carModel"/>:
+			<select t:type="select" t:id="carModel" t:model="carModels" t:blankLabel="Choose..." 
+				t:mixins="zoneUpdater" t:clientEvent="change" t:event="changeOfCarModel" t:zone="searchZone"></select>
+
+			Keywords: <input t:type="TextField" t:id="keyWords" 
+				t:mixins="zoneUpdater" t:clientEvent="keyup" t:event="changeOfKeyWords" t:zone="searchZone"/> (optional)<br/> 
+			
+			<input type="submit" value="Save"/>
+		</form>
+	</div>
+	<br/>
+
+	CAUTION: Currently Zone appears to have an important limitation: if a Zone encloses any input fields (eg. TextField or Select) 
+	then those fields must be enclosed by a Form <em>that is enclosed by the Zone</em>.<br/><br/>
+
+	As a consequence, if we did not use ZoneUpdater on the keyWords field to save its changes, then those changes would be lost whenever 
+	a carMake or carModel is changed.<br/><br/>
+
+	An alternative would be to put carModel in a Zone, but that would require its own Form, so we would have to use 3 Forms: one for carMake, 
+	one for carModel, and one for keyWords and the submit button. The Errors component would have to be moved, and so it gets tricky.<br/><br/>
+ 	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/ajax.html">Ajax</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Zone.html">Zone</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/TextField.html">TextField</a>,
+	<a href="http://tinybits.blogspot.com/2010/03/new-and-better-zoneupdater.html">Inge Solvoll's Zone Updater</a>.<br/><br/>
+	
+	<a t:type="actionlink" t:id="gohome" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXSelect1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXSelect1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/ZoneUpdater.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/zone_updater.js"/>
+</body>
+</html>

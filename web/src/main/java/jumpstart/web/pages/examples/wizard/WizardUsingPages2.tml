@@ -1,0 +1,20 @@
+<html t:type="examples/wizard/WizardUsingPagesLayout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+	<form t:type="form" t:id="form" style="background: #EEEEEE; padding: 1em;">
+		<h2>Applying for Credit - Step 2: The Applicant</h2>
+		<table>
+			<tr>
+				<td><t:label for="name"/></td>
+				<td><input t:type="TextField" t:id="name" value="creditRequest.applicantName" t:validate="required"/></td>
+				<td>(required)</td>
+			</tr>
+		</table><br/>
+		
+		<button t:type="chenillekit/Button" type="button" t:event="Prev">&lt; Prev</button>
+		<input type="submit" value="Next &gt;"/>
+		<button t:type="chenillekit/Button" type="button" t:event="Quit" style="margin-left: 20px;"> Quit </button>
+
+		<t:errors/>
+	</form>
+
+</html>

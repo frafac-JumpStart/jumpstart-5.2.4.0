@@ -1,0 +1,2 @@
+<!-- This empty ejb-jar.xml is needed by openejb only. See http://openejb.apache.org/3.0/application-discovery-via-the-classpath.html -->
+<ejb-jar/>

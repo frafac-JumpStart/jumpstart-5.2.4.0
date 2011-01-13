@@ -1,0 +1,44 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/examples.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/examples.css"/>
+</head>
+<body>
+	<h1>Editable Loop (2)</h1>
+
+	Here is the result of your changes.  The changes have not been persisted to the database.<br/>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Start Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr t:type="Loop" t:source="persons" t:value="person">
+				<td>${person.id}</td>
+				<td>${person.firstName}</td>
+				<td>${person.lastName}</td>
+				<td><t:output value="person.startDate" format="dateFormat"/></td>
+			</tr>
+		</tbody>
+ 	</table>
+	<div t:type="if" t:test="persons" t:negate="true">
+		<div class="nodata">There is no data to display.</div><br/>
+	</div>
+	
+	<a t:type="pagelink" t:page="examples/tables/EditableLoop1" href="#">Return</a><br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Loop.html">Loop</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/EditableLoop2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/EditableLoop2.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/examples.css"/>
+</body>
+</html>

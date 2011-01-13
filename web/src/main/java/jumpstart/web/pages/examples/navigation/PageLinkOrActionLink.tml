@@ -1,0 +1,38 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>PageLink Or ActionLink?</h1>
+	
+	There are several criteria to consider when choosing between PageLink and ActionLink for a particular job:<br/><br/>
+	
+	<strong>PageLink</strong>
+	<ul>
+		<li><strong>Plus:</strong> Simple to code, requiring no Java.</li>
+		<li><strong>Plus:</strong> Generates a render request, so it does only 1 trip to the server.</li>
+		<li><strong>Minus:</strong> Context is baked in when the link is rendered.</li>
+		<li><strong>Minus:</strong> Cannot catch exceptions thrown by the target page.  
+			The system exceptions page will be displayed.</li>
+	</ul>
+
+	<strong>ActionLink</strong>
+	<ul>
+		<li><strong>Plus:</strong> Able to do work before going to next page (or redisplaying same page).</li>
+		<li><strong>Minus:</strong> Generates a component event request, so it does 2 trips to the server.</li>
+		<li><strong>Plus:</strong> Context can be baked in when the link is rendered and/or provided dynamically 
+			by the event handler method.</li>
+		<li><strong>Plus:</strong> Able to catch exceptions and deal with them, eg. by displaying them on the page. 
+			However, in practice you would rarely use this because it's unlikely you'd write a target page that 
+			throws an exception while you're simply passing it some context info. The target page will have to handle 
+			context problems, but it will usually do that later as it renders. This is discussed further in the 
+			Handling a Bad Context example.</li>
+	</ul>
+
+	References:	
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/PageLink.html">PageLink</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/ActionLink.html">ActionLink</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/PageLinkOrActionLink.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/PageLinkOrActionLink.java"/>
+</body>
+</html>

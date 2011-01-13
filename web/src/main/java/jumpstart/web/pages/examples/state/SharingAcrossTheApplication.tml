@@ -1,0 +1,31 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+
+	<h1>Sharing Across the Application</h1>
+	
+	To share an object across the whole application, register it as a service and inject it into pages that need it.<br/><br/>
+	
+	In this application we have registered a CountryNames service.  This page uses it.<br/><br/>
+	
+	<strong>CountryNames</strong>
+	<div style="height: 200px; width: 300px; overflow: auto; background: #bff; border: 1px solid #666; ">
+		<t:loop t:source="countryNames.set" t:value="var:countryName">
+			${var:countryName}<br/>
+		</t:loop>
+	</div><br/>
+	
+	Tapestry's <a t:type="pagelink" t:page="servicestatus" href="#">Services Status page</a> lists all the 
+	services, including CountryNames.<br/><br/>
+	
+	References: <a href="http://tapestry.apache.org/tapestry5/tapestry-ioc/service.html">Tapestry IoC Services</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/servicestatus.html">IoC Services Status</a>, 
+	Render Variables in <a href="http://tapestry.apache.org/tapestry5/guide/parameters.html">Component Parameters</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/SharingAcrossTheApplication.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/SharingAcrossTheApplication.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/CountryNames.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/AppModule.java"/>
+</body>
+</html>

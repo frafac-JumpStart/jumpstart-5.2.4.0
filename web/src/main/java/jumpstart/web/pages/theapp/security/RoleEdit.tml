@@ -1,0 +1,81 @@
+<html t:type="theapp/layout" t:tab="literal:Security" t:subtab="literal:Role" t:title="literal:Edit Role" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:remove>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css"/>
+</t:remove>
+<div class="contentblock">
+	<h1>Edit Role</h1>
+	<t:if test="role">
+		<form t:type="form" t:id="form">
+	
+			<!-- Include version in the form to prevent it being updated/refreshed in onActivate(), which would defeat optimistic locking. -->
+	 		<t:hidden value="role.version"/>
+	
+			<table class="recordblock" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<t:errors />
+						<div class="record">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<th><t:label for="name"/></th>
+									<td><input t:id="name" t:type="TextField" value="role.name" size="20" t:validate="required,maxLength=20" /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="buttons">
+							<table>
+								<tr>
+									<td><input type="submit" value="Save" class="positive"/></td>
+									<td><button t:type="chenillekit/Button" type="button" t:event="Refresh" title="Refresh">Refresh</button></td>
+									<td><button t:type="chenillekit/Button" type="button" t:event="Cancel" title="Cancel">Cancel</button></td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+		<table class="matrixblock" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+					<h1>Users with this Role</h1>
+					<div class="matrix">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th>User</th>
+								<th>Active</th>
+								<th>Actions</th>
+							</tr>
+							<tr t:type="loop" t:source="userRoles" t:value="userRole">
+								<td class="left">${userRole.user.loginId}</td>
+								<td>${userRole.active}</td>
+								<td>
+									<span class="action"><a t:type="actionlink" t:id="viewUserRole" t:context="userRole.id" title="View">View</a></span>
+									<span class="action"><a t:type="actionlink" t:id="editUserRole" t:context="userRole.id" title="Edit">Edit</a></span>
+									<span class="action"><a t:type="actionlink" t:id="removeUserRole" t:context="list:userRole.id,userRole.version" 
+										onclick="return confirm('Remove ${userRole.role.name}?')" title="Remove">Remove</a></span>
+								</td>
+							</tr>
+						</table>
+						<div t:type="if" t:test="userRoles" t:negate="true">
+							<div class="nodata">(No Users to display)</div>
+						</div>
+					</div>
+					<div class="buttons">
+						<table>
+							<tr>
+								<td><button t:type="chenillekit/Button" type="button" t:event="AddUserRole" title="Add User Role">Add...</button></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</t:if>
+	<t:if negate="true" test="role">
+		<div class="badrequest">
+			Role does not exist.
+		</div>
+	</t:if>
+</div>
+</html>

@@ -1,0 +1,262 @@
+<project name="web" default="get-dependent-files" basedir=".">
+
+	<property file="../build.properties"/>
+	
+	<property name="project.dir" value="${basedir}/.."/>
+	<property name="context.path" value="jumpstart/web"/>
+
+	<property name="java.main.dir" value="src/main/java"/>
+	<property name="java.tests.dir" value="src/test/java"/>
+	<property name="resources.main.dir" value="src/main/resources"/>
+
+	<property name="target.dir" value="target"/>
+	<property name="target.classes.dir" value="${target.dir}/classes"/>
+	<property name="target.package.dir" value="${target.dir}/package"/>
+
+	<property name="lib.compile.dir" value="src/main/lib-compile"/>
+	<property name="lib.provided.dir" value="src/main/lib-provided"/>
+	<property name="lib.runtime.dir" value="src/main/lib-runtime"/>
+	<property name="lib.test.dir" value="src/test/lib-test"/>
+
+	<property name="deployment.web.descriptor.file" value="${basedir}/src/main/java/jumpstart/web/WEB-INF/${deployment.web.descriptor}" />
+
+	<property name="debug" value="on"/>
+
+	<property name="war.file" value="${target.package.dir}/${app.name}.war"/>
+
+	<!-- To compile, we need the business JAR in the classpath -->
+	
+	<property name="business.jar.file" value="${project.dir}/${business.dir}/target/package/${app.name}.jar"/>
+
+	<!-- If including source, we need the business source -->
+	
+	<property name="business.src.main.java.dir" value="${project.dir}/${business.dir}/src/main/java"/>
+
+	<!-- If we're building for Tomcat then we'll produce the WAR in "collapsed EAR" format ie. all the business classes and libs will go in the WAR.-->
+	
+	<property name="business.target.classes.dir" value="${project.dir}/${business.dir}/target/classes"/>
+	<property name="business.lib.compile.dir" value="${project.dir}/${business.dir}/src/main/lib-compile" />
+	<property name="business.lib.runtime.dir" value="${project.dir}/${business.dir}/src/main/lib-runtime" />
+	<property name="business.resources.dir" value="${project.dir}/${business.dir}/src/main/resources"/>
+	<property name="deployment.persistence.descriptor.file" value="${project.dir}/${business.dir}/src/main/resources/persistence-descriptor/${deployment.persistence.descriptor}" />
+
+	<path id="classpath.compile">
+		<fileset dir="${lib.compile.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${lib.provided.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<pathelement location="${business.jar.file}"/>
+	</path>
+
+	<path id="classpath.test">
+		<pathelement location="${conf.test.dir}"/>
+		<pathelement location="${target.test-classes.dir}"/>
+		<pathelement location="${target.classes.dir}"/>
+		<fileset dir="${lib.compile.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${lib.runtime.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+		<fileset dir="${lib.test.dir}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="clean" description="Deletes the target directory">
+		<delete dir="${target.dir}"/>
+	</target>
+
+	<target name="init">
+		<mkdir dir="${target.classes.dir}"/>
+		<mkdir dir="${target.package.dir}"/>
+	</target>
+
+	<target name="compile" depends="init" description="Compiles main source, output goes to the target/classes dir.">
+		<available file="${business.jar.file}" property="business.jar.file.exists"/>
+		<fail unless="business.jar.file.exists" message="Business client jar does not exist.  Run the business module's 'package' task before retrying."/>
+
+		<javac source="1.5" srcdir="${java.main.dir}" destdir="${target.classes.dir}" classpathref="classpath.compile" debug="${debug}"/>
+	</target>
+
+	<target name="test-compile" depends="init" description="Compiles test source, output goes to the target/test-classes dir.">
+	</target>
+
+	<target name="test" description="">
+		<echo message="There are no unit tests in jumpstart web tier."/>
+	</target>
+
+	<target name="package" depends="init" description="">
+		<antcall target="package-unless-for-tomcat"/>
+		<antcall target="package-if-for-tomcat"/>
+	</target>
+
+	<target name="package-unless-for-tomcat" unless="deployment.server.type.is.tomcat" depends="interpret-server-type">
+		<delete file="${war.file}" />
+		<antcall target="package-basic-war"/>
+		<antcall target="add-sourcecode-if-required"/>
+	</target>
+
+	<target name="package-if-for-tomcat" if="deployment.server.type.is.tomcat" depends="interpret-server-type">
+		<delete file="${war.file}" />
+		<antcall target="package-basic-war"/>
+		<antcall target="add-sourcecode-if-required"/>
+		<antcall target="add-business-classes"/>
+	</target>
+
+	<target name="package-basic-war">
+		<war destfile="${war.file}" manifest="${resources.main.dir}/META-INF/MANIFEST.MF" webxml="${deployment.web.descriptor.file}">
+			<zipfileset dir="${java.main.dir}/${context.path}" includes="css/**,images/**,js/**,WEB-INF/*.properties" />
+			<zipfileset dir="${target.classes.dir}" prefix="WEB-INF/classes" />
+			<zipfileset dir="${java.main.dir}" prefix="WEB-INF/classes" excludes="**/*.java,${context.path}/css/**,${context.path}/images/**,${context.path}/js/**,${context.path}/WEB-INF/**"/>
+			<zipfileset dir="${lib.compile.dir}" prefix="WEB-INF/lib" />
+			<zipfileset dir="${lib.runtime.dir}" prefix="WEB-INF/lib"/>
+		</war>
+	</target>
+
+	<!-- Add source code to the WAR - you wouldn't normally do this - this is only for jumpstart! -->
+
+	<target name="add-sourcecode-if-required" if="add.source.to.war">
+		<war destfile="${war.file}" update="true">
+			<zipfileset dir="${business.src.main.java.dir}" prefix="WEB-INF/sourcecode/business/src/main/java"/>
+			<zipfileset dir="${java.main.dir}" prefix="WEB-INF/sourcecode/web/src/main/java"/>
+		</war>
+	</target>
+
+	<!-- Add business classes etc. to the WAR.  This is the "collapsed EAR" approach http://openejb.apache.org/collapsed-ear.html -->
+
+	<target name="add-business-classes">
+		<available type="file" file="${deployment.persistence.descriptor.file}" property="dep.pers.desc.exists" />
+		<fail unless="dep.pers.desc.exists" message="*** File specified by deployment.persistence.descriptor does not exist: ${deployment.persistence.descriptor.file}" />
+
+		<war destfile="${war.file}" update="true">
+			<zipfileset dir="${business.target.classes.dir}" prefix="WEB-INF/classes" />
+			<zipfileset dir="${business.resources.dir}" includes="META-INF/ejb-jar.xml" prefix="WEB-INF/classes" />
+			<zipfileset file="${deployment.persistence.descriptor.file}" fullpath="WEB-INF/classes/META-INF/persistence.xml" />
+			<zipfileset dir="${business.lib.compile.dir}" includes="*.jar" prefix="WEB-INF/lib" />
+			<zipfileset dir="${business.lib.runtime.dir}" includes="*.jar" prefix="WEB-INF/lib" />
+		</war>
+	</target>
+
+	<target name="deploy-war-to-integration-test-server-tomcat">
+		<available type="dir" file="${project.dir}/${integration.test.server.dir}/webapps" property="integration.test.server.dir.exists" />
+		<fail unless="integration.test.server.dir.exists" message="*** Integration test server directory does not exist. Tried ${project.dir}/${integration.test.server.dir}/webapps." />
+
+		<!-- The WAR is in "collapsed EAR" format. -->
+		<copy todir="${project.dir}/${integration.test.server.dir}/webapps" file="${war.file}" />
+		<!-- There is no datasource descriptor to copy to tomcat - datasource is set up in Tomcat's conf/openejb.xml.-->
+	</target>
+
+	<target name="integration-test" description="">
+		<echo message="There are no integration tests in jumpstart web tier."/>
+	</target>
+
+	<target name="install" description="">
+		<echo message="There is no local repository to install the WAR in."/>
+	</target>
+
+	<target name="delete-dependent-files" description="">
+		<delete dir="${lib.compile.dir}" includes="*"/>
+		<delete dir="${lib.provided.dir}" includes="*"/>
+		<delete dir="${lib.runtime.dir}" includes="*"/>
+		<delete dir="${lib.test.dir}" includes="*"/>
+	</target>
+
+	<!--
+	Get the files that our project depends on. They're all 3rd-party jars.
+	Each tier (business, web, enterprise) gets its own set.  Some files appear more than once, and that's OK.
+	It allows different tiers to use different versions, which is sometimes necessary.
+	-->
+	<target name="get-dependent-files">
+		<setproxy></setproxy>
+		<fail unless="maven.repo.root" message="*** Specify maven.repo.root in the project's build.properties."/>
+
+		<!-- compile-time jars - needed for compiling and will be put in the package for runtime -->
+
+		<mkdir dir="${lib.compile.dir}"/>
+		<get dest="${lib.compile.dir}/tapestry-core-5.1.0.5.jar" usetimestamp="true" src="${maven.repo.root}/org/apache/tapestry/tapestry-core/5.1.0.5/tapestry-core-5.1.0.5.jar" />
+		<get dest="${lib.compile.dir}/tapestry-ioc-5.1.0.5.jar" usetimestamp="true" src="${maven.repo.root}/org/apache/tapestry/tapestry-ioc/5.1.0.5/tapestry-ioc-5.1.0.5.jar" />
+		<get dest="${lib.compile.dir}/tapestry5-annotations-5.1.0.5.jar" usetimestamp="true" src="${maven.repo.root}/org/apache/tapestry/tapestry5-annotations/5.1.0.5/tapestry5-annotations-5.1.0.5.jar" />
+		<get dest="${lib.compile.dir}/chenillekit-core-1.0.2.jar" usetimestamp="true" src="http://www.chenillekit.org/mvnrepo/release/org/chenillekit/chenillekit-core/1.0.2/chenillekit-core-1.0.2.jar" />
+		
+		<!-- provided jars - needed for compiling only - at runtime these are provided by the container (eg. JBoss) or the EAR (shared with the business tier) -->
+
+		<mkdir dir="${lib.provided.dir}"/>
+	 	<get dest="${lib.provided.dir}/javaee-api-5.0-2.jar" usetimestamp="true" src="${maven.repo.root}/org/apache/openejb/javaee-api/5.0-2/javaee-api-5.0-2.jar"/>
+		<get dest="${lib.provided.dir}/javassist-3.9.0.GA.jar" usetimestamp="true" src="http://repository.jboss.org/maven2/javassist/javassist/3.9.0.GA/javassist-3.9.0.GA.jar" />
+		<get dest="${lib.provided.dir}/joda-time-1.6.jar" usetimestamp="true" src="${maven.repo.root}/joda-time/joda-time/1.6/joda-time-1.6.jar" />
+		<get dest="${lib.provided.dir}/slf4j-api-1.5.2.jar" usetimestamp="true" src="${maven.repo.root}/org/slf4j/slf4j-api/1.5.2/slf4j-api-1.5.2.jar" />
+
+		<!-- runtime jars - not needed for compiling but will be put in the package for runtime. -->
+
+		<mkdir dir="${lib.runtime.dir}"/>
+		<get dest="${lib.runtime.dir}/antlr-runtime-3.1.1.jar" usetimestamp="true" src="${maven.repo.root}/org/antlr/antlr-runtime/3.1.1/antlr-runtime-3.1.1.jar" />
+		<get dest="${lib.runtime.dir}/bsf-2.4.0.jar" usetimestamp="true" src="${maven.repo.root}/bsf/bsf/2.4.0/bsf-2.4.0.jar" />
+		<get dest="${lib.runtime.dir}/chenillekit-tapestry-1.0.2.jar" usetimestamp="true" src="http://www.chenillekit.org/mvnrepo/release/org/chenillekit/chenillekit-tapestry/1.0.2/chenillekit-tapestry-1.0.2.jar" />
+		<get dest="${lib.runtime.dir}/commons-codec-1.3.jar" usetimestamp="true" src="${maven.repo.root}/commons-codec/commons-codec/1.3/commons-codec-1.3.jar" />
+		<get dest="${lib.runtime.dir}/commons-configuration-1.5.jar" usetimestamp="true" src="${maven.repo.root}/commons-configuration/commons-configuration/1.5/commons-configuration-1.5.jar" />
+		<get dest="${lib.runtime.dir}/commons-lang-2.4.jar" usetimestamp="true" src="${maven.repo.root}/commons-lang/commons-lang/2.4/commons-lang-2.4.jar" />
+		<get dest="${lib.runtime.dir}/woodstox-core-asl-4.0.3.jar" usetimestamp="true" src="${maven.repo.root}/org/codehaus/woodstox/woodstox-core-asl/4.0.3/woodstox-core-asl-4.0.3.jar" />
+		<get dest="${lib.runtime.dir}/stax-api-1.0.1.jar" usetimestamp="true" src="${maven.repo.root}/stax/stax-api/1.0.1/stax-api-1.0.1.jar" />
+		<get dest="${lib.runtime.dir}/stax2-api-3.0.1.jar" usetimestamp="true" src="${maven.repo.root}/org/codehaus/woodstox/stax2-api/3.0.1/stax2-api-3.0.1.jar" />
+
+		<!-- testing jars - needed for compiling and running tests (but this release has no web tier tests) -->
+
+		<mkdir dir="${lib.test.dir}"/>
+		<!-- For jndi lookup -->
+		<get dest="${lib.test.dir}/dom4j-1.6.1.jar" usetimestamp="true" src="${maven.repo.root}/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" />
+		<!-- For hibernate -->
+		<get dest="${lib.test.dir}/antlr-3.1.1.jar" usetimestamp="true" src="${maven.repo.root}/org/antlr/antlr/3.1.1/antlr-3.1.1.jar" />
+		<get dest="${lib.test.dir}/hibernate-annotations-3.4.0.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-annotations/3.4.0.GA/hibernate-annotations-3.4.0.GA.jar" />
+		<get dest="${lib.test.dir}/hibernate-commons-annotations-3.1.0.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-commons-annotations/3.1.0.GA/hibernate-commons-annotations-3.1.0.GA.jar" />
+		<get dest="${lib.test.dir}/hibernate-entitymanager-3.4.0.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-entitymanager/3.4.0.GA/hibernate-entitymanager-3.4.0.GA.jar" />
+		
+		<get dest="${lib.test.dir}/jetty-6.1.24.jar" usetimestamp="true" src="${maven.repo.root}/org/mortbay/jetty/jetty/6.1.24/jetty-6.1.24.jar" />
+		<get dest="${lib.test.dir}/jetty-util-6.1.24.jar" usetimestamp="true" src="${maven.repo.root}/org/mortbay/jetty/jetty-util/6.1.24/jetty-util-6.1.24.jar" />
+		<!-- For Jetty to provide an AJP Connector and JAAS 
+		<get dest="${lib.test.dir}/jetty-ajp-6.1.24.jar" usetimestamp="true" src="${maven.repo.root}/org/mortbay/jetty/jetty-ajp/6.1.24/jetty-ajp-6.1.24.jar" />
+		<get dest="${lib.test.dir}/jetty-plus-6.1.246.jar" usetimestamp="true" src="${maven.repo.root}/org/mortbay/jetty/jetty-plus/6.1.24/jetty-plus-6.1.24.jar" />
+		-->
+		
+	</target>
+
+	<target name="interpret-server-type">
+
+		<!-- Validate the deployment.server.type -->
+		
+		<condition property="deployment.server.type.valid">
+			<or>
+				<!-- JBoss4 is no longer supported
+				<equals arg1="${deployment.server.type}" arg2="jboss4"/>
+				-->
+				<equals arg1="${deployment.server.type}" arg2="jboss5"/>
+				<equals arg1="${deployment.server.type}" arg2="glassfish"/>
+				<equals arg1="${deployment.server.type}" arg2="tomcat"/>
+			</or>
+		</condition>
+		<!-- JBoss4 is no longer supported
+		<fail unless="deployment.server.type.valid" message="*** Please specify a valid deployment.server.type. Expected glassfish, tomcat, jboss4, or jboss5.  Found ${deployment.server.type}." />
+		-->
+		<fail unless="deployment.server.type.valid" message="*** Please specify a valid deployment.server.type. Expected glassfish, tomcat, or jboss5.  Found ${deployment.server.type}." />
+
+		<!-- Set some boolean properties based on the deployment.server.type -->
+		
+		<!-- JBoss4 is no longer supported
+		<condition property="deployment.server.type.is.jboss4">
+			<equals arg1="${deployment.server.type}" arg2="jboss4"/>
+		</condition>
+		-->
+		<condition property="deployment.server.type.is.jboss5">
+			<equals arg1="${deployment.server.type}" arg2="jboss5"/>
+		</condition>
+		<condition property="deployment.server.type.is.glassfish">
+			<equals arg1="${deployment.server.type}" arg2="glassfish"/>
+		</condition>
+		<condition property="deployment.server.type.is.tomcat">
+			<equals arg1="${deployment.server.type}" arg2="tomcat"/>
+		</condition>
+	</target>
+		
+</project>

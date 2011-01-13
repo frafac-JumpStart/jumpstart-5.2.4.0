@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; 
+	 We use a "strict" DTD to make IE follow the alignment rules. -->
+	 
+<html t:type="theapp/layout" t:tab="literal:NONE" t:title="literal:Edit User" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<t:remove>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css"/>
+</t:remove>
+<div class="contentblock">
+	<h1>Edit My Preferences</h1>
+	<form t:type="form" t:id="form">
+	
+		<!-- Include version in the form to prevent it being updated/refreshed in onActivate(), which would defeat optimistic locking. -->
+		<t:hidden value="user.version"/>
+	
+		<table class="recordblock" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+					<t:errors />
+					<div class="record">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th><t:label for="pageStyle"/></th>
+								<td>
+									<t:RadioGroup t:id="pageStyle" t:value="user.pageStyle" t:encoder="pageStyleEncoder">
+										<t:Radio t:id="boxy"/><t:label for="boxy"/>
+										&nbsp;
+										<t:Radio t:id="wide"/><t:label for="wide"/>
+									</t:RadioGroup>
+								</td>
+							</tr>
+							<tr>
+								<th><t:label for="dateInputPattern"/></th>
+								<td><select t:id="dateInputPattern" t:type="Select" t:value="user.dateInputPattern" t:model="datePatterns"/></td>
+							</tr>
+							<tr>
+								<th><t:label for="dateViewPattern"/></th>
+								<td><select t:id="dateViewPattern" t:type="Select" t:value="user.dateViewPattern" t:model="datePatterns"/></td>
+							</tr>
+							<tr>
+								<th><t:label for="dateListPattern"/></th>
+								<td><select t:id="dateListPattern" t:type="Select" t:value="user.dateListPattern" t:model="datePatterns"/></td>
+							</tr>
+						</table>
+					</div>
+					<div class="buttons">
+						<table>
+							<tr>
+								<td><input type="submit" value="Save"/></td>
+								<td><button t:type="chenillekit/Button" type="button" t:event="Refresh" title="Refresh">Refresh</button></td>
+							</tr>
+						</table>
+					</div>
+					<div class="info">${message}</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+</html>

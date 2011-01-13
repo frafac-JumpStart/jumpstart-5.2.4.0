@@ -1,0 +1,37 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/examples.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/examples.css"/>
+</head>
+<body>
+	<h1>Conversations List</h1>
+	
+	This page shows which conversations are currently in your session.  All of the Wizard examples use conversations.<br/>
+	
+	<table>
+		<tr>
+			<th>Target</th>
+			<th>ConversationId</th>
+		</tr>
+		<tr t:type="Loop" t:source="allConversations" t:value="conversation">
+			<td>${object.class}</td>
+			<td><a t:type="actionlink" t:id="Go" t:context="conversation.id" href="#">${conversation.id}</a></td>
+		</tr>
+		
+ 	</table>
+	<div t:type="if" t:test="allConversations" t:negate="true">
+		<div class="nodata">(No Conversations to display)</div>
+		<br/><br/><br/>
+	</div>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/appstate.html">Session State</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/ConversationsList.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/ConversationsList.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/Conversation.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/Conversations.java"/>
+</body>
+</html>

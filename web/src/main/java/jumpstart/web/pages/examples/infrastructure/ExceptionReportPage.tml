@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; -->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Exception Report Page</h1>
+	
+	When Tapestry detects an uncaught exception, it displays an "exception report" page.
+	The default page is called ExceptionReport.<br/><br/>
+	
+	To see the <strong>current</strong> "exception report" page in action, click here: 
+	<a t:type="actionlink" t:id="throwexception" href="#">I throw an exception!</a><br/><br/>
+	
+	ExceptionReport displays a wealth of information when system property <em>tapestry.production-mode=false</em>. 
+	This is great for development. When the value is <em>true</em>, which is the default, the page is kept brief 
+	to avoid confusing the user and to avoid disclosing details of your application's internals.<br/><br/>
+
+	Currently, tapestry.production-mode = <em>${productionMode}</em>.<br/><br/>
+
+	To try it, stop the server, set the system property, and start the server again.  Eg. in Windows:
+	<ul>
+		<li><em>set JAVA_OPTS=-Dtapestry.production-mode=true</em></li>
+		<li><em>run.bat</em></li>
+	</ul>
+	In tcsh:
+	<ul>
+		<li><em>setenv JAVA_OPTS '-Dtapestry.production-mode=true'</em></li>
+		<li><em>run.sh</em></li>
+	</ul>
+	Then click on the link above to test it.<br/><br/>
+	
+	However, you may prefer to <strong>override the exception report</strong> to one of your own. The simplest 
+	technique is to create a page called ExceptionReport.	Tapestry's exception handler will notice it and use it.<br/><br/>
+	
+	<strong>To enable JumpStart's ExceptionReport</strong>, find ExceptionReport_parked.java and rename it 
+	to ExceptionReport.java, then click on the link above to test it.  Like Tapestry's exception report, you will 
+	find it displays different things depending on the value of <em>tapestry.production-mode</em>.<br/><br/>
+	
+	<strong>To revert back to Tapestry's default</strong> exception page, rename our ExceptionReport.java back to 
+	ExceptionReport_parked.java and choose Project > Clean... in Eclipse.<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/cookbook/exceptions.html">Overriding Exception Report</a>, 
+	<a href="http://wiki.apache.org/tapestry/Tapestry5ExceptionPage">Tapestry 5 Exception Page</a>.<br/>
+	
+	<h3>An exception handling strategy</h3>
+	If you're unsure which exceptions should be handled on your current page and which ones should result in the exception 
+	page, then try splitting them according to these 2 categories:
+	<ul>
+		<li><strong>Application exceptions</strong>, such as validation errors.  Display application exceptions 
+		on the page that detects them.</li>
+		<li><strong>System exceptions</strong>, such as system availability problems (eg. cannot connect to 
+		database) and irrecoverable errors due to programming bugs (eg. OutOfBoundsException, IllegalStateException).  
+		Handle these by re-throwing them or not catching them at all, causing the exception page to be shown.</li>
+	</ul>
+	 
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/infrastructure/ExceptionReportPage.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/infrastructure/ExceptionReportPage.java"/>
+</body>
+</html>

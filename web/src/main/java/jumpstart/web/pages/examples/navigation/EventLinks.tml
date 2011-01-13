@@ -1,0 +1,45 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Event Links</h1>
+	
+	EventLink triggers an event that it names, which is handled in the same page.<br/><br/>
+	
+	These 3 EventLinks trigger the same event, SayHi, which we can handle with just one method, <em>onSayHi()</em>:<br/>
+	<a t:type="eventlink" t:event="SayHi" t:context="literal:Dude" href="#">Say Hi Dude</a>, 
+	<a t:type="eventlink" t:event="SayHi" t:context="literal:Dude 2" href="#">Say Hi Dude 2</a>, 
+	<a t:type="eventlink" t:event="SayHi" t:context="literal:Dude 3" href="#">Say Hi Dude 3</a><br/>
+	<span style="color:green">${hiMessage}</span><br/><br/>
+	
+	The code for the first one looks like this: <br/>
+	<code>&lt;a t:type="eventlink" t:event="SayHi" t:context="literal:Dude" href="#"&gt;Say Hi Dude&lt;/a&gt;</code>.<br/><br/>
+	
+	It generates a link with a URL like this:<br/> 
+	<code>http://myhost/jumpstart/examples/navigation/eventlinks:sayhi/Dude</code> .<br/><br/>
+	
+	When clicked, the corresponding EventLink component is notified and it sends the event SayHi to its container.<br/> 
+	The container can provide methods to handle the event, eg. onSayHi(String name).<br/><br/>
+
+	In this example, <em>onSayHi(String name)</em> returns nothing, which means stay on this page. 
+	Tapestry then <strong>redirects</strong> the browser to the page.<br/><br/>
+
+	<strong>Redirect-after-post</strong> <br/>
+	Once Tapestry knows which page is next, why doesn't Tapestry just render it and return it?  Because Tapestry uses the 
+	<a href="http://www.theserverside.com/tt/articles/article.tss?l=RedirectAfterPost">Redirect-After-Post</a> pattern: it constructs 
+	a <strong>render request</strong> URL to the next page, just like PageLink does, and returns that URL to the browser as a redirect. 
+	So when the next page shows, its URL will not be the URL that triggered an event.  Its URL will be safe to bookmark, reload or 
+	return to. The cost is 2 trips to the server, but it's worth it.<br/><br/>
+	
+	Actually, clicking on an EventLink link causes a GET, not a POST, so in this case it's Redirect-After-Get!<br/><br/> 
+
+	References:	
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/EventLink.html">EventLink</a>,
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/event.html">Component Events</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/persist.html">Persistent Page Data</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/EventLinks.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/EventLinks.java"/>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a DOCTYPE to allow us to use special characters like &nbsp; 
+	We use a "strict" DTD to make IE follow the alignment rules. -->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/wizard.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/wizard.css"/>
+</head>
+<body>
+	<h1>Wizard Using Pages</h1>
+
+	This 4 step wizard is done with 5 <strong>pages</strong>.<br/>
+	The first 3 steps are data entry.  They share a "conversation" during which the browser's Back and Refresh/Reload buttons are allowed.<br/>
+	The 4th step displays success.  Any attempt to return to the "conversation" will be redirected to the 5th page - a "bad flow" page.<br/><br/>
+
+	<t:body/><br/>
+
+	<h3>The best approach?</h3>	
+	So which approach is best for writing wizards? Pages or form fragments? The choice is yours.<br/><br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/appstate.html">Session State</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/wizard/WizardUsingPagesLayout.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/wizard/WizardUsingPagesLayout.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingPages1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingPages1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingPages2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingPages2.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingPages3.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingPages3.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/base/examples/wizard/WizardConversationalPage.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingPagesSuccess.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingPagesSuccess.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingPagesBadFlow.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/wizard/WizardUsingPagesBadFlow.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/state/examples/wizard/CreditRequest.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/Conversations.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/commons/Conversation.java"/>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<project name="business" default="get-dependent-files" basedir=".">
+
+	<property file="../build.properties" />
+
+	<property name="project.dir" value="${basedir}/.." />
+
+	<property name="java.main.dir" value="src/main/java" />
+	<property name="java.tests.dir" value="src/test/java" />
+	<property name="resources.main.dir" value="src/main/resources" />
+
+	<property name="target.dir" value="target" />
+	<property name="target.classes.dir" value="${target.dir}/classes" />
+	<property name="target.test-classes.dir" value="${target.dir}/test-classes" />
+	<property name="target.package.dir" value="${target.dir}/package" />
+
+	<property name="lib.compile.dir" value="src/main/lib-compile" />
+	<property name="lib.provided.dir" value="src/main/lib-provided" />
+	<property name="lib.runtime.dir" value="src/main/lib-runtime" />
+	<property name="lib.test.dir" value="src/test/lib-test" />
+	<property name="lib.test.openejb.local.dir" value="src/test/lib-test-local-openejb" />
+
+	<property name="conf.test.jboss.remote.dir" value="src/test/conf-remote-jboss" />
+	<property name="conf.test.glassfish.remote.dir" value="src/test/conf-remote-glassfish" />
+	<property name="conf.test.tomcat.remote.dir" value="src/test/conf-remote-tomcat" />
+
+	<property name="deployment.persistence.descriptor.file" value="${basedir}/src/main/resources/persistence-descriptor/${deployment.persistence.descriptor}" />
+
+	<property name="debug" value="on" />
+
+	<property name="jar.file" value="${target.package.dir}/${app.name}.jar" />
+
+	<path id="classpath.compile">
+		<fileset dir="${lib.compile.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib.provided.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="classpath.unit.test">
+		<pathelement location="${target.test-classes.dir}" />
+		<pathelement location="${target.classes.dir}" />
+		<fileset dir="${lib.compile.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib.provided.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib.runtime.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib.test.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="classpath.integration.test.common">
+		<pathelement location="${target.test-classes.dir}" />
+		<pathelement location="${target.classes.dir}" />
+		<fileset dir="${lib.compile.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib.provided.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib.runtime.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${lib.test.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- JBoss4 is no longer supported
+	<path id="classpath.integration.test.with.jboss4.remote">
+		<pathelement location="${conf.test.jboss.remote.dir}" />
+		<path refid="classpath.integration.test.common" />
+		<filelist dir="${project.dir}/${integration.test.server.dir}/../../client">
+			<file name="jbossall-client.jar" />
+		</filelist>
+	</path>
+	-->
+
+	<path id="classpath.integration.test.with.jboss5.remote">
+		<pathelement location="${conf.test.jboss.remote.dir}" />
+		<fileset dir="${project.dir}/${integration.test.server.dir}/../../client">
+			<include name="**/*.jar" />
+		</fileset>
+		<!-- Move our test classpath down here to avoid conflict with jboss-javaee.jar -->
+		<path refid="classpath.integration.test.common" />
+		<!--
+		<fileset dir="${project.dir}/${integration.test.server.dir}/../../common/lib">
+			<include name="**/*.jar" />
+		</fileset>
+		-->
+	</path>
+
+	<path id="classpath.integration.test.with.glassfish.remote">
+		<pathelement location="${conf.test.glassfish.remote.dir}" />
+		<path refid="classpath.integration.test.common" />
+		<filelist dir="${project.dir}/${integration.test.server.dir}/../../lib">
+			<file name="appserv-deployment-client.jar" />
+			<file name="appserv-ext.jar" />
+			<file name="appserv-rt.jar" />
+		</filelist>
+	</path>
+
+	<path id="classpath.integration.test.with.tomcat.remote">
+		<pathelement location="${conf.test.tomcat.remote.dir}" />
+		<path refid="classpath.integration.test.common" />
+		<fileset dir="${project.dir}/${integration.test.server.dir}/webapps/openejb/lib">
+			<include name="openejb-client-*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean" description="Deletes the target directory">
+		<delete dir="${target.dir}" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="${target.classes.dir}" />
+		<mkdir dir="${target.test-classes.dir}" />
+		<mkdir dir="${target.package.dir}" />
+	</target>
+
+	<target name="compile" depends="init" description="Compiles main source, output goes to the target/classes dir.">
+		<javac source="1.5" srcdir="${java.main.dir}" destdir="${target.classes.dir}" classpathref="classpath.compile" debug="${debug}" />
+
+		<copy todir="${target.classes.dir}">
+			<fileset dir="${java.main.dir}" includes="**/*.properties" />
+		</copy>
+	</target>
+
+	<target name="test-compile" depends="init" description="Compiles test source, output goes to the target/test-classes dir.">
+		<javac source="1.5" srcdir="${java.tests.dir}" destdir="${target.test-classes.dir}" classpathref="classpath.unit.test" debug="${debug}" />
+	</target>
+
+	<target name="test">
+		<mkdir dir="test-results" />
+		<junit printsummary="yes" fork="off" timeout="10">
+			<test name="jumpstart.business.BusinessUnitTestSuite" haltonfailure="yes">
+				<formatter type="plain" usefile="false" />
+			</test>
+			<classpath refid="classpath.unit.test" />
+		</junit>
+	</target>
+
+	<target name="package" depends="init" description="">
+		<available type="file" file="${deployment.persistence.descriptor.file}" property="dep.pers.desc.exists" />
+		<fail unless="dep.pers.desc.exists" message="*** File specified by deployment.persistence.descriptor does not exist: ${deployment.persistence.descriptor.file}" />
+
+		<delete file="${jar.file}" />
+		<jar destfile="${jar.file}" manifest="${resources.main.dir}/META-INF/MANIFEST.MF">
+			<zipfileset dir="${target.classes.dir}" />
+			<zipfileset file="${deployment.persistence.descriptor.file}" fullpath="META-INF/persistence.xml" />
+		</jar>
+	</target>
+
+	<!-- For tips on how to use the integration tests see http://jumpstart.doublenegative.com.au/tips.html -->
+
+	<target name="integration-test">
+		<echo message="Running integration tests of jumpstart business tier."/>
+
+		<!-- JBoss4 is no longer supported
+		<antcall target="integration-test-if-jboss4-remote" />
+		-->
+		<antcall target="integration-test-if-jboss5-remote"/>
+		<antcall target="integration-test-if-glassfish-remote" />
+		<antcall target="integration-test-if-tomcat-remote" />
+	</target>
+
+	<!-- JBoss4 is no longer supported
+	<target name="integration-test-if-jboss4-remote" if="deployment.server.type.is.jboss4" depends="interpret-server-type">
+		<echo message="classpath.integration.test.with.jboss4.remote = ${toString:classpath.integration.test.with.jboss4.remote}"/>
+		<mkdir dir="test-results" />
+		<junit printsummary="yes" fork="off" timeout="10">
+			<test name="jumpstart.business.BusinessIntegrationTestSuite" haltonfailure="yes">
+				<formatter type="plain" usefile="false" />
+			</test>
+			<classpath refid="classpath.integration.test.with.jboss4.remote" />
+		</junit>
+	</target>
+	-->
+
+	<target name="integration-test-if-jboss5-remote" if="deployment.server.type.is.jboss5" depends="interpret-server-type">
+		<echo message="classpath.integration.test.with.jboss5.remote = ${toString:classpath.integration.test.with.jboss5.remote}"/>
+		<mkdir dir="test-results" />
+		<junit printsummary="yes" fork="off" timeout="10">
+			<test name="jumpstart.business.BusinessIntegrationTestSuite" haltonfailure="yes">
+				<formatter type="plain" usefile="false" />
+			</test>
+			<classpath refid="classpath.integration.test.with.jboss5.remote" />
+		</junit>
+	</target>
+
+	<target name="integration-test-if-glassfish-remote" if="deployment.server.type.is.glassfish" depends="interpret-server-type">
+		<echo message="classpath.integration.test.with.glassfish.remote = ${toString:classpath.integration.test.with.glassfish.remote}"/>
+		<mkdir dir="test-results" />
+		<junit printsummary="yes" fork="off" timeout="10">
+			<test name="jumpstart.business.BusinessIntegrationTestSuite" haltonfailure="yes">
+				<formatter type="plain" usefile="false" />
+			</test>
+			<classpath refid="classpath.integration.test.with.glassfish.remote" />
+		</junit>
+	</target>
+
+	<target name="integration-test-if-tomcat-remote" if="deployment.server.type.is.tomcat" depends="interpret-server-type">
+		<echo message="classpath.integration.test.with.tomcat.remote = ${toString:classpath.integration.test.with.tomcat.remote}"/>
+		<mkdir dir="test-results" />
+		<junit printsummary="yes" fork="off" timeout="10">
+			<test name="jumpstart.business.BusinessIntegrationTestSuite" haltonfailure="yes">
+				<formatter type="plain" usefile="false" />
+			</test>
+			<classpath refid="classpath.integration.test.with.tomcat.remote" />
+		</junit>
+	</target>
+
+	<target name="install" description="">
+		<echo message="There is no local repository to install the JAR in." />
+	</target>
+
+	<target name="delete-dependent-files" description="">
+		<delete dir="${lib.compile.dir}" includes="*" />
+		<delete dir="${lib.provided.dir}" includes="*" />
+		<delete dir="${lib.runtime.dir}" includes="*" />
+		<delete dir="${lib.test.dir}" includes="*" />
+		<delete dir="${lib.test.openejb.local.dir}" includes="*" />
+	</target>
+
+	<!--
+		Get the files that our project depends on. They're all 3rd-party jars.
+		Each tier (business, web, enterprise) gets its own set.  Some files appear in more than one tier and that's OK.
+		It allows different tiers to use different versions, which is sometimes necessary.
+	-->
+
+	<target name="get-dependent-files">
+		<setproxy>
+		</setproxy>
+		<fail unless="maven.repo.root" message="*** Specify maven.repo.root in the project's build.properties." />
+
+		<!-- compile-time jars - needed for compiling and will be put in the package for runtime -->
+
+		<mkdir dir="${lib.compile.dir}" />
+		<get dest="${lib.compile.dir}/joda-time-1.6.jar" usetimestamp="true" src="${maven.repo.root}/joda-time/joda-time/1.6/joda-time-1.6.jar" />
+		<get dest="${lib.compile.dir}/slf4j-api-1.5.2.jar" usetimestamp="true" src="${maven.repo.root}/org/slf4j/slf4j-api/1.5.2/slf4j-api-1.5.2.jar" />
+
+		<!-- provided jars - needed for compiling only - at runtime these are provided by the container eg. JBoss -->
+
+		<mkdir dir="${lib.provided.dir}" />
+		<get dest="${lib.provided.dir}/javaee-api-5.0-2.jar" usetimestamp="true" src="${maven.repo.root}/org/apache/openejb/javaee-api/5.0-2/javaee-api-5.0-2.jar" />
+		<!-- TODO: modify BaseEntity so it is not dependent on Hibernate. -->
+		<get dest="${lib.provided.dir}/hibernate-core-3.3.1.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-core/3.3.1.GA/hibernate-core-3.3.1.GA.jar" />
+
+		<!-- runtime jars - not needed for compiling but will be put in the package for runtime. -->
+
+		<mkdir dir="${lib.runtime.dir}" />
+		<get dest="${lib.runtime.dir}/slf4j-log4j12-1.5.2.jar" usetimestamp="true" src="${maven.repo.root}/org/slf4j/slf4j-log4j12/1.5.2/slf4j-log4j12-1.5.2.jar" />
+		<!--
+		<get dest="${lib.runtime.dir}/mysql-connector-java-5.1.10.jar" usetimestamp="true" src="${maven.repo.root}/mysql/mysql-connector-java/5.1.10/mysql-connector-java-5.1.10.jar"/>
+		-->
+
+		<!-- testing jars - needed for compiling and running tests -->
+
+		<mkdir dir="${lib.test.dir}" />
+		<get dest="${lib.test.dir}/dom4j-1.6.1.jar" usetimestamp="true" src="${maven.repo.root}/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" />
+		<get dest="${lib.test.dir}/javassist-3.9.0.GA.jar" usetimestamp="true" src="http://repository.jboss.org/maven2/javassist/javassist/3.9.0.GA/javassist-3.9.0.GA.jar" />
+		<get dest="${lib.test.dir}/junit-4.3.1.jar" usetimestamp="true" src="${maven.repo.root}/junit/junit/4.3.1/junit-4.3.1.jar" />
+		<get dest="${lib.test.dir}/log4j-1.2.14.jar" usetimestamp="true" src="${maven.repo.root}/log4j/log4j/1.2.14/log4j-1.2.14.jar" />
+
+		<!-- testing openejb local jars - needed when running tests with openejb locally, ie. in-line. -->
+
+		<mkdir dir="${lib.test.openejb.local.dir}" />
+		<get dest="${lib.test.openejb.local.dir}/antlr-3.1.1.jar" usetimestamp="true" src="${maven.repo.root}/org/antlr/antlr/3.1.1/antlr-3.1.1.jar" />
+		<get dest="${lib.test.openejb.local.dir}/hibernate-annotations-3.4.0.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-annotations/3.4.0.GA/hibernate-annotations-3.4.0.GA.jar" />
+		<get dest="${lib.test.openejb.local.dir}/hibernate-commons-annotations-3.1.0.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-commons-annotations/3.1.0.GA/hibernate-commons-annotations-3.1.0.GA.jar" />
+		<get dest="${lib.test.openejb.local.dir}/hibernate-entitymanager-3.4.0.GA.jar" usetimestamp="true" src="${maven.repo.root}/org/hibernate/hibernate-entitymanager/3.4.0.GA/hibernate-entitymanager-3.4.0.GA.jar" />
+		
+	</target>
+
+	<target name="interpret-server-type">
+
+		<!-- Validate the deployment.server.type -->
+		
+		<condition property="deployment.server.type.valid">
+			<or>
+				<!-- JBoss4 is no longer supported
+				<equals arg1="${deployment.server.type}" arg2="jboss4"/>
+				-->
+				<equals arg1="${deployment.server.type}" arg2="jboss5"/>
+				<equals arg1="${deployment.server.type}" arg2="glassfish"/>
+				<equals arg1="${deployment.server.type}" arg2="tomcat"/>
+			</or>
+		</condition>
+		<!-- JBoss4 is no longer supported
+		<fail unless="deployment.server.type.valid" message="*** Please specify a valid deployment.server.type. Expected glassfish, tomcat, jboss4, or jboss5.  Found ${deployment.server.type}." />
+		-->
+		<fail unless="deployment.server.type.valid" message="*** Please specify a valid deployment.server.type. Expected glassfish, tomcat, or jboss5.  Found ${deployment.server.type}." />
+		
+		<!-- Set some boolean properties based on the deployment.server.type -->
+		
+		<!-- JBoss4 is no longer supported
+		<condition property="deployment.server.type.is.jboss4">
+			<equals arg1="${deployment.server.type}" arg2="jboss4"/>
+		</condition>
+		-->
+		<condition property="deployment.server.type.is.jboss5">
+			<equals arg1="${deployment.server.type}" arg2="jboss5"/>
+		</condition>
+		<condition property="deployment.server.type.is.glassfish">
+			<equals arg1="${deployment.server.type}" arg2="glassfish"/>
+		</condition>
+		<condition property="deployment.server.type.is.tomcat">
+			<equals arg1="${deployment.server.type}" arg2="tomcat"/>
+		</condition>
+	</target>
+
+</project>

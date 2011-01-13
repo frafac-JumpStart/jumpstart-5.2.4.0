@@ -1,0 +1,32 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<!-- 
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/examples.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/examples.css"/>
+	 -->
+	<style type="text/css">
+		dl.t-beandisplay dd.id	{ display:inline; margin-left: 0px; }	// IE 7.
+	</style>
+</head>
+<body>
+	<h1>Review</h1>
+	
+	<t:if test="person">
+		<t:beandisplay object="person"/>
+	</t:if>
+	<t:if negate="true" test="person">
+		Person ${personId} does not exist. Has the database been set up?<br/><br/>
+	</t:if>
+	
+	<a t:type="pageLink" t:page="examples/easycrud/Index" href="#">Cancel</a><br/><br/>
+	
+	<a t:type="pageLink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/easycrud/Review.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/easycrud/Review.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+</body>
+</html>

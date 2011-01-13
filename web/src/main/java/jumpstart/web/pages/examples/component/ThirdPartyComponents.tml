@@ -1,0 +1,36 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Third Party Components</h1>
+
+	It's easy to use third-party components.<br/><br/>
+
+	In this example we use the <a href="http://www.chenillekit.org/demo/tapcomp/slidingpaneldemo">SlidingPanel</a> component 
+	from the <a href="http://chenillekit.codehaus.org/">ChenilleKit</a> open-source project.<br/><br/>
+	
+	The components were added to JumpStart simply by putting chenillekit-core.jar in web/src/main/lib-compile/ and chenillekit-tapestry.jar in web/src/main/lib-runtime/ .<br/>
+	Actually, they were put there by Ant by running the <em>get-dependant-jars</em> target of <em>build.xml</em> during installation.<br/>
+	In the development environment, JumpStart's collapser would have deployed them into <code>collapsed/jumpstart.war/WEB-INF/lib/</code>, <br/>
+	or if JumpStart's exploder is enabled, it would have deployed them into <code>exploded/jumpstart.ear/jumpstart.war/WEB-INF/lib/</code>.<br/><br/>
+
+	<t:chenillekit.SlidingPanel t:subject="literal:This is a sliding panel" t:closed="true" style="width: 100%;">
+		Hello World.<br/>
+		Hello World.<br/>
+		Hello World.
+	</t:chenillekit.SlidingPanel><br/>
+
+	For more third-party components see <em>Components</em> on <a href="http://wiki.apache.org/tapestry/Tapestry5HowTos#Components">Tapestry 5 How Tos</a> 
+	and <em>Third Party Libraries</em> on <a href="http://tapestry.apache.org/tapestry5/">Tapestry 5 Home</a>.<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/component-classes.html">Component Classes</a>,
+	<a href="http://tapestry.apache.org/tapestry5/guide/templates.html">Component Templates</a>,
+	<a href="http://tapestry.apache.org/tapestry5/guide/parameters.html">Component Parameters</a>, 
+	<a href="http://www.chenillekit.org/demo/tapcomp/slidingpaneldemo">SlidingPanel</a>, 
+	<a href="http://chenillekit.codehaus.org/">ChenilleKit</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/ThirdPartyComponents.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/ThirdPartyComponents.java"/>
+</body>
+</html>

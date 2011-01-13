@@ -1,0 +1,34 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+<body>
+	<h1>Easy CRUD</h1>
+	
+	This example is a preview of the examples that follow. It demonstrates how Tapestry handles CRUD (Create, Review, Update, Delete) with ease.<br/>
+	However, very little is explained here - that is left to later examples.<br/><br/>
+
+	<a t:type="pageLink" t:page="examples/easycrud/Create" href="#">Create...</a><br/><br/>
+
+	<t:if test="errorMessage">
+		<span style="color:red">${errorMessage}</span><br/><br/>
+	</t:if>
+
+	<table t:type="grid" t:source="persons" t:row="person" include="id,firstName,lastName,region,startDate" t:add="action">[Grid here]
+		<p:actionCell>
+			<a t:type="pageLink" t:page="examples/easycrud/Review" t:context="person.id" href="#">Review</a>
+			<a t:type="pageLink" t:page="examples/easycrud/Update" t:context="person.id" href="#">Update</a>
+			<a t:type="eventLink" t:event="Delete" t:context="list:person.id,person.version" 
+				t:mixins="Confirm" t:message="Delete ${person.firstName} ${person.lastName}?">Delete</a>
+		</p:actionCell>
+	</table><br/>
+
+	<a t:type="pageLink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for PersonService, BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/easycrud/Index.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/easycrud/Index.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/Confirm.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/confirm.js"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+</body>
+</html>

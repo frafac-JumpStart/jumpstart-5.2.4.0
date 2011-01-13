@@ -1,0 +1,48 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Passing Data Between Pages (1)</h1>
+	
+	Tapestry's policy of doing Redirect-After-Post makes it a bit tricky to pass data between pages. You can setup a 
+	page object before the REDIRECT but there is no guarantee you will get the same page object during the RENDER. 
+	For this reason, Tapestry clears all the fields as it passivates the page before the REDIRECT.  It returns the page 
+	to a pool of pages, ready for the next request to RENDER the page.<br/><br/>
+	
+	There are 5 ways to pass data between pages in a way that will survive the Redirect-After-Post:
+	
+	<ul>
+		<li><strong>Activation Context</strong><br/>
+			Usually employed to pass an <strong>identifier</strong>, eg. productId.
+			<form t:type="form" t:id="useactivationcontext">
+				<input type="submit" value="Use Activation Context"/>
+			</form>
+		</li>
+		<li><strong>Persistence</strong><br/>
+			Usually the most appropriate way to pass <strong>whole objects, lengthy data, or data you don't 
+			want to be visible in a URL</strong>
+			<form t:type="form" t:id="usepersistence">
+				<input type="submit" value="Use Persistence"/>
+			</form>
+		</li>
+		<li><strong>Request Parameters</strong><br/>
+			May be the most appropriate way to pass <strong>filter criteria</strong> because, 
+			arguably, it produces the most RESTful URL in that situation.
+			<form t:type="form" t:id="userequestparameters">
+				<input type="submit" value="Use Request Parameters"/>
+			</form>
+		</li>
+		<li><strong>Application State Objects</strong><br/>
+			The best way to share data between multiple pages as in a <strong>wizard or a shopping basket</strong>.<br/>
+			See the <em>Sharing Across Multiple Pages</em> example.<br/><br/>
+		</li>
+		<li><strong>Services</strong><br/>
+			The best way to share an object across all sessions in the same application.<br/>
+			See the <em>Sharing Across the Application</em> example.<br/><br/>
+		</li>
+	</ul> 
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/PassingDataBetweenPages1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/PassingDataBetweenPages1.java"/>
+</body>
+</html>

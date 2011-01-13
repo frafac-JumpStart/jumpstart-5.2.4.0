@@ -1,0 +1,55 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>Creating Validators (1)</h1>
+	
+	This page demonstrates how to create a validator.<br/><br/>
+
+	Our example validator is called "letters" - it ensures that a String field contains letters only.<br/>
+	We have created a server-side implementation called Letter.java and a client-side implementation called Tapestry.Validator.letters in validators.js.<br/><br/>
+
+	<form t:type="form" t:id="inputs">
+		<t:errors/>
+		<table>
+			<tr>
+				<td><t:label for="firstName"/>:</td>
+				<td><input t:type="TextField" t:id="firstName" t:validate="required, maxlength=10, letters" size="10"/></td>
+				<td>(required, maxLength=10, letters only)</td>
+			</tr>
+			<tr>
+				<td><t:label for="lastName"/>:</td>
+				<td><input t:type="TextField" t:id="lastName" t:validate="required, maxLength=10, letters" size="10"/></td>
+				<td>(required, maxLength=10, letters only)</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Display"/></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+	
+	The Letters class and validation messages, ValidationMessages.properties, are available to the whole application because we 
+	contributed them in AppModule.<br/>
+	However, javascript must be added to each page that needs it, which we've done with @IncludeJavaScriptLibrary in the page class.<br/><br/>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/validation.html">Form Input and Validation</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>, 
+	<a href="http://wiki.apache.org/tapestry/Tapestry5HowToAddValidators">How To Add Validators</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-ioc/service.html">Tapestry IoC Services</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/CreatingValidators1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/CreatingValidators1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/validators/Letters.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/validators/ValidationMessages.properties"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/js/validators.js"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/services/AppModule.java"/>
+</body>
+</html>

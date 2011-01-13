@@ -1,0 +1,25 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body>
+	<h1>Annotations</h1> 
+	
+	Tapestry doesn't just look for particular method names - it also looks for particular annotations. Here are some useful ones...<br/><br/>
+	<strong>@OnEvent(value = EventConstants.ACTIVATE).</strong> You can put this annotation on a method instead of naming the method <em>onActivate</em>.<br/><br/>
+	<strong>@SetupRender.</strong> You can put this annotation on a method instead of naming the method <em>setupRender</em>.<br/><br/>
+	<strong>@CleanupRender.</strong> You can put this annotation on a method instead of naming the method <em>cleanupRender</em>.<br/><br/>
+	<strong>@Log.</strong> If you put this annotation on a method then Tapestry will log calls to the method at debug level.<br/><br/>
+	<strong>@Property.</strong> If you put this annotation on a field then Tapestry will invisibly provide a getter and setter 
+	for the field.  If the field has a leading underscore, Tapestry will generate the getter and setter names <em>without</em> the
+	underscore.<br/><br/>
+
+	The value of field <code>_message</code> is "<span style="color:red">${message}</span>".<br/><br/>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/rendering.html">Component Rendering</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/logging.html">Logging</a>.<br/><br/>
+
+	<t:pagelink page="Index">Home</t:pagelink><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/lang/Annotations.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/lang/Annotations.java"/>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<html t:type="theapp/layout" title="literal:Welcome" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+	<t:remove>
+	 	<link rel="stylesheet" type="text/css" href="../../../css/theapp/global.css"/>
+	</t:remove>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<div class="bozo">Hi!</div>
+	<br/>
+	<br/>
+	<div style="text-align:center;">
+		This version introduces maintenance of Users, Roles, and UserRoles to explore handling of one-to-many relationships.<br/>
+		The domain model is illustrated on the Help page.<br/>
+		A future version of JumpStart may add role-based checking of authorization to the various functions.<br/>
+	</div> 
+</html>

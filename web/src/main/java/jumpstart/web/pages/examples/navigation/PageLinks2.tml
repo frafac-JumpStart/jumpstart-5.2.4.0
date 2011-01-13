@@ -1,0 +1,21 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Page Links (2)</h1>
+	
+	This page is called <em>examples/navigation/PageLinks2</em>.<br/>
+	Look at the URL of this page. It's the render request.<br/>
+	The render request asked Tapestry to get an instance of this page, activate it, render the output and return it.<br/><br/>
+
+	References:	
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/PageLink.html">PageLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/rendering.html">Component Rendering</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="examples/navigation/PageLinks1" href="#">Return</a><br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/PageLinks2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/PageLinks2.java"/>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Total Control Object Select</h1>
+	
+	Sometimes you'll need more control over the model, which you can achieve by creating a custom model.<br/>
+	In this example we've created PersonSelectModel to give us control over the option labels.<br/><br/>
+
+	<form t:type="form">
+		Person: <select t:type="select" t:model="persons" t:value="person" t:encoder="persons"></select>
+		<input type="submit" value="Submit"/>
+		You chose: ${person}
+	</form>
+	
+	References: 
+	<a href="http://wiki.apache.org/tapestry/Tapestry5HowtoSelectWithObjects">How To Select With Objects</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/EventContext.html">EventContext API</a>.<br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	The source for BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/TotalControlObjectSelect.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/TotalControlObjectSelect.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/model/examples/select/PersonSelectModel.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/PersonService.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+</body>
+</html>

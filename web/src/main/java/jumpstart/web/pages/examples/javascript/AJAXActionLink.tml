@@ -1,0 +1,42 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>AJAX ActionLink</h1>
+	This page demonstrates how easily <a href="http://en.wikipedia.org/wiki/AJAX">AJAX</a> behaviour can be given to an ActionLink, 
+	without writing any JavaScript.
+	In this demonstration, note how the whole page is refreshed when you click the first link, whereas only time2 is updated when you 
+	click on the second, AJAX-enabled, link.<br/><br/>
+
+	<div style="margin-left: 50px">
+		<a t:type="actionlink" t:id="refreshPage" href="#">Refresh whole page - this ActionLink is not AJAX-enabled</a><br/>
+		<a t:type="actionlink" t:id="refreshZone" href="#" t:zone="time2zone">Refresh time2 only - this ActionLink is AJAX-enabled</a><br/><br/>
+
+		time1:  ${time1}
+		<t:zone t:id="time2zone">
+			time2:  ${time2}
+		</t:zone><br/>
+	</div>
+
+	We gave AJAX behaviour to the second link by specifying a <code>zone</code> parameter on it and putting a Zone component around time2.<br/><br/>
+	
+	<strong>Without zone</strong> specified on the first ActionLink, clicking it causes the normal sequence of 
+	<strong>EVENT and REDIRECT-AFTER-POST</strong>.<br/>
+	The event handler would return a value denoting the <em>page to render</em>.  This involves 2 round trips to the server.<br/><br/>
+	
+	<strong>With zone</strong> specified on the second ActionLink, clicking it causes an <strong>EVENT-PARTIALRESPONSE</strong> sequence.  <br/>
+	The event handler returns a value denoting which <em>component or block to update</em>.  This involves only 1 round trip to the server.<br/><br/> 
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/ActionLink.html">ActionLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/ajax.html">Ajax</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Zone.html">Zone</a>,
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/annotations/InjectComponent.html">InjectComponent API</a>.<br/><br/>
+	
+	Some statistics: the AJAX traffic is less than 1,000 bytes, whereas the non-AJAX traffic is over 3,000 bytes. The AJAX 
+	link generates 1 POST whereas the non-AJAX generates 2 GETs (which is normal for ActionLink).<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXActionLink.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXActionLink.java"/>
+</body>
+</html>

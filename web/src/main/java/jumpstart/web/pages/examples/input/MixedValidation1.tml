@@ -1,0 +1,57 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<head>
+	<style type="text/css">
+		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
+	</style>
+</head>
+<body>
+	<h1>Mixed Validation (1)</h1>
+	
+	This page demonstrates mixing Tapestry validators with programmatic validation in an <em>onValidate()</em> method.<br/>
+	Tapestry validators check "required" and "maxlength=10".  Programmatic validation checks for "letters only".<br/><br/>
+
+	<form t:type="form" t:id="inputs" t:clientValidation="false">
+		<t:errors/>
+		<table>
+			<tr>
+				<td><t:label for="firstName"/>:</td>
+				<td><input t:type="TextField" t:id="firstName" t:validate="required, maxlength=10" size="10"/></td>
+				<td>(required, maxLength=10, letters only)</td>
+			</tr>
+			<tr>
+				<td><t:label for="lastName"/>:</td>
+				<td><input t:type="TextField" t:id="lastName" t:validate="required, maxLength=10" size="10"/></td>
+				<td>(required, maxLength=10, letters only)</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Display"/></td>
+				<td></td>
+			</tr>
+		</table>
+	</form>
+
+	One of the events fired by Form is VALIDATE_FORM, so we know that Tapestry will call an onValidateForm() method if it 
+	exists.	It is in onValidateForm() that we validate for "letters only".<br/><br/>
+	
+	Server-side validation cannot display the bubble-style pop-up error messages, but it can display a box of errors.<br/>
+	To make sure all error messages are displayed together in the same style, we've done two more things:
+	<ul>
+		<li>In the template, we've specified <code>clientValidation="false"</code> on the form to turn off the bubble-style 
+			pop-up error messages.</li>
+		<li>In the class, in onValidateForm() we use the Form's <code>recordError(...)</code> methods. We're using the same 
+			methods that the Tapestry validators use.</li>
+	</ul>
+	The result is that errors are displayed in the same style regardless of whether the validator or the page class found the error.<br/><br/>
+	
+	References: <a href="http://wiki.apache.org/tapestry/Tapestry5HowToUseForms">How To Use Forms</a>,
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/corelib/components/Form.html">Form API</a>,
+	<a href="http://tapestry.apache.org/tapestry5/guide/validation.html">Form Input and Validation</a>,
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a><br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+		
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/MixedValidation1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/MixedValidation1.java"/>
+</body>
+</html>

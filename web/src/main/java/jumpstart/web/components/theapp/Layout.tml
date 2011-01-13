@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a DOCTYPE to allow us to use special characters like &nbsp; 
+	We use a "strict" DTD to make IE follow the alignment rules. -->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<head>
+	<title>${title}</title>
+	<link rel="stylesheet" type="text/css" href="${stylesheet}"/>
+	<t:remove>
+ 		<link rel="stylesheet" type="text/css" href="../../css/theapp/global.css"/>
+ 	</t:remove>
+</head>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+	<div id="page">
+				
+		<div id="top">
+	
+			<div id="banner">
+				<h1>Tapestry JumpStart</h1>
+				<div class="links">
+					Login Id: ${loginId}
+					&nbsp;|&nbsp;
+					<a t:type="pagelink" t:page="theapp/security/MyPreferencesEdit" href="#">Preferences</a>
+					&nbsp;|&nbsp;
+					<a t:type="pagelink" t:page="theapp/security/MyAccountView" href="#">Account</a>
+					&nbsp;|&nbsp;
+					<a t:type="pagelink" t:page="theapp/general/Help" href="#">Help</a>
+					&nbsp;|&nbsp;
+					<a t:type="pagelink" t:page="theapp/general/About" href="#">About</a>
+					&nbsp;|&nbsp;
+					<a t:type="actionlink" t:id="Logout" href="#">Log Out</a>
+				</div>
+			</div>
+			
+			<t:theapp.navbar tab="${tab}" subtab="${subtab}"/>
+
+		</div>
+	
+		<div id="middle">	
+			<table id="mid_table">
+				<tr id="mid_tr">
+					<td id="content">
+						<t:body/>
+					</td>
+				</tr>
+			</table>
+		</div>
+	
+	</div>		
+
+</body>
+</html>

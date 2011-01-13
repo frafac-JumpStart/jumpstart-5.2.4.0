@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.6.5
+Created-By: 1.5.0_05-48 ("Apple Computer, Inc.")
+Class-Path: ./lib/slf4j-api-1.5.2.jar ./lib/slf4j-log4j12-1.5.2.jar ./lib/joda-time-1.6.jar
+Package: jumpstart.business
+Extension-Name: jumpstart
+Specification-Title: jumpstart
+Specification-Version: 4.12.2
+Specification-Vendor: JumpStart
+Implementation-Title: jumpstart.business jumpstart.util
+Implementation-Version: 4.12.2
+Implementation-Vendor: JumpStart

@@ -1,0 +1,31 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Sharing Across Multiple Pages (1)</h1>
+
+	This page demonstrates how to share a bit of data between multiple pages using a Session State Object (an SSO).<br/>
+	SSOs are shared between the pages of your web session only, and not with other sessions using the same application.<br/><br/>
+	
+	To turn a field into an SSO, annotate it with <em>@SessionState</em>.  If any other page or component in your web session 
+	declares a field of the same type and annotates it with <em>@SessionState</em> then it will share the same value.<br/><br/>
+	
+	We use the example of a simple ShoppingBasket object, created in this page and displayed in the next page.<br/><br/>
+
+	<t:beaneditform object="myBasket" submitLabel="Next &gt;">[An editor for shoppingbasket]</t:beaneditform>
+	
+	Tapestry creates this ShoppingBasket object the first time the page uses it.  Other sessions will not see it, 
+	but any pages in your session will use it if they declare a field of type ShoppingBasket annotated with 
+	@SessionState.<br/><br/>
+
+	<strong>Caution:</strong> A consideration is the impact in clustered servers.  Howard discusses this in 
+	<a href="http://thread.gmane.org/gmane.comp.java.tapestry.user/65410/focus=65426">Tapestry App Replication</a>.<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/appstate.html">Session State</a>.<br/><br/>
+	
+	<a t:type="eventlink" t:event="GoHome" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/SharingAcrossMultiplePages1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/state/SharingAcrossMultiplePages1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/state/examples/state/ShoppingBasket.java"/>
+</body>
+</html>

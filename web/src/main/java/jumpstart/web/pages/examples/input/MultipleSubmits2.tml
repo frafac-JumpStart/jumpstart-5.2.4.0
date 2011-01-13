@@ -1,0 +1,14 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Multiple Submits (2)</h1>
+	
+	${yourSearch}<br/><br/>
+	
+	<a t:type="pagelink" t:page="examples/input/MultipleSubmits1" href="#">Return</a><br/><br/>
+	
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/MultipleSubmits2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/input/MultipleSubmits2.java"/>
+</body>
+</html>

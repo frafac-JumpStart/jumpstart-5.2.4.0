@@ -1,0 +1,25 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<t:remove>
+	<link rel="stylesheet" type="text/css" href="../../css/theapp/global.css"/>
+</t:remove>
+
+<t:content>
+	<div id="navbar">
+		<ul>
+			<li><a t:type="pagelink" t:page="theapp/security/UserSearch" t:context="null" class="prop:cssClassForSecurityTab"><span>Security</span></a></li>
+		</ul>
+	</div>
+
+	<div id="subnavbar">
+		<div t:type="if" t:test="securityTabActive">
+			<ul>
+				<li><a t:type="pagelink" t:page="theapp/security/UserSearch" t:context="null" class="prop:cssClassForUserSubTab"><span>User</span></a></li>
+				<li><a t:type="pagelink" t:page="theapp/security/RoleSearch" t:context="null" class="prop:cssClassForRoleSubTab"><span>Role</span></a></li>
+				<li><a t:type="pagelink" t:page="theapp/security/UserRoleSearch" t:context="null" class="prop:cssClassForUserRoleSubTab"><span>User Role</span></a></li>
+			</ul>
+ 		</div>
+	</div>
+</t:content>
+
+</html>

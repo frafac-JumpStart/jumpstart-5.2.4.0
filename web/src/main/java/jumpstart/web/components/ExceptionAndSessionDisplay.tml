@@ -1,0 +1,31 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+	<!-- 
+		This component is identical to the portion of Tapestry's default ExceptionReport page that
+		handles productionMode=false.
+	 -->
+
+<t:content>
+    <h1 class="t-exception-report">An unexpected application exception has occurred.</h1>
+
+	<t:exceptiondisplay exception="exception"/>
+
+	<div class="t-env-data">
+		<h2>Request</h2>
+		<t:renderobject object="request"/>
+		
+		<t:if test="hasSession">
+			<h2>Session</h2>
+			<dl>
+				<t:loop source="session.attributeNames" value="attributeName">
+					<dt>${attributeName}</dt>
+					<dd>
+						<t:renderobject object="attributeValue"/>
+					</dd>
+				</t:loop>
+			</dl>
+		</t:if>
+	</div>
+</t:content>
+
+</html>

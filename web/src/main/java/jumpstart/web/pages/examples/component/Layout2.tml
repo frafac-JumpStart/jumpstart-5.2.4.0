@@ -1,0 +1,24 @@
+<t:examples.component.layout xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+	<h1>Layout (2)</h1>
+
+	This second page uses the same examples.component.Layout component as the first page.<br/><br/>
+	
+	Layout provides the coloured border and the text and links in it.<br/><br/>
+	
+	Layout also decides what to do with the content it found between the opening 
+	<code>&lt;t:examples.component.layout ...&gt;</code> and closing <code>&lt;/t:examples.component.layout&gt;</code> tags.  
+	That content includes this text and the source code displays.
+	Layout could have ignored the content, but instead it renders it with a Body component.  
+	You'll see <code>&lt;t:body&gt;</code> in Layout.tml.<br/><br/>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/guide/layout.html">Layout Component</a>, 
+	and the <code>&lt;body></code> section of 
+	<a href="http://tapestry.apache.org/tapestry5/guide/templates.html">Component Templates</a>.<br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/Layout2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/component/Layout2.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/Layout.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/components/examples/component/Layout.java"/>
+</t:examples.component.layout>

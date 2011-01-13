@@ -1,0 +1,72 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+<head>
+	<link rel="stylesheet" type="text/css" href="${context:css/examples/examples.css}"/>
+ 	<link rel="stylesheet" type="text/css" href="../../../css/examples/examples.css"/>
+</head>
+<body>
+	<h1>AjaxFormLoop (1)</h1>
+	
+	An AjaxFormLoop used that gives full CRUD functionality (Create, Review, Update, and Delete).<br/>
+	The changes are not persisted to the database until the Save button is pressed.<br/><br/>
+
+	<form t:type="form" t:id="personsedit">
+		<t:errors/>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Region</th>
+					<th>Start Date</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr t:type="AjaxFormLoop" t:source="personHolders" t:value="personHolder" t:encoder="encoder">
+					<t:unless t:test="personHolder.deleted">
+						<t:submitnotifier>
+							<td>${personHolder.person.id}</td>
+							<td><input t:type="TextField" t:id="firstName" t:value="personHolder.person.firstName" t:validate="required, maxlength=10" size="10"/></td>
+							<td><input t:type="TextField" t:id="lastName" t:value="personHolder.person.lastName" t:validate="required, maxlength=10" size="10"/></td>
+							<td><input t:type="Select" t:id="region" value="personHolder.person.region" t:validate="required"/></td>
+							<td><input t:type="DateField" t:id="startDate" t:value="personHolder.person.startDate" t:format="prop:dateFormat" t:validate="required" size="10"/></td>
+							<!-- If optimistic locking is needed then uncomment this next line.
+								<t:hidden value="personHolder.person.version"/>
+							 -->
+							<td><t:removerowlink>remove</t:removerowlink></td>
+						</t:submitnotifier>
+					</t:unless>
+					<p:addRow>
+						<td colspan="5" style="text-align: right">
+							<t:addrowlink>Add a row</t:addrowlink>
+						</td>
+					</p:addRow>
+				</tr>
+			</tbody>
+	 	</table>
+	 	<input type="submit" value="Save"/>
+		<button t:type="chenillekit/Button" type="button" t:event="Refresh" style="margin-left: 5px;">Refresh</button>
+	</form>
+	
+	NOTE: There have been reports of "Add a row" failing following inactivity (see <a href="https://issues.apache.org/jira/browse/TAP5-733">TAP5-733</a>), 
+	and in another circumstance that might involve cookies (discussed
+	<a href="http://www.nabble.com/Is-AjaxFormLoop-example-working-for-you--ts24526565.html">here</a>). 
+	Also, if the template is modified then redisplaying the page will fail with a type coercion problem, requiring restart of the server.<br/><br/>
+
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Loop.html">Loop</a>,
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/ValueEncoder.html">ValueEncoder API</a>.<br/><br/>
+
+	<a t:type="actionlink" t:id="GoHome" href="#">Home</a><br/><br/>
+	
+	The source for BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/AjaxFormLoop1.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/tables/AjaxFormLoop1.java"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/css/examples/examples.css"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/PersonService.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body>
+	<h1>Better Output</h1>
+
+	The earlier example, Output, generated the message <em>every time</em> getMessage() is called.<br/>
+	More usual, however, is to set up everything on the page at one point, in <strong>setupRender()</strong>.<br/><br/>
+
+	<strong>${message}</strong><br/><br/>
+	
+	References: <em>Expansions</em> in 
+	<a href="http://tapestry.apache.org/tapestry5/guide/templates.html">Component Templates</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/rendering.html">Component Rendering</a>.<br/><br/>
+	
+	<t:pagelink page="examples/output/Better" href="#">Redisplay</t:pagelink><br/><br/>
+	
+	<t:pagelink page="Index" href="#">Home</t:pagelink><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/output/BetterOutput.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/output/BetterOutput.java"/>
+</body>
+</html>

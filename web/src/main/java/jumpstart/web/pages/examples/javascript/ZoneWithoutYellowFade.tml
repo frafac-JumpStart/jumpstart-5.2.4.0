@@ -1,0 +1,26 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Zone Without Yellow Fade</h1>
+	This page demonstrates how to eliminate the "yellow fade" effect that occurs when a Zone updates.<br/><br/>
+	
+	The solution is to set the <code>update</code> parameter of Zone to <code>"show"</code>.  Its default value is <code>"highlight"</code>.<br/><br/>
+
+	<div style="margin-left: 50px">
+		<a t:type="actionlink" t:id="refreshPage" href="#">Refresh whole page - this ActionLink is not AJAX-enabled</a><br/>
+		<a t:type="actionlink" t:id="refreshZone" href="#" t:zone="time2zone">Refresh time2 only - this ActionLink is AJAX-enabled</a><br/><br/>
+
+		time1:  ${time1}
+		<t:zone t:id="time2zone" t:update="show">
+			time2:  ${time2}
+		</t:zone><br/>
+	</div>
+	
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Zone.html">Zone</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+	
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/ZoneWithoutYellowFade.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/ZoneWithoutYellowFade.java"/>
+</body>
+</html>

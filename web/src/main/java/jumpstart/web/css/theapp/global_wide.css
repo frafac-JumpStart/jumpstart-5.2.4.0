@@ -1,0 +1,190 @@
+
+/***************
+ * Basic elements
+ ***************/
+
+body		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; }
+tr			{ background: #ffffff; padding: 0; }
+td			{ font-size: 11px; color: black; text-align: center; font-weight: normal; padding: 0; }
+th			{ font-size: 11px; color: black; text-align: center; font-weight: normal; padding: 0; }
+input		{ font-size: 11px; color: navy; font-weight: normal }
+select		{ font-size: 11px; color: navy; font-weight: normal }
+img			{ border: none; }	/* Necessary for browsers other than Safari */
+form		{ margin: 0px; }	/* Necessary for IE */
+
+a:link		{ color: blue }
+a:visited	{ color: blue }
+/* a:active	{ color: orange } */
+a:hover 	{ color: #f59300; }
+
+.error		{ color: red; text-align: center; }
+.warning	{ color: orange; text-align: center; }
+.info		{ color: green; text-align: center; }
+
+/* Override Tapestry's 
+div.t-error ul	{ text-align: left; }
+*/
+.datePicker td .topLabel { color:black; } /* For Windows - because DateField uses the window title colour */
+
+/***************
+ * Layout elements
+ ***************/
+
+#top					{ background: #eee; }
+
+#banner 				{ padding: 1.0em; }
+#banner h1				{ display: inline; font-family: Arial, Helvetica, sans-serif; font-size:x-large; font-weight: bold; color:#999999; }
+#banner h2				{ display: inline; font-family: Arial, Helvetica, sans-serif; font-size:medium; font-weight: bold; color:#999999 }
+#banner .links			{ position: absolute; right: 2.0em; top: 1.0em; }
+
+#navbar					{ clear: both; width:100%; margin-top: -12px; background:#F4F4F4; font-size:93%; line-height:normal; }
+#navbar ul				{ margin:0; padding:10px 10px 0 10px; }
+#navbar li				{ list-style:none; display:inline;  margin:0; padding:0; }
+#navbar a				{ float:left; background:url("../../images/tableftJ.gif") no-repeat left top; margin:0; padding:0 0 0 5px; text-decoration:none; }
+#navbar a span			{ float:left; display:block; background:url("../../images/tabrightJ.gif") no-repeat right top; padding:5px 15px 4px 6px;
+	color:#24618E; }
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#navbar a span			{ float:none; }
+/* End IE5-Mac hack */
+#navbar a:hover			{ }
+#navbar a:hover span	{ color: #f59300; }
+#navbar .activeTab		{ background-position:0% -42px;; }
+#navbar .activeTab span	{ background-position:100% -42px; color:#FFF; }
+#navbar .activeTab:hover span	{ background-position:100% -42px; color: #f59300; }
+
+#subnavbar						{ clear: both; list-style: none; background:#24618E none repeat scroll 0%; color:#FFFFFF;
+	font-size:11px; font-weight:normal; height: 18px; padding-top: 4px; }
+#subnavbar ul					{ padding-left: 10px; margin: 0; display: inline; }
+#subnavbar li					{ list-style: none; display: inline; }
+#subnavbar a					{ color: #DEDEDE; font-weight: normal; padding-left: 10px; text-decoration:none; }
+#subnavbar .activeSubTab 		{ color: #FFFFFF; font-weight: bold; }
+#subnavbar a:hover				{ color: #f59300; }
+
+/*
+ * Beware - using "#middle table", "#middle tr", etc at this level will override
+ * descendant tables down in the actual content. 
+ * Could use child selectors like "#middle > table" and "#middle > table > tr" 
+ * but Windows IE5, 5.5, & 6 don't support them.
+ * Instead I've used specific ids like "mid_table", "mid_tr", "leftnav" and "content".
+ */
+#middle			{ clear: both; margin: 8px; border: none; padding: 0; }
+#mid_table		{ width: 100%; margin: 0; border: none; padding: 0; }
+#mid_tr			{ width: 100%; margin: -2px; border: none; padding: 0; }
+
+#content		{ width: 100%; margin: 0; border: none; padding: 0; vertical-align: top;  }
+
+#cleardiv		{	/* to fix IE5 and IE5.5 */ clear: both; height: 1em; }
+#footer			{ clear: both; margin: 0; padding: .5em 1em; color: #333; background-color: #fff; }
+
+/***************
+ * Content
+ ***************/
+
+.contentblock								{ }
+.contentblock h1							{ background: #24818E; /* nav: 24618E green: 2e8b57 */
+	border-bottom: #1c54a4 solid 1px; border-left: #98B4EB solid 1px; border-right: #1c54a4 solid 1px; border-top: #98B4EB solid 1px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;	color: #fff; font-weight: bold; font-size: 11px; line-height: 14px;
+	padding: 4px 4px; margin: 0px; text-align: left; 
+	}
+
+.badrequest			{ font-size: medium; color: black; margin-top: 16px; text-align: center; }
+
+.bozo				{ border: none; font-size:xx-large; font-weight: bold; color: #3D69B6; text-align: center; }
+
+.buttons									{ background: #d6d6d6;
+	border-bottom: #bbb solid 1px; border-left: #eee solid 1px; border-right: #bbb solid 1px; border-top: #eee solid 1px;
+	padding: 2px 4px; text-align: center;
+    }
+.buttons 									{ margin: 0; padding: 0 2px 0 0; }
+.buttons table								{ margin: auto; padding: 0 2px 0 0; }
+.buttons tr									{ background-color: transparent; }
+.buttons td									{ display: inline; list-style: none; margin: 0 2px; padding: 0; }
+.buttons input, .buttons button	{ background: #24818E; 
+    border-bottom: 1px solid #052249; border-right: 1px solid #052249; border-left: 1px solid #c4d9f5; border-top: 1px solid #c4d9f5;
+    font-family: Verdana, Arial, Helvetica, sans-serif; color: #fff; font-size: 11px; font-weight: normal;
+    padding: 1px 1px; margin: 1px 1px; text-decoration: none; cursor: pointer; 
+    }
+.buttons input.positive, .buttons button.positive	{ background: #24618E; }
+.buttons input:hover, .buttons button:hover	{ color: #f59300; }
+.buttons input[disabled="disabled"] 		{ background: gray; cursor: default; }
+.buttons input[disabled="disabled"]:hover 	{ background: gray; }
+.buttons input[disabled="disabled"]:focus 	{ background: gray; }
+
+.searchblock		{ border-top: #ccc solid 1px; border-right: #bbb solid 0; border-bottom: #bbb solid 0; border-left: #ccc solid 1px;
+	width: 100%; margin-top: 0px; margin-bottom: 20px; }
+	
+.search	table		{ width: 100%; }
+.search	tr			{ border-style: solid; }
+.search	th			{ background: #eee;
+	border-bottom: #d1d1d1 solid 1px;	border-left: #fdfdfd solid 1px;	border-right: #d1d1d1 solid 1px; border-top: #fdfdfd solid 1px;
+	padding: 3px 5px; color: #000; width: 20%; text-align: right;	font-weight: bold; 
+	}
+.search	td			{ background: #eee;
+	border-bottom: #d1d1d1 solid 1px;	border-left: #fdfdfd solid 1px;	border-right: #d1d1d1 solid 1px; border-top: #fdfdfd solid 1px;
+	padding: 0 5px; color: #000; width: auto; text-align: left; 
+	}
+
+
+.recordblock		{ border-top: #ccc solid 1px; border-right: #bbb solid 0; border-bottom: #bbb solid 0; border-left: #ccc solid 1px;
+    width: 100%; margin-top: 0px; margin-bottom: 20px;
+    }
+.record	table		{ width: 100%; }
+.record	tr			{ border-style: solid; }
+.record	th			{ background: #eee;
+	border-bottom: #d1d1d1 solid 1px; border-left: #fdfdfd solid 1px; border-right: #d1d1d1 solid 1px; border-top: #fdfdfd solid 1px;
+	padding: 3px 5px; color: #000; width: 50%; text-align: right; font-weight: bold;
+    }
+.record	td			{ background: #eee;
+	border-bottom: #d1d1d1 solid 1px; border-left: #fdfdfd solid 1px; border-right: #d1d1d1 solid 1px; border-top: #fdfdfd solid 1px;
+	padding: 0 5px; color: #000; width: 50%; text-align: left;
+    }
+
+
+.matrixblock		{ border-top: #ccc solid 1px; border-right: #bbb solid 0; border-bottom: #bbb solid 0; border-left: #ccc solid 1px;
+    width: 100%;
+    }
+.matrixblock	.nodata				{ padding: 4px 4px; line-height: 14px; }
+
+.matrix				{ }
+.matrix	table		{ width: 100%; }
+.matrix tr			{ background: #ffffff; }
+.matrix tr.even		{  }
+.matrix tr.odd		{  }
+.matrix	th			{ background: #d6d6d6;
+	border-bottom: #c2c2c2 solid 1px; border-left: #eee solid 1px; border-right: #c2c2c2 solid 1px; border-top: #eee solid 1px;
+	font-weight: bold; padding: 2px 5px; text-align: left;
+    }
+.matrix	td 			{ background: #eee;
+	border-bottom: #d1d1d1 solid 1px; border-left: #fdfdfd solid 1px; border-right: #d1d1d1 solid 1px; border-top: #fdfdfd solid 1px;
+	padding: 3px 5px; color: #000; width: auto; text-align: left;
+    }
+.matrix	td img		{  }
+.matrix	td	.left	{ text-align: left; }
+
+/* Overriding the Grid component's style */
+
+.matrix DIV.t-data-grid					{ font-family: inherit; }
+.matrix DIV.t-data-grid-pager			{ margin: 0px 0px; background: #d6d6d6; }
+.matrix DIV.t-data-grid-pager A, DIV.t-data-grid-pager SPAN.current 
+										{ text-decoration: none; color: black; padding: 2px 5px; font-size: small;
+											border: 1px solid white; margin-right: 5px; }
+.matrix DIV.t-data-grid-pager A:hover	{ border: 1px solid black; }
+.matrix DIV.t-data-grid-pager SPAN.current	{ color: white; background-color: #24618E; }
+
+.matrix TABLE.t-data-grid				{ border-collapse: inherit; border: none; border-left: none;
+											background-color: inherit; }
+.matrix TABLE.t-data-grid TR TH A		{ color: black; }
+.matrix TABLE.t-data-grid THEAD TR		{ color: inherit; background: #ffffff; }
+.matrix TABLE.t-data-grid THEAD TR TH	{ background: #d6d6d6; white-space: inherit; 
+	border-bottom: #c2c2c2 solid 1px; border-left: #eee solid 1px; border-right: #c2c2c2 solid 1px; border-top: #eee solid 1px;
+	font-weight: bold; padding: 2px 5px; text-align: left; vertical-align: bottom; 
+	}
+.matrix TABLE.t-data-grid TBODY TR TD	{ background: #eee;
+	border-bottom: #d1d1d1 solid 1px; border-left: #fdfdfd solid 1px; border-right: #d1d1d1 solid 1px; border-top: #fdfdfd solid 1px;
+	padding: 3px 5px; color: #000; width: auto; text-align: left;
+    }
+
+
+.action_link			{ display: block; float: left; width: 50px; color: #99F; margin-left: 5px; }
+.action_link a 			{ text-decoration: none; color: #00F; }
+.action_link a:hover 	{ color: #f59300; }

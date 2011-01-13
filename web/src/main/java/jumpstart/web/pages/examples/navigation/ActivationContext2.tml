@@ -1,0 +1,29 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
+	<h1>Activation Context (2)</h1>
+	
+	This page is called <em>examples/navigation/ActivationContext2</em>.<br/>
+	Look at the URL of this page. It's the render request.<br/>
+	The render request asked Tapestry to get an instance of this page, activate it with the parameter <em>1</em>, render the output and return it.<br/><br/>
+
+	This page received the parameters, ie. the activation context, by providing the method <em>onActivate(Long personId)</em>.<br/><br/>
+
+	Here is the Person you requested:<br/><br/>
+
+	<t:beandisplay object="person">[BeanDisplay here]</t:beandisplay><br/>
+
+	References:	
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/PageLink.html">PageLink</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/pagenav.html">Page Navigation</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/rendering.html">Component Rendering</a>.<br/><br/>
+
+	<a t:type="pagelink" t:page="examples/navigation/ActivationContext1" href="#">Return</a><br/><br/>
+	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ActivationContext2.tml"/>
+	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/navigation/ActivationContext2.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/PersonService.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
+	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+</body>
+</html>
