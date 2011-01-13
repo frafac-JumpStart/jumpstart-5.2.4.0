@@ -58,8 +58,8 @@ public class AppModule {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static void contributeTranslatorSource(Configuration<Translator> configuration) {
-		configuration.add(new YesNoTranslator());
+	public static void contributeTranslatorSource(MappedConfiguration<Class,Translator> configuration) {
+		configuration.add(Boolean.class,new YesNoTranslator());
 	}
 
 	public void contributeValidationMessagesSource(OrderedConfiguration<String> configuration) {

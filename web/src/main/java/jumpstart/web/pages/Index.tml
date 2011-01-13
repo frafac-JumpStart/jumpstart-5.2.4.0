@@ -29,8 +29,8 @@
 	</div>
 
 	<div id="titles">
-		<h1>JumpStart 4.12.2</h1>
-		<h2>For Tapestry 5.1.0.5</h2>
+		<h1>JumpStart 5.2.4.0</h1>
+		<h2>For Tapestry 5.2.4</h2>
 		
 		Choose one of these "getting started" examples or 
 		<a t:type="pagelink" t:page="theapp/Login" href="#">log in</a> 
@@ -45,12 +45,12 @@
 				<br/>
 				<a t:type="pagelink" t:page="examples/easycrud/Index" href="#">Easy CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/totalcontrolcrud/Index" href="#">Total Control CRUD</a><br/>
-				<a t:type="pagelink" t:page="examples/onepagecrud/Index" href="#">One Page CRUD</a><br/>
+				<!-- a t:type="pagelink" t:page="examples/onepagecrud/Index" href="#">One Page CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/filtercrud/Index" href="#">Filter CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/componentscrud/Index" href="#">Components CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/ajaxfiltercrud/Index" href="#">AJAX Filter CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/ajaxcomponentscrud/Index" href="#">AJAX Components CRUD</a><br/>
-				<a t:type="pagelink" t:page="examples/ajaxgracefulcrud/Index" href="#">AJAX Graceful CRUD</a><br/>
+				<a t:type="pagelink" t:page="examples/ajaxgracefulcrud/Index" href="#">AJAX Graceful CRUD</a><br/-->
 				<a t:type="pagelink" t:page="examples/layoutwithmenu/Page1" href="#">Add a Layout with Menu</a><br/>
 				<br/>
 				<a t:type="pagelink" t:page="examples/output/Output" href="#">Output</a><br/>
@@ -172,14 +172,14 @@
 				<a t:type="pagelink" t:page="examples/localization/LocalizationByMessageCatalog" href="#">Localization By Message Catalog</a><br/>
 				<a t:type="pagelink" t:page="examples/localization/LocalizationByTemplate" href="#">Localization By Template</a><br/>
 				<br/>
-				<a t:type="pagelink" t:page="examples/wizard/WizardUsingFormFragments" href="#">Wizard Using Form Fragments</a><br/>
+				<!-- a t:type="pagelink" t:page="examples/wizard/WizardUsingFormFragments" href="#">Wizard Using Form Fragments</a><br/>
 				<a t:type="pagelink" t:page="examples/wizard/WizardUsingPages1" href="#">Wizard Using Pages</a><br/>
-				<br/>
+				<br/ -->
 				<a t:type="pagelink" t:page="examples/wizard/ConversationsList" href="#">Conversations List</a><br/>
 				<br/>
  				<a t:type="pagelink" t:page="examples/jodatime/1" href="#">Joda Time</a><br/>
 				<br/>
-				Found a bug? Please 
+			
 				<a href="mailto:&#103;&#101;&#111;&#102;&#102;&#046;&#099;&#097;&#108;&#108;&#101;&#110;&#100;&#101;&#114;&#046;&#106;&#117;&#109;&#112;&#115;&#116;&#097;&#114;&#116;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;?subject=Bug in JumpStart 4.12.2">report it</a>.<br/>
 				Comments? Suggestions? <br/>Please send to <a href="http://tapestry5.ideascale.com/akira/ideafactory.do?discussionID=9482">Tapestry 5 Caffe</a> or 
 				<a href="mailto:&#103;&#101;&#111;&#102;&#102;&#046;&#099;&#097;&#108;&#108;&#101;&#110;&#100;&#101;&#114;&#046;&#106;&#117;&#109;&#112;&#115;&#116;&#097;&#114;&#116;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;?subject=About JumpStart 4.12.2">me</a>.<br/>

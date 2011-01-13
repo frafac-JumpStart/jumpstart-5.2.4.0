@@ -1,0 +1,7 @@
+*.jar
+*.class
+bin/*
+collapsed/*
+.DS_Store
+.classpath
+.project
