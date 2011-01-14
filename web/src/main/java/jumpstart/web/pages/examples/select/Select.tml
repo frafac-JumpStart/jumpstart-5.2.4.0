@@ -3,7 +3,7 @@
 	<h1>Select</h1>
 	The <strong>Select</strong> component displays a list of <strong>options</strong> in a drop-down box, allowing
 	you to choose one.<br/>
-	The options are held in a <strong>model</strong> which can be specified in many different ways, as these examples deomnstrate.<br/>
+	The options are held in a <strong>model</strong> which can be specified in many different ways, as these examples demonstrate.<br/>
 	Each option has a <strong>label</strong>, which is what you see displayed in the list.<br/>
 	Each option also has a <strong>value</strong>, which uniquely identifies it to the server.
 	If the value is not a string, then an <strong>encoder</strong> must be provided.<br/>
@@ -50,7 +50,7 @@
 	</form><br/>
 
 	References: 
-	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>.<br/><br/>
+	<a href="http://tapestry.apache.org/tapestry5.2-dev/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>.<br/><br/>
 	
 	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
 	

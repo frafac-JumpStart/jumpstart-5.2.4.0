@@ -1,5 +1,8 @@
 package jumpstart.web.pages.examples.javascript;
 
+import java.util.Arrays;
+import java.util.List;
+
 import jumpstart.web.pages.Index;
 
 import org.apache.tapestry5.ComponentResources;
@@ -10,114 +13,78 @@ import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.Zone;
+import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 
 public class AJAXSelect1 {
-	static final private String[] ALL_MAKES = new String[] {"Honda", "Toyota"};
-	static final private String[] NO_MODELS = new String[] {};
-	static final private String[] HONDA_MODELS = new String[] {"Accord", "Civic", "Jazz"};
-	static final private String[] TOYOTA_MODELS = new String[] {"Camry", "Corolla"};
-
-	// Screen fields
-
-	@Property
-	@Persist
-	private String _carMake;
-
-	@Property
-	@Persist
-	private String _carModel;
-
-	@Property
-	@Persist
-	private String _keyWords;
 	
-	@Property
-	@Persist
-	private String[] _carMakes;
-	
-	@SuppressWarnings("unused")
-	@Property
-	@Persist
-	private String[] _carModels;
-	
-	// Other pages
-
-	@InjectPage
-	private AJAXSelect2 _page2;
-
-	// Generally useful bits and pieces
-
-	@InjectComponent
-	private Zone _searchZone;
-
-	@Component(id = "searchCriteria")
-	private Form _searchCriteriaForm;
-
-	@Inject
-	private Request _request;
-
-	@Inject
-	private ComponentResources _resources;
-	
-	// The code
-
-	void setupRender() {
-		if (_carMakes == null) {
-			_carMakes = ALL_MAKES;
-			_carModels = NO_MODELS;
+		public enum CarMaker
+		{
+			MERCEDES, AUDI, BMW, HONDA, TOYOTA, PEUGEOT, CITROEN ;
 		}
-	}
+	
+	
+		@Inject
+	    private Messages messages;
+	   
+	    @Property
+	    @Persist
+	    private CarMaker carMaker;
+	   
+	    @Property
+	    @Persist
+	    private String carModel;
 
-	Object onChangeOfCarMake() {
-		_carMake = _request.getParameter("param");
+	    @InjectComponent
+	    private Zone modelZone;
+	   
+	    @Property
+	    @Persist
+	    private List<String> availableModels;
+	    
+	    // Other pages
+		@InjectPage
+		private AJAXSelect2 _page2;
 		
-		if (_carMake == null) {
-			_carModels = NO_MODELS;
-		}
-		else if (_carMake.equals(_carMakes[0])) {
-			_carModels = HONDA_MODELS;
-		}
-		else if (_carMake.equals(_carMakes[1])) {
-			_carModels = TOYOTA_MODELS;
-		}
-		else {
-			_carModels = NO_MODELS;
-		}
-		_carModel = null;
+		private String _carMaker;
 		
-		return _searchZone.getBody();
-	}
+		
+	    
+	    public Object onValueChanged(CarMaker maker) 
+	    {
+	       availableModels = findAvailableModels(maker);
+	       
+	       return modelZone.getBody();
+	    }
+	    
+	    public List<String> findAvailableModels(final CarMaker maker) 
+	    {
+	      switch (maker) 
+	      {
+	         case AUDI:
+	            return Arrays.asList("A4", "A6", "A8");
+	         case BMW:
+	            return Arrays.asList("3 Series", "5 Series", "7 Series");
+	         case MERCEDES:
+	            return Arrays.asList("C-Class", "E-Class", "S-Class");
+	         case HONDA:
+	        	return Arrays.asList("Accord", "Civic", "Jazz");
+	         case TOYOTA:	 
+	        	return Arrays.asList("Camry", "Corolla");
+	         case PEUGEOT:
+		        return Arrays.asList("207", "307", "407");
+		     case CITROEN:	 
+		        return Arrays.asList("C3", "C4","C5");	
 
-	Object onChangeOfCarModel() {
-		_carModel = _request.getParameter("param");
-		return _searchZone.getBody();
-	}
-
-	void onChangeOfKeyWords() {
-		_keyWords = _request.getParameter("param");
-	}
+	         default:
+	            return Arrays.asList();
+	       }
+	    }    
 	
-	void onValidateForm() {
-		if (_carMake == null) {
-			_searchCriteriaForm.recordError("Choose a car make.");
-			return;
-		}
-		if (_carModel == null) {
-			_searchCriteriaForm.recordError("Choose a car model.");
-			return;
-		}
-	}
+	
 
-	Object onSuccess() {
-		_page2.set(_carMake, _carModel, _keyWords);
-		_resources.discardPersistentFieldChanges();
-		return _page2;
-	}
+	
 
-	Object onActionFromGoHome() {
-		_resources.discardPersistentFieldChanges();
-		return Index.class;
-	}
+	
 }

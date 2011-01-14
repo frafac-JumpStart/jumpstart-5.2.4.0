@@ -3,48 +3,44 @@
 	<h1>AJAX Select (1)</h1>
 	
 	This page demonstrates a technique for AJAX-enabling a Select component.<br/><br/>
-
-	<div t:type="zone" t:id="searchZone" style="background-color: eee; padding: 15px">
-		<form t:type="form" t:id="searchCriteria" style="margin: 0">
-			<t:errors/>
-
-			<t:label for="carMake"/>:
-			<select t:type="select" t:id="carMake" t:model="carMakes" t:blankLabel="Choose..." 
-				t:mixins="zoneUpdater" t:clientEvent="change" t:event="changeOfCarMake" t:zone="searchZone"></select>
 	
-			<t:label for="carModel"/>:
-			<select t:type="select" t:id="carModel" t:model="carModels" t:blankLabel="Choose..." 
-				t:mixins="zoneUpdater" t:clientEvent="change" t:event="changeOfCarModel" t:zone="searchZone"></select>
+	The Select component 'carMaker' of the page SelectZoneDemo shows all available car makers. 
+	When a user selects a car maker, another Select component for selecting available models of the make should appear. 
+	This can be accomplished by the parameter zone of the Select component 'carMaker'. 
+	When zone parameter is bound every change of the Select's value causes an Ajax request. 
+	In this case the Select component publishes the event valuechanged which can be used to provide the model for the second Select component.
+	<br/><br/>
 
-			Keywords: <input t:type="TextField" t:id="keyWords" 
-				t:mixins="zoneUpdater" t:clientEvent="keyup" t:event="changeOfKeyWords" t:zone="searchZone"/> (optional)<br/> 
-			
-			<input type="submit" value="Save"/>
-		</form>
-	</div>
-	<br/>
+	<t:form>
+      <p>
+         <t:errors />
+      </p>
+      <p>
+         <t:select t:id="carMaker" validate="required"
+                   zone="modelZone" />
+      </p>
+      
+      <t:zone t:id="modelZone" id="modelZone">
+         <t:if test="carMaker">
+           <p>
+              <t:select t:id="carModel" model="availableModels" validate="required"/>
+           </p>
+         </t:if>
+      </t:zone>
+      
+      <p>
+         <t:submit value="literal:Submit" />
+      </p>
+      <br/>
+   </t:form>	<br/>
 
-	CAUTION: Currently Zone appears to have an important limitation: if a Zone encloses any input fields (eg. TextField or Select) 
-	then those fields must be enclosed by a Form <em>that is enclosed by the Zone</em>.<br/><br/>
-
-	As a consequence, if we did not use ZoneUpdater on the keyWords field to save its changes, then those changes would be lost whenever 
-	a carMake or carModel is changed.<br/><br/>
-
-	An alternative would be to put carModel in a Zone, but that would require its own Form, so we would have to use 3 Forms: one for carMake, 
-	one for carModel, and one for keyWords and the submit button. The Errors component would have to be moved, and so it gets tricky.<br/><br/>
- 	
+		
 	References: 
-	<a href="http://tapestry.apache.org/tapestry5/guide/ajax.html">Ajax</a>, 
-	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Zone.html">Zone</a>,
-	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>,
-	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/TextField.html">TextField</a>,
-	<a href="http://tinybits.blogspot.com/2010/03/new-and-better-zoneupdater.html">Inge Solvoll's Zone Updater</a>.<br/><br/>
+	<a href="http://tapestry.apache.org/tapestry5-2.dev/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>,
 	
 	<a t:type="actionlink" t:id="gohome" href="#">Home</a><br/><br/>
 	
 	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXSelect1.tml"/>
 	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/javascript/AJAXSelect1.java"/>
-	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/ZoneUpdater.java"/>
-	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/mixins/zone_updater.js"/>
 </body>
 </html>

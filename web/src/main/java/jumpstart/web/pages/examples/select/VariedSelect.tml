@@ -39,7 +39,7 @@
 	</form><br/>
 
 	References: 
-	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>.<br/><br/>
+	<a href="http://tapestry.apache.org/tapestry5.2-dev/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>.<br/><br/>
 	
 	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
 	
