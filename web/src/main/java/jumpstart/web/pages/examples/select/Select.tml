@@ -1,20 +1,46 @@
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
-<body style="font-family: Arial, Helvetica, sans-serif;  font-size: smaller;">
-	<h1>Select</h1>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+ xmlns:p="tapestry:parameter">
+<head>
+	<title>Tapestry 5 Jumpstart - Select</title>
+</head>
+<body id="homepage">
+<div class="wrapper bs">
+ <ul class="nav">
+	<li>
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5.2-dev/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">
+	Select</a>
+	</li>
+				
+	<li class="last">
+	<a t:type="pagelink" t:page="Index" href="#">Home</a>
+	</li>
+			
+ </ul>
+
+ <div id="top">
+
+	<h1><img src="${context:/css/layout/tapestry_s.png}" alt="Tapestry" id="tapestry" /></h1>
+
+	<div >
 	The <strong>Select</strong> component displays a list of <strong>options</strong> in a drop-down box, allowing
 	you to choose one.<br/>
-	The options are held in a <strong>model</strong> which can be specified in many different ways, as these examples demonstrate.<br/>
+	The options are held in a <strong>model</strong> which can be specified in many different ways, 
+	as these examples demonstrate.<br/>
 	Each option has a <strong>label</strong>, which is what you see displayed in the list.<br/>
 	Each option also has a <strong>value</strong>, which uniquely identifies it to the server.
 	If the value is not a string, then an <strong>encoder</strong> must be provided.<br/>
 	The <strong>t:label</strong> components in these examples are labelling the Select component.  
 	They do not affect the option labels.<br/><br/>
 
-	The Select component expects you to provide a SelectModel, but to keep things simple it will also accept enums and lists of strings 
+	The Select component expects you to provide a SelectModel, 
+	but to keep things simple it will also accept enums and lists of strings 
 	as the following examples show.<br/><br/>
 	
 	<form t:type="form">
-		* In this example we provide the <strong>strings</strong> right in the template. Each option label and value is the same as the string.<br/><br/>
+		* In this example we provide the <strong>strings</strong> right in the template.<br/>
+		 Each option label and value is the same as the string.<br/><br/>
 		
 		<t:label for="color0"/>:
 		<select t:type="select" t:id="color0" t:model="literal:Red,Yellow,Blue"></select>
@@ -23,7 +49,8 @@
 	</form><br/>
 
 	<form t:type="form">
-		* In this example the model is an <strong>enum</strong>, which Select infers from color1's type.  The option labels are produced by "humanising" the enum values.<br/><br/>
+		* In this example the model is an <strong>enum</strong>, which Select infers from color1's type.  
+		The option labels are produced by "humanising" the enum values.<br/><br/>
 		
 		<t:label for="color1"/>:
 		<select t:type="select" t:id="color1"></select>
@@ -32,7 +59,8 @@
 	</form><br/>
 
 	<form t:type="form">
-		* In this example we provide a <strong>map of strings</strong> right in the template.  The mapped key and value become the option value and label, respectively.<br/><br/>
+		* In this example we provide a <strong>map of strings</strong> right in the template. <br/> 
+		The mapped key and value become the option value and label, respectively.<br/><br/>
 		
 		<t:label for="color2"/>:
 		<select t:type="select" t:id="color2" t:model="literal:R=Red,G=Green,B=Blue"></select>
@@ -41,21 +69,37 @@
 	</form><br/>
 
 	<form t:type="form">
-		* In this example the model is an <strong>enum plus properties</strong>.  The option labels come from the page's properties file if there's a matching entry in it.<br/><br/>
+		* In this example the model is an <strong>enum plus properties</strong>. <br/>
+		 The option labels come from the page's properties file if there's a matching entry in it.<br/><br/>
 		
 		<t:label for="color3"/>:
 		<select t:type="select" t:id="color3"></select>
 		<input type="submit" value="Submit"/>
 		You chose: ${color3}
 	</form><br/>
+	
+	</div>
+	<div class="clearer"></div>
+</div>
 
-	References: 
-	<a href="http://tapestry.apache.org/tapestry5.2-dev/tapestry-core/ref/org/apache/tapestry5/corelib/components/Select.html">Select</a>.<br/><br/>
-	
-	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
-	
-	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/Select.tml"/>
-	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/Select.properties"/>
-	<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/Select.java"/>
+<div id="bar"><strong>Select</strong></div>
+		
+<div id="content">
+			
+<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/Select.tml"/>
+<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/Select.properties"/>
+<t:sourcecodedisplay src="/web/src/main/java/jumpstart/web/pages/examples/select/Select.java"/>	<br/>
+<div class="clearer"></div>			
+
+</div>		
+		
+<div class="clearer"></div>
+
+<div id="footer">Created with 
+	<a href="http://tapestry.apache.org/">Apache Tapestry 5</a>, OpenEjb3 and ChenilleKit components. 
+	Get the source code of jumpstart at <a href="https://github.com/frafac-JumpStart/jumpstart-5.2.4.0">Github</a></div>
+
+</div>
 </body>
 </html>
+

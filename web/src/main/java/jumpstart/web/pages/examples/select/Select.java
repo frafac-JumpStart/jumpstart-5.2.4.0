@@ -1,7 +1,11 @@
 package jumpstart.web.pages.examples.select;
 
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Property;
 
+@Import(stylesheet =
+{ "context:css/layout/style.css" }
+)
 public class Select {
 
 	@Property

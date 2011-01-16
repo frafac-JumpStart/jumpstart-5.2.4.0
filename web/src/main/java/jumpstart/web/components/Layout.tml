@@ -28,7 +28,7 @@
 
 			<h1><img src="${context:/css/layout/tapestry_s.png}" alt="Tapestry" id="tapestry" /></h1>
 
-			<div id="aside">Welcome to Tapestry 5 Jumpstart !</div>
+			<div>Welcome to Tapestry 5 Jumpstart !</div>
 			
 			<div id="aside">
 			Choose one of these "getting started" examples or 
