@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+<head>
+	<title>Tapestry 5 Jumpstart - ${pageTitle}</title>
+</head>
+<body id="homepage">
+	<div class="wrapper bs">
+		<ul class="nav">
+				<li>
+					<a href="http://jumpstart.doublenegative.com.au/download.html">Download</a>
+				</li>
+				<li>
+					<a href="http://jumpstart.doublenegative.com.au/orientation.html">Orientation</a>
+				</li>
+				<li>
+					<a href="http://jumpstart.doublenegative.com.au/tips.html">Tips</a>
+				</li>
+				<li>
+					<a href="http://jumpstart.doublenegative.com.au/faq.html">FAQ</a>
+				</li>
+				<li class="last">
+					<a href="http://jumpstart.doublenegative.com.au/troubleshooting.html">Troubleshooting</a>
+				</li>
+			
+		</ul>
+
+		<div id="top">
+
+			<h1><img src="${context:/css/layout/tapestry_s.png}" alt="Tapestry" id="tapestry" /></h1>
+
+			<div id="aside">Welcome to Tapestry 5 Jumpstart !</div>
+			
+			<div id="aside">
+			Choose one of these "getting started" examples or 
+			<a t:type="pagelink" t:page="theapp/Login" href="#">log in</a> 
+			to the application.
+			</div>
+			
+			
+			<div class="clearer"></div>
+
+		</div>
+		
+		<div id="bar">
+			<strong>JumpStart 5.2.4.0 For Tapestry 5.2.4</strong>
+		</div>
+		
+		
+		<div id="content">
+			
+			<t:body />
+			<div class="clearer"></div>			
+
+		</div>		
+		
+		<div class="clearer"></div>
+
+		<div id="footer">Created with <a href="http://tapestry.apache.org/">Apache Tapestry 5</a>, OpenEjb3 and ChenilleKit components. 
+		Get the source code of jumpstart at <a href="https://github.com/frafac-JumpStart/jumpstart-5.2.4.0">Github</a></div>
+
+	</div>
+</body>
+</html>

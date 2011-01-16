@@ -1,7 +1,41 @@
-<html t:type="layout" t:pageTitle="tapestry5-jumpstart Index"
-      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
-      xmlns:p="tapestry:parameter">
-        <!-- Most of the page content, including <head>, <body>, etc. tags, comes from Layout.tml -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- We need a doctype to allow us to use special characters like &nbsp; 
+	 We use a "strict" DTD to make IE follow the alignment rules. -->
+	 
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+<head>
+	<title>JumpStart Home</title>
+	<style type="text/css">
+		body		{ font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: normal; }
+		h1			{ font-size: 20px; margin-top: 0px; margin-bottom: 10px; }
+		h2			{ font-size: 16px; margin-top: 0px; margin-bottom: 10px; }
+		a:link		{ color: blue }
+		a:visited	{ color: blue }
+		a:active	{ color: orange }
+		#titles		{ text-align: center; margin-top: 20px; margin-bottom: 15px; }
+		#acknowledgement	{ text-align: center; margin-top: 400px; }
+		#globalNav	{ text-align: right; }
+	</style>
+</head>
+
+<body>
+	<div id="globalNav"> 
+		<a href="http://jumpstart.doublenegative.com.au/download.html">Download</a>
+		| <a href="http://jumpstart.doublenegative.com.au/orientation.html">Orientation</a>
+		| <a href="http://jumpstart.doublenegative.com.au/tips.html">Tips</a>
+		| <a href="http://jumpstart.doublenegative.com.au/faq.html">FAQ</a>
+		| <a href="http://jumpstart.doublenegative.com.au/troubleshooting.html">Troubleshooting</a>
+	</div>
+
+	<div id="titles">
+		<h1>JumpStart 5.2.4.0</h1>
+		<h2>For Tapestry 5.2.4</h2>
+		
+		Choose one of these "getting started" examples or 
+		<a t:type="pagelink" t:page="theapp/Login" href="#">log in</a> 
+		to the application.
+	</div>
 
 	<table align="center">
 		<tr>
@@ -153,5 +187,14 @@
 		</tr>
 	</table>
 
+	<br/><br/><br/><br/><br/><br/><br/><br/>
+
+	<div id="acknowledgement">
+		I am obliged to include the following link because I made some buttons there (in a hurry)... <br/><br/>
+		<A HREF="http://www.buttongenerator.com/">
+			<IMG SRC="http://www.buttongenerator.com/ima/link.gif" WIDTH="88" HEIGHT="31" BORDER="0" ALT="ButtonGenerator.com"/>
+		</A>
+	</div>
 	
+</body>
 </html>
