@@ -11,12 +11,12 @@
 				<br/>
 				<a t:type="pagelink" t:page="examples/easycrud/Index" href="#">Easy CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/totalcontrolcrud/Index" href="#">Total Control CRUD</a><br/>
-				<!-- a t:type="pagelink" t:page="examples/onepagecrud/Index" href="#">One Page CRUD</a><br/>
+				<a t:type="pagelink" t:page="examples/onepagecrud/Index" href="#">One Page CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/filtercrud/Index" href="#">Filter CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/componentscrud/Index" href="#">Components CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/ajaxfiltercrud/Index" href="#">AJAX Filter CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/ajaxcomponentscrud/Index" href="#">AJAX Components CRUD</a><br/>
-				<a t:type="pagelink" t:page="examples/ajaxgracefulcrud/Index" href="#">AJAX Graceful CRUD</a><br/-->
+				<a t:type="pagelink" t:page="examples/ajaxgracefulcrud/Index" href="#">AJAX Graceful CRUD</a><br/>
 				<a t:type="pagelink" t:page="examples/layoutwithmenu/Page1" href="#">Add a Layout with Menu</a><br/>
 				<br/>
 				<a t:type="pagelink" t:page="examples/output/Output" href="#">Output</a><br/>
@@ -138,9 +138,9 @@
 				<a t:type="pagelink" t:page="examples/localization/LocalizationByMessageCatalog" href="#">Localization By Message Catalog</a><br/>
 				<a t:type="pagelink" t:page="examples/localization/LocalizationByTemplate" href="#">Localization By Template</a><br/>
 				<br/>
-				<!-- a t:type="pagelink" t:page="examples/wizard/WizardUsingFormFragments" href="#">Wizard Using Form Fragments</a><br/>
+				<a t:type="pagelink" t:page="examples/wizard/WizardUsingFormFragments" href="#">Wizard Using Form Fragments</a><br/>
 				<a t:type="pagelink" t:page="examples/wizard/WizardUsingPages1" href="#">Wizard Using Pages</a><br/>
-				<br/ -->
+				<br/>
 				<a t:type="pagelink" t:page="examples/wizard/ConversationsList" href="#">Conversations List</a><br/>
 				<br/>
  				<a t:type="pagelink" t:page="examples/jodatime/1" href="#">Joda Time</a><br/>
