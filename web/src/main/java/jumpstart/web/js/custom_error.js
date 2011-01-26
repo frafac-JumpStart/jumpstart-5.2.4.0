@@ -29,9 +29,13 @@ Tapestry.FieldEventManager.addMethods( {
 
 		var id = this.field.id;
 		this.fieldContainer = this.field.parentNode;
-		Element.extend(this.fieldContainer);
+	    Element.extend(this.fieldContainer);
 
-		this.label = $(id + '-label');
+		var selector = "label[for='" + id + "']";
+
+		this.label = this.field.up("form").down(selector);
+		this.icon = $(id + '_icon');
+		
 		this.labelContainer = this.label.parentNode;
 		Element.extend(this.labelContainer);
 
@@ -54,18 +58,28 @@ Tapestry.FieldEventManager.addMethods( {
 		Element.extend(this.msgContainer);
 		
 		this.translator = Prototype.K;
-		
-		// Set up a listener that validates the field on change of focus 
-		
-		document.observe(Tapestry.FOCUS_CHANGE_EVENT, function(event) {
-			// If changing focus *within the same form* then perform validation.
-			// Note that Tapestry.currentFocusField does not change
-			// until after the FOCUS_CHANGE_EVENT notification.
-			if (Tapestry.currentFocusField == this.field
-					&& this.field.form == event.memo.form) {
-				this.validateInput();
-			}
-		}.bindAsEventListener(this));
+
+		var fem = $(this.field.form).getFormEventManager();
+
+		if (fem.validateOnBlur) {
+
+			document.observe(Tapestry.FOCUS_CHANGE_EVENT, function(event) {
+				/*
+				 * If changing focus *within the same form* then perform
+				 * validation. Note that Tapestry.currentFocusField does not
+				 * change until after the FOCUS_CHANGE_EVENT notification.
+				 */
+				if (Tapestry.currentFocusField == this.field
+						&& this.field.form == event.memo.form)
+					this.validateInput();
+
+			}.bindAsEventListener(this));
+		}
+
+		if (fem.validateOnSubmit) {
+			$(this.field.form).observe(Tapestry.FORM_VALIDATE_FIELDS_EVENT,
+					this.validateInput.bindAsEventListener(this));
+		}
 	},
 	
 	/**

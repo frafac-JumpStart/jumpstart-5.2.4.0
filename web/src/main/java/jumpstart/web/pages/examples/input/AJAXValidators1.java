@@ -6,6 +6,7 @@ import jumpstart.business.domain.examples.Person;
 import jumpstart.business.domain.examples.iface.IPersonServiceLocal;
 import jumpstart.client.IBusinessServicesLocator;
 
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.IncludeJavaScriptLibrary;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Log;
@@ -15,7 +16,7 @@ import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.Request;
 
 // This annotation tells Tapestry to declare the js file in the page so that the browser will pull it in.
-@IncludeJavaScriptLibrary( { "context:js/custom_error.js" })
+@Import(library="context:js/custom_error.js")
 public class AJAXValidators1 {
 	private final int MAX_RESULTS = 30;
 
