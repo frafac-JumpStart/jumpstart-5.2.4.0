@@ -1,11 +1,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!-- We need a doctype to allow us to use special characters like &nbsp; 
-	 We use a "strict" DTD to make IE follow the alignment rules. -->
-	 
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
-<body>
-	<h1>Edit (Using BeanEditForm) (1)</h1>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+ xmlns:p="tapestry:parameter">
+<head>
+	<title>Tapestry 5 Jumpstart - Edit (Using BeanEditForm) (1)</title>
+</head>
+<body id="homepage">
+<div class="wrapper bs">
+ <ul class="nav">
+	<li>
+	References: 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/BeanEditForm.html">BeanEditForm</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/guide/beaneditform.html">Using BeanEditForm</a>, 
 	
+	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/beaneditor/package-summary.html">beaneditor API</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Hidden.html">Hidden</a>
+	</li>
+				
+	<li class="last">
+	<a t:type="pagelink" t:page="Index" href="#">Home</a>
+	</li>
+			
+ </ul>
+
+ <div id="top">
+
+	<h1><img src="${context:/css/layout/tapestry_s.png}" alt="Tapestry" id="tapestry" /></h1>
+</div>
+	<div id="content">
 	This page shows how a simple <strong>BeanEditForm</strong> component in the template results in a multi-line editing
 	form for an object - in this example the object is Person 1 from the database.  Tapestry's BeanEditForm component 
 	magically displays the Person for edit.  We've complicated it a little by using <code>p:</code> to 
@@ -35,13 +56,13 @@
 	form - this would not include version if it was marked @NonVisual. The entity may have been updated by someone else but you 
 	won't be told.<br/><br/>
 	
-	References: 
-	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/BeanEditForm.html">BeanEditForm</a>, 
-	<a href="http://tapestry.apache.org/tapestry5/guide/beaneditform.html">Using BeanEditForm</a>, 
-	<a href="http://tapestry.apache.org/tapestry5/apidocs/org/apache/tapestry5/beaneditor/package-summary.html">beaneditor API</a>, 
-	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Hidden.html">Hidden</a>.<br/><br/>
+	
+	<div class="clearer"></div>
+</div>
 
-	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
+<div id="bar"><strong>Edit (Using BeanEditForm) (1)</strong></div>
+		
+<div id="content">
 	
 	The source for BusinessServicesLocator, etc. is shown in the EJB3 example.<br/><br/>
 
@@ -50,5 +71,17 @@
 	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/PersonService.java"/>
 	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Person.java"/>
 	<t:sourcecodedisplay src="/business/src/main/java/jumpstart/business/domain/examples/Regions.java"/>
+
+<div class="clearer"></div>			
+
+</div>		
+		
+<div class="clearer"></div>
+
+<div id="footer">Created with 
+	<a href="http://tapestry.apache.org/">Apache Tapestry 5</a>, OpenEjb3 and ChenilleKit components. 
+	Get the source code of jumpstart at <a href="https://github.com/frafac-JumpStart/jumpstart-5.2.4.0">Github</a></div>
+
+</div>
 </body>
 </html>

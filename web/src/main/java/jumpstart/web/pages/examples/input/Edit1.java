@@ -6,15 +6,17 @@ import jumpstart.client.IBusinessServicesLocator;
 import jumpstart.util.ExceptionUtil;
 
 import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
 import org.apache.tapestry5.ioc.annotations.Inject;
-
+@Import(stylesheet ={ "context:css/layout/style-quickstart.css" })
 public class Edit1 {
 
 	// The activation context
-
+	//@Persist
 	private Long _personId;
 
 	// Screen fields
@@ -49,6 +51,20 @@ public class Edit1 {
 		_personId = personId;
 	}
 
+	
+	void setupRender() throws Exception {
+		_person = getPersonService().findPerson(_personId);
+
+		if (_person == null) {
+			if (_personId < 4) {
+				throw new IllegalStateException("Database data has not been set up!");
+			}
+			else {
+				throw new Exception("Person " + _personId + " does not exist.");
+			}
+		}
+	}
+	
 	// Form triggers the PREPARE event during form render and form submission.
 
 	void onPrepare() throws Exception {
