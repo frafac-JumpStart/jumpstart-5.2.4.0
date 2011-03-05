@@ -1,32 +1,39 @@
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
-<head>
-	<style type="text/css">
-		body, td	{ font-family: Arial, Helvetica, sans-serif;  font-size: smaller; }
-	</style>
-</head>
+<html t:type="layout_quickstart" t:pageTitle="Ajax Form"
+     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
 <body>
 	<h1>AJAX Form</h1>
-	
+	<br/>
 	This page demonstrates how Tapestry AJAX-enables a Form if you specifying the zone parameter of the Form.<br/><br/>
 	
-	<form t:type="form" t:zone="nameZone" style="background-color: eee; padding: 15px">
+	<t:zone t:id="formZone" id="formZone" update="show">
+	<form t:id="ajaxForm" t:type="form" t:zone="nameZone" style="background-color: eee; padding: 15px">
+	    <t:errors/>
+	
 		First Name: <input t:type="TextField" t:id="firstName"/><br/>
 		Last Name: <input t:type="TextField" t:id="lastName"/><br/><br/>
+		Birthday <input t:type="datefield" t:id="birthday"/> <br/><br/>
  
-		<t:zone t:id="nameZone">
-			Welcome ${name}.
-		</t:zone><br/>
+		
 
 		Note that the following time field does not update because it's not in the zone:  ${time}
 		<br/><br/>
 		
 		<input type="submit" value="Accept"/>
  	</form>
+ 	</t:zone>
+ 	
+ 	<t:zone t:id="nameZone" id="nameZone">
+			Welcome ${name}.
+			Birthday ${birthday}
+	</t:zone><br/>
  	
 	References: 
-	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">Form</a>, 
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Form.html">
+	Form</a>, 
 	<a href="http://tapestry.apache.org/tapestry5/guide/ajax.html">Ajax</a>, 
-	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Zone.html">Zone</a>,<br/><br/>
+	<a href="http://tapestry.apache.org/tapestry5/tapestry-core/ref/org/apache/tapestry5/corelib/components/Zone.html">
+	Zone</a>,<br/><br/>
 
 	<a t:type="pagelink" t:page="Index" href="#">Home</a><br/><br/>
 
