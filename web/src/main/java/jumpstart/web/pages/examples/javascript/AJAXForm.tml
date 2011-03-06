@@ -14,10 +14,7 @@
 		Last Name: <input t:type="TextField" t:id="lastName"/><br/><br/>
 		Birthday <input t:type="datefield" t:id="birthday"/> <br/><br/>
  
-		
-
-		Note that the following time field does not update because it's not in the zone:  ${time}
-		<br/><br/>
+		<br/>
 		
 		<input type="submit" value="Accept"/>
  	</form>
